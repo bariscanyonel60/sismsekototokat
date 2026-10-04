@@ -1,0 +1,27 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+
+# env
+.env*
+!.env.example
+
+# platform
+.vercel
+.netlify
+
+# local agent tooling (auto-generated, machine-specific)
+.claude/
+.kiro/
+.cursor/
+.github/
+
+# misc
+.DS_Store
+npm-debug.log*

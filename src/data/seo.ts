@@ -1,0 +1,27 @@
+export const seoKeywords = [
+  "oto servis",
+  "oto tamir",
+  "araç bakım servisi",
+  "motor servisi",
+  "motor revizyon",
+  "periyodik bakım",
+  "yağ bakımı",
+  "ağır bakım",
+  "fren servisi",
+  "süspansiyon bakımı",
+  "arıza tespiti",
+  "muayene öncesi kontrol",
+  "Renault servis",
+  "Fiat servis",
+  "Opel servis",
+  "Volkswagen servis",
+  "BMW servis",
+  "Skoda servis",
+  "Iveco servis",
+  "Isuzu servis",
+  "otobüs bakım servisi",
+  "ticari araç servisi",
+  "hafif ticari araç servisi",
+];
+
+export const seoTitle = "Şimşek Oto | Otomobil, Ticari Araç ve Otobüs Bakım Servisi";
