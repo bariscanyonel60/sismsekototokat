@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import type { PageSeo } from "@/data/seo";
 import { site } from "@/data/site";
 
+export { fitDescription } from "@/lib/text";
+
 const DEFAULT_OG_IMAGE = "/opengraph-image";
 
 interface PageMetadataOptions {

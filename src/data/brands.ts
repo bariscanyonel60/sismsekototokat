@@ -11,6 +11,10 @@ export interface Brand {
   segment: VehicleSegment;
   /** Öne çıkan model ya da motor bilgisi, örn. "Transit · Connect". */
   note?: string;
+  /** Ürün kodlarında kullanılan kısaltma, örn. SO-FIA-BKM. */
+  code: string;
+  /** Araç değil motor üreticisi; ürün kartındaki "Uygun Araçlar" listesine yazılmaz. */
+  engineMaker?: boolean;
 }
 
 export const brandsIntro = {
@@ -34,19 +38,19 @@ export const segmentLabels: Record<VehicleSegment, string> = {
 };
 
 export const brands: Brand[] = [
-  { name: "Fiat", plain: "Fiat", group: "passenger", segment: "binek" },
-  { name: "Renault", plain: "Renault", group: "passenger", segment: "binek" },
-  { name: "Nissan", plain: "Nissan", group: "passenger", segment: "binek" },
-  { name: "Volkswagen", plain: "Volkswagen", group: "passenger", segment: "binek" },
-  { name: "Seat", plain: "Seat", group: "passenger", segment: "binek" },
-  { name: "Škoda", plain: "Skoda", group: "passenger", segment: "binek" },
-  { name: "Toyota", plain: "Toyota", group: "passenger", segment: "binek" },
-  { name: "Honda", plain: "Honda", group: "passenger", segment: "binek" },
-  { name: "Ford", plain: "Ford", group: "passenger", segment: "hafif-ticari", note: "Transit · Connect" },
-  { name: "Otokar", plain: "Otokar", group: "commercial", segment: "agir-vasita", note: "Otobüs" },
-  { name: "IVECO", plain: "Iveco", group: "commercial", segment: "agir-vasita" },
-  { name: "Deutz", plain: "Deutz", group: "commercial", segment: "agir-vasita", note: "Motor" },
-  { name: "Cummins", plain: "Cummins", group: "commercial", segment: "agir-vasita", note: "Motor" },
+  { name: "Fiat", plain: "Fiat", group: "passenger", segment: "binek", code: "FIA" },
+  { name: "Renault", plain: "Renault", group: "passenger", segment: "binek", code: "REN" },
+  { name: "Nissan", plain: "Nissan", group: "passenger", segment: "binek", code: "NIS" },
+  { name: "Volkswagen", plain: "Volkswagen", group: "passenger", segment: "binek", code: "VWG" },
+  { name: "Seat", plain: "Seat", group: "passenger", segment: "binek", code: "SEA" },
+  { name: "Škoda", plain: "Skoda", group: "passenger", segment: "binek", code: "SKO" },
+  { name: "Toyota", plain: "Toyota", group: "passenger", segment: "binek", code: "TOY" },
+  { name: "Honda", plain: "Honda", group: "passenger", segment: "binek", code: "HON" },
+  { name: "Ford", plain: "Ford", group: "passenger", segment: "hafif-ticari", note: "Transit · Connect", code: "FRD" },
+  { name: "Otokar", plain: "Otokar", group: "commercial", segment: "agir-vasita", note: "Otobüs", code: "OTK" },
+  { name: "IVECO", plain: "Iveco", group: "commercial", segment: "agir-vasita", code: "IVE" },
+  { name: "Deutz", plain: "Deutz", group: "commercial", segment: "agir-vasita", note: "Motor", code: "DEU", engineMaker: true },
+  { name: "Cummins", plain: "Cummins", group: "commercial", segment: "agir-vasita", note: "Motor", code: "CUM", engineMaker: true },
 ];
 
 export function brandsByGroup(group: BrandGroup): Brand[] {

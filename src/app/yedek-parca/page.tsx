@@ -4,67 +4,36 @@ import Link from "next/link";
 import { AppointmentCTA } from "@/components/AppointmentCTA";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { ArrowUpRight } from "@/components/icons";
+import { CheckIcon } from "@/components/icons";
 import { JsonLd } from "@/components/JsonLd";
+import { PartList } from "@/components/PartList";
+import { PartsCart } from "@/components/PartsCart";
 import { PartsCatalog } from "@/components/PartsCatalog";
 import { PartsHero } from "@/components/PartsHero";
 import { RevealObserver } from "@/components/RevealObserver";
-import { SectionHeading } from "@/components/SectionHeading";
 import { StickyContact } from "@/components/StickyContact";
+import { brands } from "@/data/brands";
 import { routes, sectionIds } from "@/data/navigation";
-import { partCategories, partsIntro } from "@/data/parts";
+import { partsIntro, partsPerks } from "@/data/parts";
 import { pageSeo } from "@/data/seo";
-import { services } from "@/data/services";
+import {
+  partBrandHref,
+  partCategoryHref,
+  partManufacturerHref,
+  toCartParts,
+  toPartsMenu,
+} from "@/lib/catalog/helpers";
+import { getCatalog } from "@/lib/catalog/store";
 import { buildPageMetadata } from "@/lib/metadata";
+import { brandHeading, categoryNoun } from "@/lib/seo/copy";
 import { buildPartsCatalogSchema } from "@/lib/structuredData";
 
 export const metadata: Metadata = buildPageMetadata(pageSeo.parts, { ownOgImage: true });
 
-function RelatedServices() {
-  return (
-    <section aria-labelledby="ilgili-hizmetler-baslik" className="section-y relative bg-ink">
-      <div className="container-x">
-        <SectionHeading
-          id="ilgili-hizmetler-baslik"
-          index="02"
-          eyebrow="Parça + Usta"
-          title="Parçayı Alın, Montajı Bize Bırakın"
-          description="Stoktan temin ettiğimiz parçaların montajını ve ilgili bakım onarımı aynı serviste yapıyoruz."
-        />
-        <ul className="mt-14 grid gap-px border border-bone/10 bg-bone/10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
-          {partCategories.map((category) => {
-            const service = services.find((item) => item.slug === category.serviceSlug);
-            if (!service) return null;
-            return (
-              <li key={category.id} className="bg-ink" data-reveal>
-                <Link
-                  href={`${routes.home}#${service.slug}`}
-                  className="group flex h-full flex-col gap-6 p-6 transition-colors duration-300 hover:bg-anthracite md:p-8"
-                >
-                  <span className="label-mono text-[0.65rem] text-steel-500">
-                    {category.index} · {category.title}
-                  </span>
-                  <span className="font-display text-2xl font-semibold uppercase leading-tight tracking-[0.04em] text-bone">
-                    {service.title}
-                  </span>
-                  <span className="mt-auto inline-flex items-center gap-2 text-sm text-amber">
-                    Hizmeti İncele
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    />
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-export default function PartsPage() {
+export default async function PartsPage() {
+  const catalog = await getCatalog();
+  const menu = toPartsMenu(catalog);
+  const { manufacturers } = menu;
   return (
     <>
       <a href="#icerik" className="skip-link">
@@ -72,33 +41,99 @@ export default function PartsPage() {
       </a>
       <Header currentPath={routes.parts} />
       <main id="icerik">
-        <PartsHero />
+        <PartsHero menu={menu} />
         <section
           id={sectionIds.catalog}
-          aria-labelledby="parca-katalogu-baslik"
-          className="section-y relative bg-bone-100 text-ink"
+          aria-label={partsIntro.catalogTitle}
+          className="scroll-mt-[var(--header-h)] bg-bone-100 pb-14 text-ink md:pb-20"
         >
-          <div className="container-x relative">
-            <SectionHeading
-              id="parca-katalogu-baslik"
-              index="01"
-              tone="light"
-              eyebrow={partsIntro.catalogTitle}
-              title={partsIntro.title}
-              description={partsIntro.catalogDescription}
-            />
-            <div className="mt-14 lg:mt-20">
-              <PartsCatalog />
-            </div>
+          <div className="container-x">
+            <PartsCatalog catalog={catalog} />
           </div>
         </section>
-        <RelatedServices />
-        <AppointmentCTA index="03" />
+        <section aria-labelledby="parca-rehberi-baslik" className="bg-bone-100 pb-14 text-ink md:pb-20">
+          <div className="container-x grid gap-10 rounded-sm border border-ink/10 bg-white p-6 md:grid-cols-2 md:p-10">
+            <h2 id="parca-rehberi-baslik" className="sr-only">
+              Kategoriye ve markaya göre yedek parça
+            </h2>
+            <nav aria-labelledby="kategori-rehberi-baslik">
+              <h3 id="kategori-rehberi-baslik" className="font-display text-xl font-bold uppercase tracking-[0.06em]">
+                Kategoriye Göre Yedek Parça
+              </h3>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {catalog.categories.map((category) => (
+                  <li key={category.id}>
+                    <Link
+                      href={partCategoryHref(category.id)}
+                      className="inline-flex min-h-10 items-center rounded-xs border border-ink/15 px-3.5 text-sm transition-colors hover:border-accent hover:text-accent-600"
+                    >
+                      {categoryNoun(category)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <nav aria-labelledby="marka-rehberi-baslik">
+              <h3 id="marka-rehberi-baslik" className="font-display text-xl font-bold uppercase tracking-[0.06em]">
+                Markaya Göre Yedek Parça
+              </h3>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {brands.map((brand) => (
+                  <li key={brand.plain}>
+                    <Link
+                      href={partBrandHref(brand)}
+                      className="inline-flex min-h-10 items-center rounded-xs border border-ink/15 px-3.5 text-sm transition-colors hover:border-accent hover:text-accent-600"
+                    >
+                      {brandHeading(brand)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            {manufacturers.length > 0 && (
+              <nav aria-labelledby="urun-markasi-rehberi-baslik" className="md:col-span-2">
+                <h3 id="urun-markasi-rehberi-baslik" className="font-display text-xl font-bold uppercase tracking-[0.06em]">
+                  Ürün Markasına Göre
+                </h3>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {manufacturers.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={partManufacturerHref(item.name)}
+                        className="inline-flex min-h-10 items-center rounded-xs border border-ink/15 px-3.5 text-sm transition-colors hover:border-accent hover:text-accent-600"
+                      >
+                        {item.name} ({item.count})
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+          </div>
+        </section>
+        <section aria-label="Neden Şimşek Oto yedek parça" className="border-y border-ink/10 bg-bone-100 text-ink">
+          <ul className="container-x grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
+            {partsPerks.map((perk) => (
+              <li key={perk.title} className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                  <CheckIcon size={18} />
+                </span>
+                <span>
+                  <span className="block font-display text-lg font-bold uppercase tracking-[0.04em]">{perk.title}</span>
+                  <span className="mt-0.5 block text-sm text-steel-700">{perk.text}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <PartList />
+        <AppointmentCTA index="02" />
       </main>
       <Footer />
       <StickyContact context={{ kind: "general" }} />
+      <PartsCart parts={toCartParts(catalog)} />
       <RevealObserver />
-      <JsonLd data={buildPartsCatalogSchema()} />
+      <JsonLd data={buildPartsCatalogSchema(catalog)} />
     </>
   );
 }

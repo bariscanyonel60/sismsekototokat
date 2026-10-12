@@ -41,7 +41,7 @@ export async function renderOgImage({ eyebrow, lines, footer }: OgImageOptions):
         />
         <div style={{ position: "relative", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 72px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 16, color: "#f2f1ec", fontSize: 24, letterSpacing: 5 }}>
-            <div style={{ width: 36, height: 3, background: "#ffc21a" }} />
+            <div style={{ width: 36, height: 3, background: "#d71920" }} />
             {`${site.wordmark} • ${eyebrow}`}
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 28, color: "#f2f1ec", fontSize: 104, lineHeight: 0.9 }}>
@@ -49,7 +49,7 @@ export async function renderOgImage({ eyebrow, lines, footer }: OgImageOptions):
               index === last ? (
                 <span key={line} style={{ display: "flex" }}>
                   {line}
-                  <span style={{ color: "#ffc21a" }}>.</span>
+                  <span style={{ color: "#d71920" }}>.</span>
                 </span>
               ) : (
                 <span key={line}>{line}</span>

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { ClockIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
 import { appointmentContent } from "@/data/company";
-import { sectionIds } from "@/data/navigation";
+import { ctaLabels, sectionIds } from "@/data/navigation";
 import { site } from "@/data/site";
 import { telHref, whatsappHref } from "@/lib/contact";
 import { delay } from "@/lib/cssVars";
@@ -48,7 +48,6 @@ export function AppointmentCTA({ index = "08" }: { index?: string }) {
       aria-labelledby="iletisim-baslik"
       className="section-y relative overflow-hidden bg-bone text-ink"
     >
-      <div className="tech-grid-light pointer-events-none absolute inset-0" aria-hidden />
       <div className="container-x relative">
         <div className="flex items-center gap-5" data-reveal>
           <span className="label-mono text-ink">{index}</span>
@@ -68,7 +67,7 @@ export function AppointmentCTA({ index = "08" }: { index?: string }) {
             <ul className="mt-10 border-t border-ink/15">
               <ContactRow icon={<PhoneIcon size={18} />} label="Telefon" index={0}>
                 {phone && contact.phone ? (
-                  <a href={phone} className="transition-colors hover:text-amber-600">
+                  <a href={phone} className="transition-colors hover:text-accent-600">
                     {contact.phone}
                   </a>
                 ) : (
@@ -81,7 +80,7 @@ export function AppointmentCTA({ index = "08" }: { index?: string }) {
                     href={whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-amber-600"
+                    className="transition-colors hover:text-accent-600"
                   >
                     WhatsApp ile yazın
                   </a>
@@ -96,6 +95,17 @@ export function AppointmentCTA({ index = "08" }: { index?: string }) {
                   </address>
                 ) : (
                   <Pending />
+                )}
+                {contact.mapUrl && (
+                  <a
+                    href={contact.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost btn-sm mt-4"
+                  >
+                    <PinIcon size={16} />
+                    {ctaLabels.directions}
+                  </a>
                 )}
               </ContactRow>
               <ContactRow icon={<ClockIcon size={18} />} label="Çalışma Saatleri" index={3}>
@@ -115,12 +125,12 @@ export function AppointmentCTA({ index = "08" }: { index?: string }) {
           </div>
 
           <div className="lg:col-span-7 lg:col-start-6 xl:col-span-6 xl:col-start-7">
-            <div className="corner-marks noise relative bg-ink p-7 text-bone sm:p-10 lg:p-12" data-reveal style={delay(1)}>
+            <div className="relative bg-ink p-7 text-bone sm:p-10 lg:p-12" data-reveal style={delay(1)}>
               <div className="flex items-center justify-between gap-4 border-b border-bone/12 pb-6">
                 <p className="font-display text-2xl font-bold uppercase tracking-[0.06em] md:text-[1.75rem]">
                   {appointmentContent.formTitle}
                 </p>
-                <span className="label-mono text-amber">{site.slogans.road}</span>
+                <span className="label-mono hidden text-accent-300 sm:inline">{site.slogans.road}</span>
               </div>
               <div className="mt-8">
                 <AppointmentForm />

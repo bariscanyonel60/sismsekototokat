@@ -22,7 +22,7 @@ export function SiteShell({ currentPath, children, contactContext }: SiteShellPr
         İçeriğe geç
       </a>
       <Header currentPath={currentPath} contactAnchor={homeContactHref} />
-      <main id="icerik" className="noise relative bg-ink">
+      <main id="icerik" className="relative bg-ink">
         {children}
       </main>
       <Footer contactAnchor={homeContactHref} />

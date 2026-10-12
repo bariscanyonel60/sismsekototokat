@@ -1,8 +1,11 @@
 import { images } from "@/data/images";
 
+export type CapabilityIcon = "car" | "van" | "bus" | "engine";
+
 export interface Capability {
   label: string;
   detail: string;
+  icon: CapabilityIcon;
   /**
    * Firma doğrulanmış bir rakam paylaştığında doldurulur (örn. "20+").
    * Boş bırakıldığında arayüz sayı göstermez, yalnızca yetkinliği gösterir.
@@ -10,6 +13,12 @@ export interface Capability {
   value?: string;
   valueCaption?: string;
 }
+
+export const heroContent = {
+  headlineLines: ["Binek Araçtan", "Ağır Vasıtaya", "Uzman Servis."],
+  description:
+    "Fiat, Renault, Volkswagen, Ford, Otokar ve IVECO başta olmak üzere her türlü araca bakım, onarım, arıza tespiti ve 450.000 hazır stok yedek parça.",
+};
 
 export const aboutContent = {
   eyebrow: "Hakkımızda",
@@ -25,10 +34,10 @@ export const aboutContent = {
 };
 
 export const capabilities: Capability[] = [
-  { label: "Binek Araç", detail: "Her türlü otomobile bakım ve onarım" },
-  { label: "Hafif Ticari", detail: "Ford Transit, Connect ve iş araçları" },
-  { label: "Ağır Vasıta", detail: "Otobüs, IVECO, Deutz ve Cummins" },
-  { label: "Yedek Parça", detail: "450.000 hazır stok, orijinal ve muadil" },
+  { label: "Binek Araç", detail: "Her türlü otomobile bakım ve onarım", icon: "car" },
+  { label: "Hafif Ticari", detail: "Ford Transit, Connect ve iş araçları", icon: "van" },
+  { label: "Ağır Vasıta", detail: "Otobüs, IVECO, Deutz ve Cummins", icon: "bus" },
+  { label: "Yedek Parça", detail: "450.000 hazır stok, orijinal ve muadil", icon: "engine" },
 ];
 
 export const whyUsContent = {
@@ -119,5 +128,5 @@ export const appointmentContent = {
   title: "Aracınız Bakıma mı İhtiyaç Duyuyor?",
   description:
     "Aracınızın markasını, modelini ve ihtiyacını kısaca paylaşın; size uygun servis zamanını birlikte planlayalım.",
-  formTitle: "Randevu Talebi",
+  formTitle: "Servis Talebi",
 };

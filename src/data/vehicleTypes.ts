@@ -27,7 +27,7 @@ export const vehicleTypes: VehicleType[] = [
     id: "passenger",
     index: "01",
     label: "Binek & Hafif Ticari",
-    title: "Otomobil ve hafif ticari araç servisi",
+    title: "Otomobil & Hafif Ticari Araç Servisi",
     description:
       "Fiat, Renault, Nissan, Volkswagen, Seat, Škoda, Toyota ve Honda başta olmak üzere her türlü binek araç; Ford Transit ve Connect gibi hafif ticari araçlar için bakım ve onarım.",
     brandNames: brandsByGroup("passenger").map((brand) => brand.name),
@@ -39,7 +39,7 @@ export const vehicleTypes: VehicleType[] = [
     id: "commercial",
     index: "02",
     label: "Ağır Vasıta & Otobüs",
-    title: "Ağır vasıta ve otobüs servis çözümleri",
+    title: "Ağır Vasıta & Ticari Araç Servisi",
     description:
       "Otokar otobüsler ile Deutz ve Cummins motorlu araçlara orijinal arıza tespit cihazıyla teşhis; IVECO araçlara uygun bakım, onarım ve yedek parça hizmeti.",
     brandNames: brandsByGroup("commercial").map((brand) => brand.name),

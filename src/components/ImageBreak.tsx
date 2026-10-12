@@ -24,11 +24,11 @@ export function ImageBreak() {
           className="object-cover object-[60%_50%]"
         />
       </div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(13_15_17/0.35)_0%,rgb(13_15_17/0.55)_45%,rgb(13_15_17/0.92)_100%)] md:bg-[linear-gradient(90deg,rgb(13_15_17/0.9)_0%,rgb(13_15_17/0.62)_45%,rgb(13_15_17/0.15)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(26_31_37/0.35)_0%,rgb(26_31_37/0.55)_45%,rgb(26_31_37/0.92)_100%)] md:bg-[linear-gradient(90deg,rgb(26_31_37/0.9)_0%,rgb(26_31_37/0.62)_45%,rgb(26_31_37/0.15)_100%)]" />
 
       <div className="container-x relative py-20 md:py-28">
         <div className="max-w-[920px]">
-          <span className="label-mono text-amber" data-reveal>
+          <span className="label-mono text-accent" data-reveal>
             — Servis Yaklaşımımız
           </span>
           <h2
@@ -37,7 +37,7 @@ export function ImageBreak() {
             data-reveal
             style={delay(1)}
           >
-            <span className="block">{words.slice(0, splitAt).join(" ")}</span>
+            <span className="block">{words.slice(0, splitAt).join(" ")} </span>
             <span className="block text-bone/55">{words.slice(splitAt).join(" ")}</span>
           </h2>
           <p className="lede mt-7 max-w-[34rem] text-bone/80" data-reveal style={delay(2)}>
@@ -45,7 +45,7 @@ export function ImageBreak() {
           </p>
           <a
             href={`#${sectionIds.contact}`}
-            className="link-arrow group mt-10 border-b border-amber/60 pb-2 text-amber hover:border-amber"
+            className="link-arrow group mt-10 border-b border-accent/60 pb-2 text-accent hover:border-accent"
             data-reveal
             style={delay(3)}
           >

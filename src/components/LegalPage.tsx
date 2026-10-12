@@ -45,7 +45,9 @@ export function LegalPage({ title, intro, path, indexable, updatedAt, sections =
                       href={`#${section.id}`}
                       className="flex gap-3 text-sm text-steel-400 transition-colors hover:text-bone"
                     >
-                      <span className="label-mono text-amber">{String(index + 1).padStart(2, "0")}</span>
+                      <span aria-hidden className="label-mono text-accent">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                       {section.heading}
                     </a>
                   </li>
@@ -55,10 +57,14 @@ export function LegalPage({ title, intro, path, indexable, updatedAt, sections =
             <div className="space-y-12 lg:col-span-8 lg:col-start-5">
               {sections.map((section, index) => (
                 <section key={section.id} id={section.id} aria-labelledby={`${section.id}-baslik`}>
-                  <h2 id={`${section.id}-baslik`} className="display flex items-baseline gap-4 text-[clamp(1.6rem,2.4vw,2.2rem)]">
-                    <span className="label-mono text-amber">{String(index + 1).padStart(2, "0")}</span>
-                    {section.heading}
-                  </h2>
+                  <div className="flex items-baseline gap-4">
+                    <span aria-hidden className="label-mono text-accent">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h2 id={`${section.id}-baslik`} className="display text-[clamp(1.6rem,2.4vw,2.2rem)]">
+                      {section.heading}
+                    </h2>
+                  </div>
                   <div className="mt-5 space-y-4 text-[1rem] leading-relaxed text-steel-300">
                     {section.body}
                   </div>

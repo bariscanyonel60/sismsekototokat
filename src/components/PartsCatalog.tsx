@@ -1,433 +1,917 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useId, useMemo, useRef, useState, type ComponentType } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode, type RefObject } from "react";
 
+import { ArrowRight, ArrowUpRight, ChevronRight, CloseIcon, FilterIcon, SearchIcon, WhatsAppIcon } from "@/components/icons";
+import { PartCard } from "@/components/PartCard";
+import { categoryIcons } from "@/components/partCategoryIcons";
+import { brands, segmentLabels, type Brand } from "@/data/brands";
+import { sectionIds } from "@/data/navigation";
+import { partsIntro, qualityLabels } from "@/data/parts";
 import {
-  ArrowRight,
-  ArrowUpRight,
-  CloseIcon,
-  EngineIcon,
-  FilterIcon,
-  OilIcon,
-  SearchIcon,
-  SuspensionIcon,
-} from "@/components/icons";
-import { brands, segmentLabels, type Brand, type VehicleSegment } from "@/data/brands";
-import { ctaLabels } from "@/data/navigation";
-import {
-  partCategories,
-  partHref,
-  parts,
-  partsIntro,
-  qualityLabels,
-  type Part,
-  type PartCategory,
-  type PartCategoryId,
-  type PartQuality,
-} from "@/data/parts";
+  buildView,
+  countWith,
+  EMPTY_FILTERS,
+  filterParts,
+  matchesQuery,
+  normalize,
+  parseState,
+  queryTerms,
+  segments,
+  serializeState,
+  sortKeys,
+  sortLabels,
+  vehicleLabel,
+  type CatalogState,
+  type CatalogView,
+  type Filters,
+  type SortKey,
+} from "@/lib/catalog/filters";
+import { partHref, partImage, vehicleOptions } from "@/lib/catalog/helpers";
+import { partQualities, type Catalog } from "@/lib/catalog/types";
+import { useUrlSearch, writeUrlSearch } from "@/lib/catalog/useUrlSearch";
 import { contactHref, isExternalHref } from "@/lib/contact";
-import { cssVars } from "@/lib/cssVars";
+import { cart } from "@/lib/partsCart";
 
-type IconComponent = ComponentType<{ size?: number; className?: string }>;
+const PAGE_SIZE = 12;
+const RESULTS_ID = "parca-sonuclari";
+const FINDER_ID = "arac-secici";
 
-const categoryIcons: Record<PartCategoryId, IconComponent> = {
-  "sandik-motor": EngineIcon,
-  "motor-yaglari": OilIcon,
-  "filtre-setleri": FilterIcon,
-  "on-takim": SuspensionIcon,
-};
-
-const categoryById = Object.fromEntries(partCategories.map((c) => [c.id, c])) as Record<
-  PartCategoryId,
-  PartCategory
->;
-
-const categoryTitles = Object.fromEntries(partCategories.map((c) => [c.id, c.title])) as Record<
-  PartCategoryId,
-  string
->;
-
-const segments = Object.keys(segmentLabels) as VehicleSegment[];
-const qualities = Object.keys(qualityLabels) as PartQuality[];
-
-interface Filters {
-  query: string;
-  category: PartCategoryId | null;
-  segment: VehicleSegment | null;
-  brand: Brand | null;
-  quality: PartQuality | null;
+function scrollToId(id: string) {
+  document.getElementById(id)?.scrollIntoView({ block: "start" });
 }
 
-const EMPTY_FILTERS: Filters = { query: "", category: null, segment: null, brand: null, quality: null };
+type UpdateMode = "push" | "replace";
+type Update = (patch: Partial<Filters>, mode?: UpdateMode) => void;
 
-const TR_FOLD: Record<string, string> = { ı: "i", ş: "s", ğ: "g", ü: "u", ö: "o", ç: "c" };
+/* ---------- Arama + öneriler ---------- */
 
-function normalize(value: string): string {
-  return value
-    .toLocaleLowerCase("tr-TR")
-    .replace(/[ışğüöç]/g, (char) => TR_FOLD[char] ?? char)
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
+interface Suggestion {
+  id: string;
+  label: string;
+  meta: string;
+  run: () => void;
 }
 
-const searchIndex = new Map(
-  parts.map((part) => [
-    part.slug,
-    normalize([part.title, part.description, categoryTitles[part.category], ...part.keywords].join(" ")),
-  ]),
-);
+function SearchBox({ view, filters, update }: { view: CatalogView; filters: Filters; update: Update }) {
+  const router = useRouter();
+  const inputId = useId();
+  const listId = useId();
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
 
-function matches(part: Part, filters: Filters, ignoreCategory = false): boolean {
-  if (!ignoreCategory && filters.category && part.category !== filters.category) return false;
-  if (filters.segment && !part.segments.includes(filters.segment)) return false;
-  if (filters.quality && !part.qualities.includes(filters.quality)) return false;
-  const terms = normalize(filters.query).split(/\s+/).filter(Boolean);
-  if (terms.length === 0) return true;
-  const haystack = searchIndex.get(part.slug) ?? "";
-  return terms.every((term) => haystack.includes(term));
-}
+  const suggestions = useMemo<Suggestion[]>(() => {
+    const terms = queryTerms(filters.query);
+    if (terms.join("").length < 2) return [];
+    const joined = terms.join(" ");
+    const categories = view.catalog.categories
+      .filter((category) => normalize(category.title).includes(joined))
+      .slice(0, 2)
+      .map((category) => ({
+        id: `kategori-${category.id}`,
+        label: category.title,
+        meta: "Kategori",
+        run: () => update({ category: category.id, subcategory: null, query: "" }),
+      }));
+    const vehicleBrands = brands
+      .filter((brand) => normalize(brand.plain).startsWith(terms[0] ?? ""))
+      .slice(0, 2)
+      .map((brand) => ({
+        id: `marka-${brand.plain}`,
+        label: `${brand.name} yedek parça`,
+        meta: "Araç markası",
+        run: () => update({ brand, segment: brand.segment, model: "", engine: "", year: "", query: "" }),
+      }));
+    const parts = view.catalog.parts
+      .filter((part) => matchesQuery(view, part, terms))
+      .slice(0, 6)
+      .map((part) => {
+        const oem = part.oemCodes?.find((code) => terms.some((term) => normalize(code).replace(/[\s./-]/g, "").includes(term.replace(/[\s./-]/g, ""))));
+        return {
+          id: `urun-${part.slug}`,
+          label: part.title,
+          meta: oem ? `OEM: ${oem}` : `Ürün Kodu: ${part.code}`,
+          run: () => router.push(partHref(part.slug)),
+        };
+      });
+    return [...parts, ...categories, ...vehicleBrands];
+  }, [filters.query, view, update, router]);
 
-const chipBase = "border transition-colors duration-300";
-const chipIdle = "border-ink/15 bg-white text-steel-700 hover:border-ink/40 hover:text-ink";
-const chipActive = "border-amber bg-amber text-ink";
-
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: string;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={`label-mono h-10 whitespace-nowrap px-3.5 text-[0.68rem] ${chipBase} ${active ? chipActive : chipIdle}`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function PartCard({ part, brand, index }: { part: Part; brand: Brand | null; index: number }) {
-  const href = contactHref({ kind: "part", part: part.title, brand: brand?.plain });
-  const external = isExternalHref(href);
-  const category = categoryById[part.category];
-  const image = part.image ?? category.image;
-
-  return (
-    <li className="part-card" style={cssVars({ "--i": Math.min(index, 8) })}>
-      <article className="group relative flex h-full flex-col overflow-hidden rounded-md border border-ink/10 bg-white shadow-[0_1px_2px_rgb(26_31_37/0.05)] transition-[box-shadow,border-color,transform] duration-500 ease-out-expo hover:-translate-y-1 hover:border-ink/20 hover:shadow-[0_24px_48px_-24px_rgb(26_31_37/0.35)]">
-        <div className="relative aspect-[16/10] overflow-hidden bg-bone-300">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"
-            placeholder="blur"
-            className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
-          />
-          <span className="label-mono absolute left-3 top-3 rounded-sm bg-white/90 px-2.5 py-1 text-[0.6rem] text-ink shadow-sm backdrop-blur md:left-4 md:top-4">
-            {category.title}
-          </span>
-          {part.qualities.length > 0 && (
-            <ul className="absolute right-3 top-3 flex gap-1.5 md:right-4 md:top-4" aria-label="Parça seçenekleri">
-              {part.qualities.map((quality) => (
-                <li
-                  key={quality}
-                  className={`label-mono rounded-sm px-2 py-1 text-[0.6rem] shadow-sm ${
-                    quality === "orijinal" ? "bg-amber text-ink" : "bg-ink/85 text-bone backdrop-blur"
-                  }`}
-                >
-                  {qualityLabels[quality]}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className="flex flex-1 flex-col p-5 md:p-6">
-          <h3 className="display text-[clamp(1.5rem,2vw,1.9rem)] text-ink">
-            <Link
-              href={partHref(part.slug)}
-              className="after:absolute after:inset-0 after:z-[1] decoration-amber decoration-2 underline-offset-4 group-hover:underline"
-            >
-              {part.title}
-            </Link>
-          </h3>
-          <p className="mt-2.5 flex-1 text-[0.93rem] leading-relaxed text-steel-700">{part.description}</p>
-
-          <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Uygun araç grupları">
-            {part.segments.map((segment) => (
-              <li key={segment} className="label-mono rounded-sm bg-bone-300/70 px-2 py-1 text-[0.58rem] text-steel-700">
-                {segmentLabels[segment]}
-              </li>
-            ))}
-          </ul>
-
-          <div className="relative z-[2] mt-5 grid grid-cols-2 gap-2">
-            <Link
-              href={partHref(part.slug)}
-              className="link-arrow justify-between rounded-sm border border-ink/15 px-4 py-3 text-[0.8rem] text-ink transition-colors duration-300 hover:border-ink"
-            >
-              İncele
-              <ArrowRight size={16} />
-            </Link>
-            <a
-              href={href}
-              target={external ? "_blank" : undefined}
-              rel={external ? "noopener noreferrer" : undefined}
-              aria-label={`${part.title}${brand ? ` (${brand.plain})` : ""} için stok ve fiyat sor`}
-              className="link-arrow justify-between rounded-sm bg-amber px-4 py-3 text-[0.8rem] text-ink transition-colors duration-300 hover:bg-ink hover:text-bone"
-            >
-              Fiyat Sor
-              <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </div>
-      </article>
-    </li>
-  );
-}
-
-export function PartsCatalog() {
-  const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
-  const searchId = useId();
-  const resultsRef = useRef<HTMLDivElement>(null);
-
-  const results = useMemo(() => parts.filter((part) => matches(part, filters)), [filters]);
-  const categoryCounts = useMemo(
-    () =>
-      Object.fromEntries(
-        partCategories.map((category) => [
-          category.id,
-          parts.filter((part) => part.category === category.id && matches(part, filters, true)).length,
-        ]),
-      ) as Record<PartCategoryId, number>,
-    [filters],
-  );
-
-  const update = (patch: Partial<Filters>) => setFilters((current) => ({ ...current, ...patch }));
-
-  const setSegment = (segment: VehicleSegment | null) =>
-    setFilters((current) => ({
-      ...current,
-      segment,
-      brand: current.brand && segment && current.brand.segment !== segment ? null : current.brand,
-    }));
-
-  const setBrand = (brand: Brand | null) =>
-    setFilters((current) => ({ ...current, brand, segment: brand ? brand.segment : current.segment }));
-
-  const revealResults = () => {
-    const el = resultsRef.current;
-    if (!el) return;
-    const { top } = el.getBoundingClientRect();
-    if (top > window.innerHeight * 0.55 || top < 0) el.scrollIntoView({ block: "start" });
+  const expanded = open && suggestions.length > 0;
+  const choose = (index: number) => {
+    suggestions[index]?.run();
+    setOpen(false);
+    setActive(-1);
   };
 
-  const activeChips = [
-    filters.query.trim() && { key: "query", label: `“${filters.query.trim()}”`, clear: () => update({ query: "" }) },
-    filters.category && {
-      key: "category",
-      label: categoryTitles[filters.category],
-      clear: () => update({ category: null }),
-    },
-    filters.brand && { key: "brand", label: filters.brand.name, clear: () => update({ brand: null }) },
-    filters.segment && {
-      key: "segment",
-      label: segmentLabels[filters.segment],
-      clear: () => setSegment(null),
-    },
-    filters.quality && {
-      key: "quality",
-      label: qualityLabels[filters.quality],
-      clear: () => update({ quality: null }),
-    },
-  ].filter((chip): chip is { key: string; label: string; clear: () => void } => Boolean(chip));
+  return (
+    <div className="relative">
+      <label htmlFor={inputId} className="sr-only">
+        Ürün adı, OEM kodu veya ürün kodu ara
+      </label>
+      <SearchIcon size={20} className="pointer-events-none absolute left-4 top-[1.75rem] -translate-y-1/2 text-steel-500" />
+      <input
+        id={inputId}
+        type="search"
+        role="combobox"
+        aria-expanded={expanded}
+        aria-controls={listId}
+        aria-autocomplete="list"
+        aria-activedescendant={expanded && active >= 0 ? `${listId}-${active}` : undefined}
+        value={filters.query}
+        onChange={(event) => {
+          update({ query: event.target.value }, "replace");
+          setOpen(true);
+          setActive(-1);
+        }}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown" && suggestions.length) {
+            event.preventDefault();
+            setOpen(true);
+            setActive((current) => (current + 1) % suggestions.length);
+          } else if (event.key === "ArrowUp" && suggestions.length) {
+            event.preventDefault();
+            setActive((current) => (current <= 0 ? suggestions.length - 1 : current - 1));
+          } else if (event.key === "Enter") {
+            event.preventDefault();
+            if (expanded && active >= 0) choose(active);
+            else {
+              setOpen(false);
+              scrollToId(RESULTS_ID);
+            }
+          } else if (event.key === "Escape") {
+            setOpen(false);
+            setActive(-1);
+          }
+        }}
+        placeholder="Ürün adı, OEM kodu veya ürün kodu ara..."
+        autoComplete="off"
+        className="h-14 w-full rounded-sm border-2 border-ink/15 bg-white pl-12 pr-4 text-base text-ink outline-none transition-colors placeholder:text-steel-500 focus:border-accent"
+      />
+      <ul
+        id={listId}
+        role="listbox"
+        aria-label="Arama önerileri"
+        hidden={!expanded}
+        className="absolute inset-x-0 top-full z-30 mt-1 max-h-[22rem] overflow-y-auto rounded-sm border border-ink/15 bg-white py-1 shadow-[0_18px_40px_-24px_rgb(26_31_37/0.5)]"
+      >
+        {suggestions.map((item, index) => (
+          <li
+            key={item.id}
+            id={`${listId}-${index}`}
+            role="option"
+            aria-selected={index === active}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => choose(index)}
+            onMouseEnter={() => setActive(index)}
+            className={`flex cursor-pointer items-center justify-between gap-4 px-4 py-2.5 ${
+              index === active ? "bg-bone-100" : ""
+            }`}
+          >
+            <span className="min-w-0 truncate font-semibold text-ink">{item.label}</span>
+            <span className="label-mono shrink-0 text-[0.58rem] text-steel-500">{item.meta}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-  const fallbackHref = contactHref({
-    kind: "part",
-    part: filters.query.trim() || "yedek parça",
-    brand: filters.brand?.plain,
-  });
+/* ---------- Araç seçici ---------- */
+
+interface VehicleDraft {
+  brand: string;
+  model: string;
+  engine: string;
+  year: string;
+}
+
+const EMPTY_DRAFT: VehicleDraft = { brand: "", model: "", engine: "", year: "" };
+
+const fieldClass =
+  "h-12 w-full rounded-sm border border-ink/15 bg-white px-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-steel-500 focus:border-accent disabled:cursor-not-allowed disabled:bg-bone-100 disabled:text-steel-500";
+
+function VehicleFinder({
+  catalog,
+  draft,
+  setDraft,
+  onApply,
+  brandRef,
+}: {
+  catalog: Catalog;
+  draft: VehicleDraft;
+  setDraft: (draft: VehicleDraft) => void;
+  onApply: (event: FormEvent<HTMLFormElement>) => void;
+  brandRef: RefObject<HTMLSelectElement | null>;
+}) {
+  const titleId = useId();
+  const ids = { model: useId(), engine: useId(), year: useId() };
+  const options = draft.brand ? vehicleOptions(catalog, draft.brand, draft.model) : { models: [], engines: [], years: [] };
+  const off = !draft.brand;
 
   return (
-    <div>
-      <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4" aria-label="Parça kategorileri">
-        {partCategories.map((category) => {
-          const Icon = categoryIcons[category.id];
-          const active = filters.category === category.id;
+    <form
+      id={FINDER_ID}
+      onSubmit={onApply}
+      aria-labelledby={titleId}
+      className="mt-5 scroll-mt-[calc(var(--header-h)+1rem)] border-t border-ink/10 pt-5"
+    >
+      <h2 id={titleId} className="font-display text-[1.5rem] font-bold uppercase leading-[0.95] tracking-[0.02em] text-ink md:text-[1.75rem]">
+        <span className="block">Aracına Uygun{" "}</span>
+        <span className="block">
+          Parçayı Bul<span className="text-accent">.</span>
+        </span>
+      </h2>
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,0.8fr)_auto]">
+        <label className="flex min-w-0 flex-col gap-1">
+          <span className="label-mono text-[0.58rem] text-steel-500">1 · Marka</span>
+          <select
+            ref={brandRef}
+            value={draft.brand}
+            onChange={(event) => setDraft({ ...EMPTY_DRAFT, brand: event.target.value })}
+            className={fieldClass}
+          >
+            <option value="">Marka seçin</option>
+            {segments.map((segment) => (
+              <optgroup key={segment} label={segmentLabels[segment]}>
+                {brands
+                  .filter((brand) => brand.segment === segment)
+                  .map((brand) => (
+                    <option key={brand.plain} value={brand.plain}>
+                      {brand.name}
+                      {brand.note ? ` (${brand.note})` : ""}
+                    </option>
+                  ))}
+              </optgroup>
+            ))}
+          </select>
+        </label>
+        <VehicleField
+          id={ids.model}
+          step="2 · Model"
+          value={draft.model}
+          disabled={off}
+          options={options.models}
+          placeholder={options.models.length ? "Model seçin veya yazın" : "Model yazın"}
+          onChange={(model) => setDraft({ ...draft, model, engine: "", year: "" })}
+        />
+        <VehicleField
+          id={ids.engine}
+          step="3 · Motor"
+          value={draft.engine}
+          disabled={off}
+          options={options.engines}
+          placeholder="Motor (isteğe bağlı)"
+          onChange={(engine) => setDraft({ ...draft, engine })}
+        />
+        <VehicleField
+          id={ids.year}
+          step="4 · Yıl"
+          value={draft.year}
+          disabled={off}
+          options={options.years}
+          placeholder="Yıl"
+          inputMode="numeric"
+          onChange={(year) => setDraft({ ...draft, year })}
+        />
+        <button type="submit" disabled={off} className="btn btn-primary h-12 self-end px-5 disabled:opacity-50">
+          <span>Uyumlu Parçaları Göster</span>
+          <ArrowRight size={16} />
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function VehicleField({
+  id,
+  step,
+  value,
+  disabled,
+  options,
+  placeholder,
+  inputMode,
+  onChange,
+}: {
+  id: string;
+  step: string;
+  value: string;
+  disabled: boolean;
+  options: string[];
+  placeholder: string;
+  inputMode?: "numeric";
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label className="flex min-w-0 flex-col gap-1">
+      <span className="label-mono text-[0.58rem] text-steel-500">{step}</span>
+      <input
+        value={value}
+        disabled={disabled}
+        list={options.length ? `${id}-liste` : undefined}
+        onChange={(event) => onChange(event.target.value.slice(0, 60))}
+        placeholder={placeholder}
+        inputMode={inputMode}
+        autoComplete="off"
+        className={fieldClass}
+      />
+      {options.length > 0 && (
+        <datalist id={`${id}-liste`}>
+          {options.map((option) => (
+            <option key={option} value={option} />
+          ))}
+        </datalist>
+      )}
+    </label>
+  );
+}
+
+function VehicleContext({
+  filters,
+  count,
+  onChange,
+  onClear,
+}: {
+  filters: Filters;
+  count: number;
+  onChange: () => void;
+  onClear: () => void;
+}) {
+  const parts = filters.brand
+    ? [filters.brand.name, filters.model, filters.engine, filters.year].filter(Boolean)
+    : [filters.segment ? segmentLabels[filters.segment] : ""];
+  return (
+    <div className="mt-4 grid gap-4 rounded-sm bg-ink p-4 text-bone sm:grid-cols-[1fr_auto] sm:items-center md:p-5">
+      <div>
+        <p className="label-mono text-[0.58rem] text-accent-300">{filters.brand ? "Aracınız" : "Araç tipi"}</p>
+        <p className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-display text-xl font-bold uppercase tracking-[0.04em] md:text-2xl">
+          {parts.map((item, index) => (
+            <span key={`${item}-${index}`} className={index === 0 ? "text-bone" : "text-steel-300"}>
+              {item}
+            </span>
+          ))}
+        </p>
+        <p className="mt-2 text-sm text-steel-300" role="status" aria-live="polite">
+          Aracınıza uygun <strong className="font-semibold text-bone">{count}</strong> ürün gösteriliyor.
+          {filters.brand && (filters.model || filters.engine) && (
+            <span className="block text-steel-400">
+              Model ve motor uyumu sipariş öncesinde şasi numaranızla ayrıca kontrol edilir.
+            </span>
+          )}
+        </p>
+      </div>
+      <div className="flex gap-2">
+        <button type="button" onClick={onChange} className="btn btn-outline btn-sm">
+          Aracı Değiştir
+        </button>
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Araç seçimini temizle"
+          className="inline-flex size-11 items-center justify-center rounded-sm border border-bone/25 text-bone transition-colors hover:border-accent hover:text-accent-300"
+        >
+          <CloseIcon size={16} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Kategoriler ---------- */
+
+function CategoryStrip({ view, filters, update }: { view: CatalogView; filters: Filters; update: Update }) {
+  const items = [
+    { id: null, icon: null, title: "Tüm Ürünler", count: countWith(view, filters, { category: null, subcategory: null }) },
+    ...view.catalog.categories.map((category) => ({
+      id: category.id,
+      icon: category.icon,
+      title: category.title,
+      count: countWith(view, filters, { category: category.id, subcategory: null }),
+    })),
+  ];
+  return (
+    <section aria-labelledby="parca-kategorileri-baslik" className="mt-12">
+      <h2 id="parca-kategorileri-baslik" className="font-display text-2xl font-bold uppercase tracking-[0.04em] text-ink md:text-3xl">
+        Yedek Parça Kategorileri
+      </h2>
+      <ul className="-mx-[var(--gutter)] mt-5 flex snap-x scroll-px-[var(--gutter)] gap-2 overflow-x-auto px-[var(--gutter)] pb-1 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-4 sm:overflow-visible sm:px-0 xl:grid-cols-8 [&::-webkit-scrollbar]:hidden">
+        {items.map(({ id, icon, title, count }) => {
+          const Icon = icon ? categoryIcons[icon] : SearchIcon;
+          const active = filters.category === id;
           return (
-            <li key={category.id}>
+            <li key={title} className="w-[8.5rem] shrink-0 snap-start sm:w-auto">
               <button
                 type="button"
                 aria-pressed={active}
                 onClick={() => {
-                  update({ category: active ? null : category.id });
-                  revealResults();
+                  update({ category: id, subcategory: null });
+                  scrollToId(RESULTS_ID);
                 }}
-                className={`group relative flex h-full w-full items-center gap-3 overflow-hidden rounded-md border p-3.5 text-left transition-[border-color,box-shadow] duration-500 md:gap-4 md:p-5 ${
-                  active
-                    ? "border-ink bg-white shadow-[0_12px_32px_-18px_rgb(26_31_37/0.4)]"
-                    : "border-ink/10 bg-white hover:border-ink/30"
+                className={`relative flex h-full w-full flex-col items-start gap-3 overflow-hidden rounded-sm border p-3.5 text-left transition-colors duration-300 ${
+                  active ? "border-ink/25 bg-bone-300/60" : "border-ink/10 bg-white hover:border-ink/30"
                 }`}
               >
                 <span
-                  className={`absolute left-0 top-0 h-1 bg-amber transition-[width] duration-700 ease-out-expo ${
-                    active ? "w-full" : "w-0 group-hover:w-1/3"
-                  }`}
+                  aria-hidden
+                  className={`absolute inset-x-0 top-0 h-0.5 bg-accent transition-transform duration-300 ${
+                    active ? "scale-x-100" : "scale-x-0"
+                  } origin-left`}
                 />
-                <span
-                  className={`inline-flex size-10 shrink-0 items-center justify-center rounded-sm transition-colors duration-500 md:size-12 ${
-                    active ? "bg-amber text-ink" : "bg-bone-300/70 text-ink group-hover:bg-amber"
-                  }`}
-                >
-                  <Icon size={22} />
+                <Icon size={28} strokeWidth={1.5} className={active ? "text-accent" : "text-ink"} />
+                <span className="font-display text-[0.95rem] font-bold uppercase leading-tight tracking-[0.03em] text-ink">
+                  {title}
                 </span>
-                <span className="min-w-0">
-                  <span className="display block text-[clamp(1rem,1.6vw,1.45rem)] leading-tight text-ink">{category.title}</span>
-                  <span className="label-mono mt-1 block text-[0.6rem] text-steel-500">
-                    {categoryCounts[category.id]} ürün
-                  </span>
-                </span>
+                <span className="label-mono mt-auto text-[0.56rem] text-steel-500">{count} ürün</span>
               </button>
             </li>
           );
         })}
       </ul>
+    </section>
+  );
+}
 
-      <div className="mt-6 rounded-md border border-ink/10 bg-white p-4 md:p-5">
-        <div className="flex items-center justify-between gap-4">
-          <p className="label-mono text-[0.65rem] text-ink">Markanızı seçin</p>
-          {filters.brand && (
-            <button
-              type="button"
-              onClick={() => update({ brand: null })}
-              className="label-mono text-[0.6rem] text-steel-700 underline-offset-4 transition-colors hover:text-ink hover:underline"
-            >
-              Tüm Markalar
-            </button>
-          )}
-        </div>
-        <div className="mt-4 grid gap-4 lg:grid-cols-[2fr_auto_1.6fr] lg:gap-6">
-          {segments.map((segment) => (
-            <fieldset key={segment} className="min-w-0">
-              <legend className="label-mono mb-2.5 text-[0.6rem] text-steel-500">{segmentLabels[segment]}</legend>
-              <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:flex-wrap md:px-0">
-                {brands
-                  .filter((brand) => brand.segment === segment)
-                  .map((brand) => {
-                    const active = filters.brand?.plain === brand.plain;
-                    return (
-                      <button
-                        key={brand.plain}
-                        type="button"
-                        aria-pressed={active}
-                        onClick={() => {
-                          setBrand(active ? null : brand);
-                          revealResults();
-                        }}
-                        className={`h-10 shrink-0 whitespace-nowrap rounded-sm px-3.5 font-display text-[0.95rem] font-semibold uppercase tracking-[0.08em] ${chipBase} ${
-                          active ? chipActive : chipIdle
-                        }`}
-                      >
-                        {brand.name}
-                        {brand.note && (
-                          <span
-                            className={`ml-2 font-sans text-[0.68rem] font-normal normal-case tracking-normal ${
-                              active ? "text-ink/70" : "text-steel-500"
-                            }`}
-                          >
-                            {brand.note}
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
+/* ---------- Filtre paneli ---------- */
+
+function FilterSection({ title, value, children }: { title: string; value?: string; children: ReactNode }) {
+  return (
+    <details open className="group/section border-b border-ink/10 last:border-b-0">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-2 [&::-webkit-details-marker]:hidden">
+        <span className="label-mono text-[0.62rem] text-ink">{title}</span>
+        <span className="flex min-w-0 items-center gap-2">
+          {value && <span className="truncate text-xs text-accent-600">{value}</span>}
+          <ChevronRight size={16} className="shrink-0 text-steel-500 transition-transform group-open/section:rotate-90" />
+        </span>
+      </summary>
+      <fieldset className="pb-4">
+        <legend className="sr-only">{title}</legend>
+        <div className="grid gap-0.5">{children}</div>
+      </fieldset>
+    </details>
+  );
+}
+
+function RadioOption({
+  name,
+  label,
+  count,
+  checked,
+  onSelect,
+  indent = false,
+}: {
+  name: string;
+  label: string;
+  count: number;
+  checked: boolean;
+  onSelect: () => void;
+  indent?: boolean;
+}) {
+  const disabled = count === 0 && !checked;
+  return (
+    <label
+      className={`flex min-h-9 cursor-pointer items-center gap-2.5 rounded-xs pr-1 text-[0.92rem] transition-colors has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-40 ${
+        indent ? "pl-5" : "pl-1"
+      } ${checked ? "font-semibold text-ink" : "text-steel-700 hover:text-ink"}`}
+    >
+      <input
+        type="radio"
+        name={name}
+        checked={checked}
+        disabled={disabled}
+        onChange={onSelect}
+        className="size-4 shrink-0 appearance-none rounded-full border border-ink/35 bg-white transition-[border] checked:border-[5px] checked:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      />
+      <span className="flex-1">{label}</span>
+      <span className={`label-mono text-[0.6rem] ${checked ? "text-accent-600" : "text-steel-500"}`}>{count}</span>
+    </label>
+  );
+}
+
+function FilterPanel({ view, filters, update, name }: { view: CatalogView; filters: Filters; update: Update; name: string }) {
+  const category = view.catalog.categories.find((item) => item.id === filters.category);
+  const brandPatch = (brand: Brand | null): Partial<Filters> =>
+    brand ? { brand, segment: brand.segment, model: "", engine: "", year: "" } : { brand: null, model: "", engine: "", year: "" };
+
+  return (
+    <div>
+      <FilterSection title="Kategori" value={category?.title}>
+        <RadioOption
+          name={`${name}-kategori`}
+          label="Tüm Kategoriler"
+          count={countWith(view, filters, { category: null, subcategory: null })}
+          checked={!filters.category}
+          onSelect={() => update({ category: null, subcategory: null })}
+        />
+        {view.catalog.categories.map((item) => (
+          <div key={item.id} className="grid gap-0.5">
+            <RadioOption
+              name={`${name}-kategori`}
+              label={item.title}
+              count={countWith(view, filters, { category: item.id, subcategory: null })}
+              checked={filters.category === item.id}
+              onSelect={() => update({ category: item.id, subcategory: null })}
+            />
+            {filters.category === item.id && item.subcategories.length > 0 && (
+              <div role="radiogroup" aria-label={`${item.title} alt kategorileri`} className="grid gap-0.5">
+                <RadioOption
+                  name={`${name}-alt`}
+                  indent
+                  label="Tümü"
+                  count={countWith(view, filters, { subcategory: null })}
+                  checked={!filters.subcategory}
+                  onSelect={() => update({ subcategory: null })}
+                />
+                {item.subcategories.map((sub) => (
+                  <RadioOption
+                    key={sub.id}
+                    name={`${name}-alt`}
+                    indent
+                    label={sub.title}
+                    count={countWith(view, filters, { subcategory: sub.id })}
+                    checked={filters.subcategory === sub.id}
+                    onSelect={() => update({ subcategory: sub.id })}
+                  />
+                ))}
               </div>
-            </fieldset>
-          ))}
-        </div>
-      </div>
+            )}
+          </div>
+        ))}
+      </FilterSection>
 
-      <div className="z-30 -mx-[var(--gutter)] mt-6 border-y border-ink/10 bg-bone-100/90 px-[var(--gutter)] py-4 backdrop-blur-xl backdrop-saturate-150 lg:sticky lg:top-[var(--header-h)] lg:mx-0 lg:rounded-md lg:border-x lg:px-5">
-        <div className="relative">
-          <label htmlFor={searchId} className="sr-only">
-            Parça ara
-          </label>
-          <SearchIcon size={18} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-steel-500" />
-          <input
-            id={searchId}
-            type="search"
-            value={filters.query}
-            onChange={(event) => update({ query: event.target.value })}
-            placeholder="Parça ara: rotil, yağ filtresi, 5W-30, sandık motor…"
-            autoComplete="off"
-            className="h-11 w-full rounded-sm border border-ink/15 bg-white pl-10 pr-3 text-[0.95rem] text-ink placeholder:text-steel-500 outline-none transition-colors focus:border-amber"
+      <FilterSection title="Araç Markası" value={filters.brand?.name}>
+        <RadioOption
+          name={`${name}-marka`}
+          label="Tüm Markalar"
+          count={countWith(view, filters, brandPatch(null))}
+          checked={!filters.brand}
+          onSelect={() => update(brandPatch(null))}
+        />
+        {segments.map((segment) => (
+          <div key={segment} className="mt-1 grid gap-0.5">
+            <span className="px-1 pt-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-steel-500">
+              {segmentLabels[segment]}
+            </span>
+            {brands
+              .filter((brand) => brand.segment === segment)
+              .map((brand) => (
+                <RadioOption
+                  key={brand.plain}
+                  name={`${name}-marka`}
+                  indent
+                  label={brand.note ? `${brand.name} (${brand.note})` : brand.name}
+                  count={countWith(view, filters, brandPatch(brand))}
+                  checked={filters.brand?.plain === brand.plain}
+                  onSelect={() => update(brandPatch(brand))}
+                />
+              ))}
+          </div>
+        ))}
+      </FilterSection>
+
+      <FilterSection title="Araç Tipi" value={filters.segment ? segmentLabels[filters.segment] : undefined}>
+        <RadioOption
+          name={`${name}-tip`}
+          label="Tüm Araçlar"
+          count={countWith(view, filters, { segment: null, ...brandPatch(null) })}
+          checked={!filters.segment}
+          onSelect={() => update({ segment: null, ...brandPatch(null) })}
+        />
+        {segments.map((segment) => {
+          const keepBrand = filters.brand?.segment === segment;
+          const patch: Partial<Filters> = keepBrand ? { segment } : { segment, ...brandPatch(null) };
+          return (
+            <RadioOption
+              key={segment}
+              name={`${name}-tip`}
+              label={segmentLabels[segment]}
+              count={countWith(view, filters, patch)}
+              checked={filters.segment === segment}
+              onSelect={() => update(patch)}
+            />
+          );
+        })}
+      </FilterSection>
+
+      {view.manufacturers.length > 0 && (
+        <FilterSection title="Ürün Markası" value={filters.manufacturer ?? undefined}>
+          <RadioOption
+            name={`${name}-uretici`}
+            label="Tüm Ürün Markaları"
+            count={countWith(view, filters, { manufacturer: null })}
+            checked={!filters.manufacturer}
+            onSelect={() => update({ manufacturer: null })}
           />
-        </div>
+          {view.manufacturers.map((maker) => (
+            <RadioOption
+              key={maker}
+              name={`${name}-uretici`}
+              label={maker}
+              count={countWith(view, filters, { manufacturer: maker })}
+              checked={filters.manufacturer === maker}
+              onSelect={() => update({ manufacturer: maker })}
+            />
+          ))}
+        </FilterSection>
+      )}
 
-        <div className="mt-3 flex gap-6 overflow-x-auto [scrollbar-width:none] md:mt-4">
-          <fieldset className="flex shrink-0 items-center gap-2">
-            <legend className="sr-only">Araç grubu</legend>
-            <span aria-hidden className="label-mono mr-2 hidden text-[0.62rem] text-steel-500 lg:inline">
-              Araç Grubu
-            </span>
-            <Chip active={filters.segment === null} onClick={() => setSegment(null)}>
-              Tüm Araçlar
-            </Chip>
-            {segments.map((segment) => (
-              <Chip key={segment} active={filters.segment === segment} onClick={() => setSegment(segment)}>
-                {segmentLabels[segment]}
-              </Chip>
-            ))}
-          </fieldset>
+      <FilterSection title="Parça Türü" value={filters.quality ? qualityLabels[filters.quality] : undefined}>
+        <RadioOption
+          name={`${name}-tur`}
+          label="Tümü"
+          count={countWith(view, filters, { quality: null })}
+          checked={!filters.quality}
+          onSelect={() => update({ quality: null })}
+        />
+        {partQualities.map((quality) => (
+          <RadioOption
+            key={quality}
+            name={`${name}-tur`}
+            label={qualityLabels[quality]}
+            count={countWith(view, filters, { quality })}
+            checked={filters.quality === quality}
+            onSelect={() => update({ quality })}
+          />
+        ))}
+      </FilterSection>
+    </div>
+  );
+}
 
-          <span className="w-px shrink-0 self-stretch bg-ink/10" aria-hidden />
+/* ---------- Sayfalama ---------- */
 
-          <fieldset className="flex shrink-0 items-center gap-2">
-            <legend className="sr-only">Parça türü</legend>
-            <span aria-hidden className="label-mono mr-2 hidden text-[0.62rem] text-steel-500 lg:inline">
-              Parça Türü
-            </span>
-            {qualities.map((quality) => (
-              <Chip
-                key={quality}
-                active={filters.quality === quality}
-                onClick={() => update({ quality: filters.quality === quality ? null : quality })}
+/** 1 … 4 5 6 … 9 biçiminde sayfa listesi; `null` üç noktadır. */
+function pageList(current: number, total: number): (number | null)[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages = new Set([1, total, current - 1, current, current + 1]);
+  if (current <= 3) [2, 3, 4].forEach((page) => pages.add(page));
+  if (current >= total - 2) [total - 3, total - 2, total - 1].forEach((page) => pages.add(page));
+  const sorted = [...pages].filter((page) => page >= 1 && page <= total).sort((a, b) => a - b);
+  return sorted.flatMap((page, i) => (i > 0 && page - sorted[i - 1] > 1 ? [null, page] : [page]));
+}
+
+function Pagination({ page, total, onChange }: { page: number; total: number; onChange: (page: number) => void }) {
+  const navButton =
+    "inline-flex h-11 items-center gap-2 rounded-sm border border-ink/15 bg-white px-4 font-display text-sm font-bold uppercase tracking-[0.08em] text-ink transition-colors hover:border-ink disabled:pointer-events-none disabled:opacity-40";
+  return (
+    <nav aria-label="Ürün sayfaları" className="mt-10 flex items-center justify-between gap-2 sm:justify-center">
+      <button type="button" onClick={() => onChange(page - 1)} disabled={page === 1} className={navButton}>
+        <ArrowRight size={14} className="rotate-180" />
+        Önceki
+      </button>
+      <p className="label-mono text-[0.65rem] text-steel-700 sm:hidden" aria-live="polite">
+        {page} / {total}
+      </p>
+      <ul className="hidden items-center gap-1.5 sm:flex">
+        {pageList(page, total).map((item, index) =>
+          item === null ? (
+            <li key={`bosluk-${index}`} aria-hidden className="px-1 text-steel-500">
+              …
+            </li>
+          ) : (
+            <li key={item}>
+              <button
+                type="button"
+                onClick={() => onChange(item)}
+                aria-current={item === page ? "page" : undefined}
+                aria-label={`${item}. sayfa`}
+                className={`inline-flex size-11 items-center justify-center rounded-sm border font-display text-base font-bold transition-colors ${
+                  item === page ? "border-ink bg-ink text-bone" : "border-ink/15 bg-white text-ink hover:border-ink"
+                }`}
               >
-                {qualityLabels[quality]}
-              </Chip>
-            ))}
-          </fieldset>
-        </div>
+                {item}
+              </button>
+            </li>
+          ),
+        )}
+      </ul>
+      <button type="button" onClick={() => onChange(page + 1)} disabled={page === total} className={navButton}>
+        Sonraki
+        <ArrowRight size={14} />
+      </button>
+    </nav>
+  );
+}
+
+/* ---------- Mobil filtre paneli ---------- */
+
+function useDialogFocus(open: boolean, panelRef: RefObject<HTMLElement | null>, onClose: () => void) {
+  useEffect(() => {
+    if (!open) return;
+    const panel = panelRef.current;
+    const previous = document.activeElement as HTMLElement | null;
+    const focusables = () =>
+      Array.from(
+        panel?.querySelectorAll<HTMLElement>("button:not([disabled]), input:not([disabled]), select, summary, a[href]") ?? [],
+      );
+    focusables()[0]?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusables();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKey);
+      previous?.focus();
+    };
+  }, [open, panelRef, onClose]);
+}
+
+/* ---------- Katalog ---------- */
+
+interface Chip {
+  key: string;
+  label: string;
+  clear: () => void;
+}
+
+export function PartsCatalog({ catalog }: { catalog: Catalog }) {
+  const view = useMemo(() => buildView(catalog), [catalog]);
+  const search = useUrlSearch();
+  const state = useMemo(() => parseState(view, search), [view, search]);
+  const { filters, sort } = state;
+
+  const [editedDraft, setDraft] = useState<VehicleDraft | null>(null);
+  const draft: VehicleDraft = editedDraft ?? {
+    brand: filters.brand?.plain ?? "",
+    model: filters.model,
+    engine: filters.engine,
+    year: filters.year,
+  };
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const brandRef = useRef<HTMLSelectElement>(null);
+  const sortId = useId();
+  const sortMobileId = useId();
+
+  const closeSheet = useMemo(() => () => setSheetOpen(false), []);
+  useDialogFocus(sheetOpen, sheetRef, closeSheet);
+
+  const commit = (next: CatalogState, mode: UpdateMode = "push") => writeUrlSearch(serializeState(next), mode);
+  const update: Update = (patch, mode = "push") => commit({ ...state, filters: { ...filters, ...patch }, page: 1 }, mode);
+
+  const results = useMemo(() => filterParts(view, filters, sort), [view, filters, sort]);
+  const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE));
+  const page = Math.min(state.page, totalPages);
+  const firstIndex = (page - 1) * PAGE_SIZE;
+  const shown = results.slice(firstIndex, firstIndex + PAGE_SIZE);
+
+  const goToPage = (next: number) => {
+    commit({ ...state, page: Math.min(Math.max(next, 1), totalPages) });
+    scrollToId(RESULTS_ID);
+  };
+
+  const applyVehicle = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const brand = brands.find((item) => item.plain === draft.brand);
+    if (!brand) return;
+    const next = { brand, segment: brand.segment, model: draft.model.trim(), engine: draft.engine.trim(), year: draft.year.trim() };
+    update(next);
+    setDraft(null);
+    cart.setVehicle(vehicleLabel({ ...filters, ...next }));
+    scrollToId(RESULTS_ID);
+  };
+
+  const changeVehicle = () => {
+    setDraft(null);
+    scrollToId(FINDER_ID);
+    brandRef.current?.focus({ preventScroll: true });
+  };
+
+  const clearVehicle = () => {
+    update({ brand: null, segment: null, model: "", engine: "", year: "" });
+    setDraft(null);
+    cart.setVehicle("");
+  };
+
+  const clearFilters = () => update({ ...EMPTY_FILTERS, query: filters.query, brand: filters.brand, segment: filters.segment, model: filters.model, engine: filters.engine, year: filters.year });
+  const clearAll = () => {
+    update(EMPTY_FILTERS);
+    setDraft(null);
+  };
+
+  const categoryTitle = filters.category ? view.categoryTitles.get(filters.category) : undefined;
+  const subTitle = filters.category && filters.subcategory ? view.subcategoryTitles.get(`${filters.category}/${filters.subcategory}`) : undefined;
+
+  const filterChips = [
+    filters.brand && {
+      key: "brand",
+      label: vehicleLabel(filters),
+      clear: clearVehicle,
+    },
+    !filters.brand && filters.segment && { key: "segment", label: segmentLabels[filters.segment], clear: () => update({ segment: null }) },
+    categoryTitle && { key: "category", label: categoryTitle, clear: () => update({ category: null, subcategory: null }) },
+    subTitle && { key: "subcategory", label: subTitle, clear: () => update({ subcategory: null }) },
+    filters.quality && { key: "quality", label: qualityLabels[filters.quality], clear: () => update({ quality: null }) },
+    filters.manufacturer && { key: "manufacturer", label: filters.manufacturer, clear: () => update({ manufacturer: null }) },
+  ].filter((chip): chip is Chip => Boolean(chip));
+  const queryChip: Chip | null = filters.query.trim()
+    ? { key: "query", label: `“${filters.query.trim()}”`, clear: () => update({ query: "" }) }
+    : null;
+  const chips = queryChip ? [queryChip, ...filterChips] : filterChips;
+  const filterCount = filterChips.length;
+
+  const askHref = contactHref({ kind: "part", part: filters.query.trim() || "yedek parça", brand: filters.brand?.plain });
+  const askExternal = isExternalHref(askHref);
+
+  const sortSelect = (id: string, className: string) => (
+    <select
+      id={id}
+      value={sort}
+      onChange={(event) => commit({ ...state, sort: event.target.value as SortKey, page: 1 })}
+      className={className}
+    >
+      {sortKeys.map((key) => (
+        <option key={key} value={key}>
+          {sortLabels[key]}
+        </option>
+      ))}
+    </select>
+  );
+
+  return (
+    <div>
+      <div className="relative z-10 -mt-20 rounded-sm border border-ink/10 bg-white p-4 shadow-[0_30px_60px_-40px_rgb(26_31_37/0.45)] md:-mt-24 md:p-6">
+        <SearchBox view={view} filters={filters} update={update} />
+        <VehicleFinder catalog={catalog} draft={draft} setDraft={setDraft} onApply={applyVehicle} brandRef={brandRef} />
+        {(filters.brand || filters.segment) && (
+          <VehicleContext filters={filters} count={results.length} onChange={changeVehicle} onClear={clearVehicle} />
+        )}
       </div>
 
-      <div
-        ref={resultsRef}
-        className="mt-8 flex scroll-mt-[calc(var(--header-h)+1rem)] flex-col gap-4 md:flex-row md:items-center md:justify-between lg:scroll-mt-[calc(var(--header-h)+10rem)]"
-      >
-        <p className="label-mono text-steel-700" role="status" aria-live="polite">
-          <span className="text-ink">{String(results.length).padStart(2, "0")}</span>
-          <span className="mx-2 text-steel-500">/</span>
-          {String(parts.length).padStart(2, "0")} ürün listeleniyor
-        </p>
-        {activeChips.length > 0 && (
-          <ul className="flex flex-wrap items-center gap-2" aria-label="Aktif filtreler">
-            {activeChips.map((chip) => (
+      <CategoryStrip view={view} filters={filters} update={update} />
+
+      <section id={RESULTS_ID} aria-labelledby="parca-sonuclari-baslik" className="mt-12 scroll-mt-[calc(var(--header-h)+1rem)]">
+        <div className="flex items-end justify-between gap-4 border-b border-ink/10 pb-4">
+          <div className="min-w-0">
+            <h2 id="parca-sonuclari-baslik" className="font-display text-[1.75rem] font-bold uppercase leading-none tracking-[0.03em] text-ink md:text-[2.25rem]">
+              {categoryTitle ?? "Tüm Ürünler"}
+              {subTitle && <span className="text-steel-500"> / {subTitle}</span>}
+            </h2>
+            <p className="label-mono mt-2 text-[0.65rem] text-steel-700" role="status" aria-live="polite">
+              <span className="text-ink">{results.length}</span> ürün
+              {totalPages > 1 && <span className="text-steel-500"> · Sayfa {page} / {totalPages}</span>}
+            </p>
+          </div>
+          <div className="hidden items-center gap-3 lg:flex">
+            <label htmlFor={sortId} className="label-mono text-[0.6rem] text-steel-500">
+              Sırala
+            </label>
+            {sortSelect(
+              sortId,
+              "h-11 rounded-sm border border-ink/15 bg-white px-3 text-sm font-semibold text-ink outline-none transition-colors focus:border-accent",
+            )}
+          </div>
+        </div>
+
+        <div className="sticky top-[var(--header-h)] z-20 -mx-[var(--gutter)] grid grid-cols-2 gap-2 border-b border-ink/10 bg-bone-100 px-[var(--gutter)] py-3 lg:hidden">
+          <button
+            type="button"
+            onClick={() => setSheetOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={sheetOpen}
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-ink font-display text-sm font-bold uppercase tracking-[0.08em] text-bone"
+          >
+            <FilterIcon size={16} />
+            Filtrele{filterCount > 0 && ` (${filterCount})`}
+          </button>
+          <label htmlFor={sortMobileId} className="relative">
+            <span className="sr-only">Sırala</span>
+            {sortSelect(
+              sortMobileId,
+              "h-11 w-full appearance-none rounded-sm border border-ink/15 bg-white pl-3 pr-8 font-display text-sm font-bold uppercase tracking-[0.06em] text-ink outline-none focus:border-accent",
+            )}
+            <ChevronRight size={14} aria-hidden className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rotate-90 text-steel-500" />
+          </label>
+        </div>
+
+        {chips.length > 0 && (
+          <ul className="mt-4 flex flex-wrap items-center gap-2" aria-label="Aktif filtreler">
+            {chips.map((chip) => (
               <li key={chip.key}>
                 <button
                   type="button"
                   onClick={chip.clear}
                   aria-label={`${chip.label} filtresini kaldır`}
-                  className="label-mono inline-flex h-8 items-center gap-2 rounded-sm border border-ink/20 bg-white px-2.5 text-[0.62rem] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-bone"
+                  className="inline-flex h-9 items-center gap-2 rounded-xs border border-ink/20 bg-white px-3 text-[0.8rem] font-semibold text-ink transition-colors hover:border-accent hover:text-accent-600"
                 >
                   {chip.label}
                   <CloseIcon size={12} />
@@ -437,48 +921,142 @@ export function PartsCatalog() {
             <li>
               <button
                 type="button"
-                onClick={() => setFilters(EMPTY_FILTERS)}
-                className="label-mono h-8 px-2 text-[0.62rem] text-steel-700 underline-offset-4 transition-colors hover:text-ink hover:underline"
+                onClick={clearAll}
+                className="label-mono h-9 px-2 text-[0.62rem] text-steel-700 underline underline-offset-4 transition-colors hover:text-accent-600"
               >
-                Tümünü Temizle
+                Tümünü temizle
               </button>
             </li>
           </ul>
         )}
-      </div>
 
-      {results.length > 0 ? (
-        <ul className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {results.map((part, index) => (
-            <PartCard key={part.slug} part={part} brand={filters.brand} index={index} />
-          ))}
-        </ul>
-      ) : (
-        <div className="mt-6 flex flex-col items-start gap-6 rounded-md border border-dashed border-ink/20 bg-white p-8 md:p-12">
-          <p className="display text-[clamp(1.8rem,3vw,2.6rem)] text-ink">
-            Bu filtrelerle eşleşen ürün yok<span className="text-amber">.</span>
-          </p>
-          <p className="max-w-xl text-steel-700">
-            Aradığınız parça listede olmayabilir ama stokta bulunabilir. Filtreleri temizleyin ya da parçayı doğrudan
-            sorun.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <button type="button" onClick={() => setFilters(EMPTY_FILTERS)} className="btn btn-dark btn-sm">
-              Filtreleri Temizle
-            </button>
-            <a
-              href={fallbackHref}
-              {...(isExternalHref(fallbackHref) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="btn btn-primary btn-sm"
-            >
-              {ctaLabels.partInquiry}
-              <ArrowUpRight size={16} />
-            </a>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[17rem_1fr]">
+          <aside
+            aria-label="Ürün filtreleri"
+            className="hidden self-start rounded-sm border border-ink/10 bg-white px-5 pb-2 pt-4 lg:sticky lg:top-[calc(var(--header-h)+1rem)] lg:block lg:max-h-[calc(100vh-var(--header-h)-2rem)] lg:overflow-y-auto"
+          >
+            <div className="flex items-center justify-between border-b border-ink/10 pb-3">
+              <p className="font-display text-lg font-bold uppercase tracking-[0.06em] text-ink">
+                Filtreler{filterCount > 0 && <span className="text-accent"> ({filterCount})</span>}
+              </p>
+              {filterCount > 0 && (
+                <button type="button" onClick={clearFilters} className="label-mono text-[0.6rem] text-steel-700 underline underline-offset-4 hover:text-accent-600">
+                  Temizle
+                </button>
+              )}
+            </div>
+            <FilterPanel view={view} filters={filters} update={update} name="masaustu" />
+          </aside>
+
+          <div className="min-w-0">
+            {results.length > 0 ? (
+              <>
+                <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+                  {shown.map((part, index) => (
+                    <li key={part.slug}>
+                      <PartCard
+                        part={part}
+                        image={partImage(catalog, part)}
+                        categoryLabel={
+                          view.subcategoryTitles.get(`${part.category}/${part.subcategory}`) ??
+                          view.categoryTitles.get(part.category) ??
+                          ""
+                        }
+                        priority={index < 2 && page === 1}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <p className="label-mono mt-8 text-center text-[0.6rem] text-steel-500">
+                  {firstIndex + 1}–{firstIndex + shown.length} / {results.length} ürün
+                </p>
+                {totalPages > 1 && <Pagination page={page} total={totalPages} onChange={goToPage} />}
+              </>
+            ) : (
+              <div className="rounded-sm border border-ink/15 bg-white p-6 md:p-10">
+                <p className="font-display text-[clamp(1.6rem,3vw,2.2rem)] font-bold uppercase leading-[0.95] text-ink">
+                  <span className="block">Bu filtrelere uygun{" "}</span>
+                  <span className="block">
+                    ürün bulunamadı<span className="text-accent">.</span>
+                  </span>
+                </p>
+                <p className="mt-4 max-w-xl text-steel-700">
+                  Filtreleri değiştirebilir veya aradığınız parçayı bize gönderebilirsiniz; listede olmayan parçalar da
+                  stokta bulunabilir.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <button type="button" onClick={clearAll} className="btn btn-ghost btn-sm">
+                    Filtreleri Temizle
+                  </button>
+                  <a href={askHref} {...(askExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="btn btn-primary btn-sm">
+                    {askExternal && <WhatsAppIcon size={16} />}
+                    WhatsApp&apos;tan Parça Sor
+                    {!askExternal && <ArrowUpRight size={16} />}
+                  </a>
+                </div>
+                <a href={`#${sectionIds.partList}`} className="link-arrow mt-6 text-[0.8rem] text-ink hover:text-accent-600">
+                  Parça listenizi gönderin
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+            )}
+
+            <p className="mt-8 text-sm leading-relaxed text-steel-700">{partsIntro.note}</p>
           </div>
         </div>
-      )}
+      </section>
 
-      <p className="mt-10 max-w-3xl text-sm leading-relaxed text-steel-700">{partsIntro.note}</p>
+      <div
+        className={`fixed inset-0 z-[80] lg:hidden ${sheetOpen ? "" : "pointer-events-none"}`}
+        aria-hidden={!sheetOpen}
+        inert={!sheetOpen}
+      >
+        <div
+          onClick={closeSheet}
+          className={`absolute inset-0 bg-ink/55 transition-opacity duration-300 ${sheetOpen ? "opacity-100" : "opacity-0"}`}
+        />
+        <div
+          ref={sheetRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Ürün filtreleri"
+          className={`absolute inset-y-0 right-0 flex w-full max-w-[26rem] flex-col bg-white transition-transform duration-300 ease-out-expo ${
+            sheetOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex h-16 shrink-0 items-center justify-between border-b border-ink/10 px-5">
+            <p className="font-display text-lg font-bold uppercase tracking-[0.06em] text-ink">
+              Filtreler{filterCount > 0 && <span className="text-accent"> ({filterCount})</span>}
+            </p>
+            <button
+              type="button"
+              onClick={closeSheet}
+              aria-label="Filtreleri kapat"
+              className="inline-flex size-11 items-center justify-center rounded-sm border border-ink/15 text-ink hover:border-ink"
+            >
+              <CloseIcon size={18} />
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto px-5 pt-1">
+            {sheetOpen && <FilterPanel view={view} filters={filters} update={update} name="mobil" />}
+          </div>
+          <div className="grid shrink-0 grid-cols-[auto_1fr] gap-3 border-t border-ink/10 px-5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+            <button type="button" onClick={clearFilters} disabled={filterCount === 0} className="btn btn-ghost btn-sm disabled:opacity-40">
+              Temizle
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                closeSheet();
+                scrollToId(RESULTS_ID);
+              }}
+              className="btn btn-primary btn-sm"
+            >
+              {results.length} Ürünü Göster
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

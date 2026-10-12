@@ -28,7 +28,7 @@ export function SectionHeading({
     <div className={`grid gap-8 lg:grid-cols-12 lg:gap-10 ${className}`}>
       <div className="lg:col-span-12" data-reveal>
         <div className="flex items-center gap-5">
-          <span className={`label-mono ${tone === "dark" ? "text-amber" : "text-ink"}`}>{index}</span>
+          <span className={`label-mono ${tone === "dark" ? "text-accent" : "text-ink"}`}>{index}</span>
           <span className={`h-px flex-1 ${rule}`} />
           <span className={`eyebrow ${tone === "dark" ? "text-bone" : "text-ink"}`}>{eyebrow}</span>
         </div>

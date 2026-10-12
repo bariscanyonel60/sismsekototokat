@@ -17,7 +17,7 @@ export function WhyUs() {
         <div className="lg:col-span-6 xl:col-span-6">
           <figure className="relative lg:sticky lg:top-[calc(var(--header-h)+32px)]" data-reveal="mask">
             <div data-mask>
-            <div className="chamfer relative aspect-[4/4.6] overflow-hidden bg-ink sm:aspect-[4/3.6] lg:aspect-[4/5]">
+            <div className="relative aspect-[4/4.6] overflow-hidden bg-ink sm:aspect-[4/3.6] lg:aspect-[4/5]">
               <Image
                 src={whyUsContent.image.src}
                 alt={whyUsContent.image.alt}
@@ -26,14 +26,11 @@ export function WhyUs() {
                 sizes="(min-width:1024px) 48vw, 100vw"
                 className="object-cover object-[62%_50%]"
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgb(13_15_17/0.85)_100%)]" />
-              <span className="display outline-text pointer-events-none absolute -bottom-6 -left-2 text-[clamp(7rem,16vw,15rem)] leading-none [-webkit-text-stroke:1px_rgb(242_241_236/0.28)]">
-                {total}
-              </span>
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgb(26_31_37/0.75)_100%)]" />
             </div>
             </div>
             <figcaption className="absolute bottom-6 right-6 flex items-center gap-3 md:bottom-8 md:right-8">
-              <span className="size-1.5 bg-amber" aria-hidden />
+              <span className="size-1.5 rounded-full bg-accent" aria-hidden />
               <span className="label-mono text-bone/85">{whyUsContent.imageCaption}</span>
             </figcaption>
           </figure>
@@ -49,7 +46,7 @@ export function WhyUs() {
           <h2 id="neden-biz-baslik" className="heading-xl mt-10" data-reveal style={delay(1)}>
             {whyUsContent.titleLines.map((line, index) => (
               <span key={line} className={`block ${index === 1 ? "text-steel-500" : ""}`}>
-                {line}
+                {line}{" "}
               </span>
             ))}
           </h2>
@@ -65,10 +62,10 @@ export function WhyUs() {
                 data-reveal
                 style={delay(index % 3)}
               >
-                <span className="absolute left-0 top-[-1px] h-0.5 w-0 bg-amber transition-[width] duration-700 ease-out-expo group-hover:w-full" />
+                <span className="absolute left-0 top-[-1px] h-0.5 w-0 bg-accent transition-[width] duration-700 ease-out-expo group-hover:w-full" />
                 <span
                   aria-hidden
-                  className="display text-[clamp(2.6rem,4vw,3.5rem)] leading-[0.85] text-steel-400 transition-colors duration-500 group-hover:text-amber-600"
+                  className="display text-[clamp(2.6rem,4vw,3.5rem)] leading-[0.85] text-steel-400 transition-colors duration-500 group-hover:text-accent-600"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>

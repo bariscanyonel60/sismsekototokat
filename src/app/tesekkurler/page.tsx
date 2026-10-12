@@ -36,12 +36,12 @@ export default function ThanksPage() {
       <div className="container-x pb-24 pt-[calc(var(--header-h)+var(--topbar-h)+48px)] md:pb-32">
         <Breadcrumb items={[{ label: "Talebiniz Alındı" }]} withSchema={false} className="hero-fade" />
 
-        <p className="label-mono hero-fade mt-14 text-amber" style={cssVars({ "--i": 1 })}>
+        <p className="label-mono hero-fade mt-14 text-accent" style={cssVars({ "--i": 1 })}>
           Randevu Talebi
         </p>
         <h1 className="display mt-6 text-[clamp(3rem,8vw,6.5rem)] text-bone">
           <span className="hero-line" style={cssVars({ "--i": 0 })}>
-            Teşekkürler<span className="text-amber">.</span>
+            Teşekkürler<span className="text-accent">.</span>{" "}
           </span>
           <span className="hero-line text-steel-500" style={cssVars({ "--i": 1 })}>
             Talebiniz hazır.
@@ -51,11 +51,12 @@ export default function ThanksPage() {
           {pageSeo.thanks.description}
         </p>
 
+        <h2 className="sr-only">Sonraki adımlar</h2>
         <ol className="mt-14 grid gap-px border border-bone/10 bg-bone/10 md:grid-cols-3">
           {steps.map((step, index) => (
             <li key={step.title} className="bg-graphite p-7 md:p-9">
-              <span className="display text-5xl text-amber">{String(index + 1).padStart(2, "0")}</span>
-              <h2 className="display mt-6 text-[1.8rem] text-bone">{step.title}</h2>
+              <span className="display text-5xl text-accent">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="display mt-6 text-[1.8rem] text-bone">{step.title}</h3>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-steel-300">{step.description}</p>
             </li>
           ))}

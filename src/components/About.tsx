@@ -1,3 +1,4 @@
+import { capabilityIcons } from "@/components/capabilityIcons";
 import { aboutContent, capabilities } from "@/data/company";
 import { sectionIds } from "@/data/navigation";
 import { site } from "@/data/site";
@@ -10,7 +11,6 @@ export function About() {
       aria-labelledby="hakkimizda-baslik"
       className="section-y relative overflow-hidden bg-bone text-ink"
     >
-      <div className="tech-grid-light pointer-events-none absolute inset-0" aria-hidden />
 
       <div className="container-x relative">
         <div className="flex items-center gap-5" data-reveal>
@@ -28,7 +28,7 @@ export function About() {
           >
             {aboutContent.statement.lead} <span className="text-steel-500">{aboutContent.statement.accent}</span>{" "}
             {aboutContent.statement.rest}
-            <span className="text-amber-600">.</span>
+            <span className="text-accent-600">.</span>
           </h2>
 
           <div className="space-y-5 self-end text-steel-700 lg:col-span-4" data-reveal style={delay(2)}>
@@ -47,15 +47,26 @@ export function About() {
           aria-label="Yetkinlikler"
           className="mt-16 grid grid-cols-2 border-t border-ink/15 lg:mt-24 lg:grid-cols-4"
         >
-          {capabilities.map((item, index) => (
+          {capabilities.map((item, index) => {
+            const Icon = capabilityIcons[item.icon];
+            return (
             <li
               key={item.label}
               className="group relative border-b border-ink/15 py-7 pr-4 max-lg:even:border-l max-lg:even:pl-5 sm:py-8 sm:pr-6 sm:max-lg:even:pl-6 lg:border-b-0 lg:border-r lg:px-8 lg:py-10 lg:first:pl-0 lg:last:border-r-0"
               data-reveal
               style={delay(index)}
             >
-              <span className="absolute left-0 top-[-1px] h-0.5 w-0 bg-amber transition-[width] duration-700 ease-out-expo group-hover:w-full" />
-              <span className="label-mono text-steel-500">{String(index + 1).padStart(2, "0")} / {String(capabilities.length).padStart(2, "0")}</span>
+              <span className="absolute left-0 top-[-1px] h-0.5 w-0 bg-accent transition-[width] duration-700 ease-out-expo group-hover:w-full" />
+              <span className="flex items-start justify-between gap-3">
+                <span className="label-mono text-steel-500">
+                  {String(index + 1).padStart(2, "0")} / {String(capabilities.length).padStart(2, "0")}
+                </span>
+                <Icon
+                  size={44}
+                  strokeWidth={1.1}
+                  className="-mt-1 text-ink/70 transition-[color,transform] duration-500 ease-out-expo group-hover:-translate-y-0.5 group-hover:text-accent sm:size-14"
+                />
+              </span>
               {item.value && (
                 <span className="display mt-6 block text-6xl">
                   {item.value}
@@ -69,7 +80,8 @@ export function About() {
               <h3 className="display mt-6 text-[clamp(1.6rem,3.1vw,2.9rem)]">{item.label}</h3>
               <p className="mt-3 text-sm text-steel-700 sm:text-[0.97rem]">{item.detail}</p>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>

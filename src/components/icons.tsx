@@ -26,6 +26,14 @@ export function ArrowRight(props: IconProps) {
   );
 }
 
+export function ChevronRight(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="m9 5 7 7-7 7" />
+    </svg>
+  );
+}
+
 export function ArrowUp(props: IconProps) {
   return (
     <svg {...base(props)}>
@@ -93,11 +101,78 @@ export function SearchIcon(props: IconProps) {
   );
 }
 
+export function CartIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M3 4h2.5l2.2 11h10.6L20.5 7H7" />
+      <circle cx="9" cy="19.5" r="1.25" />
+      <circle cx="17" cy="19.5" r="1.25" />
+    </svg>
+  );
+}
+
+export function PlusIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+export function MinusIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M5 12h14" />
+    </svg>
+  );
+}
+
+export function CheckIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </svg>
+  );
+}
+
 export function EngineIcon(props: IconProps) {
   return (
     <svg {...base(props)}>
       <path d="M2 10v6M2 13h2M4 9h3l2-2h6v2h2l2 3h3v4h-3l-2 3H8l-4-3V9Z" />
       <path d="M10 7V4h4v3M9 13h6" />
+    </svg>
+  );
+}
+
+export function CarIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M3.6 16H2v-3.4l2.4-1L7.2 7h8.6l3.4 4.4 2.8.8V16h-1.6M9.4 16h5.2" />
+      <path d="M6.6 11.6 8.4 8.6h3.4v3M11.8 11.6h5.4" />
+      <circle cx="6.5" cy="16" r="2.1" />
+      <circle cx="17.5" cy="16" r="2.1" />
+    </svg>
+  );
+}
+
+export function VanIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M3.6 17H2V7l1.6-2h11l3.8 5 3.6 1.2V17h-1.6M9.4 17h5.2" />
+      <path d="M14.6 5v6h4.2M2 11h12.6M8 5v6" />
+      <circle cx="6.5" cy="17" r="2.1" />
+      <circle cx="17.5" cy="17" r="2.1" />
+    </svg>
+  );
+}
+
+export function BusIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M4 17.5H2V4h20v13.5h-2M9 17.5h6" />
+      <path d="M2 10.5h20M7.5 4v6.5M13 4v6.5M18.5 4v6.5M18.5 13.5v1.5" />
+      <circle cx="6.5" cy="17.5" r="2" />
+      <circle cx="17.5" cy="17.5" r="2" />
     </svg>
   );
 }
@@ -125,6 +200,34 @@ export function SuspensionIcon(props: IconProps) {
     <svg {...base(props)}>
       <path d="M12 2v3M12 19v3M8 5h8M8 19h8" />
       <path d="m8 7 8 2-8 2 8 2-8 2 8 2" />
+    </svg>
+  );
+}
+
+export function BrakeIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="2.5" />
+      <path d="M4.5 8.5A8.5 8.5 0 0 1 9 4" />
+    </svg>
+  );
+}
+
+export function ClutchIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 3v5M12 16v5M3 12h5M16 12h5" />
+    </svg>
+  );
+}
+
+export function SparkIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M13 2 5 13h6l-1 9 8-11h-6l1-9Z" />
     </svg>
   );
 }

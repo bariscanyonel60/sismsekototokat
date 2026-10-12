@@ -50,22 +50,22 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           fill
           sizes={config.sizes}
           placeholder="blur"
-          className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.06]"
+          className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.035]"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(13_15_17/0.35)_0%,rgb(13_15_17/0.05)_35%,rgb(13_15_17/0.72)_70%,rgb(13_15_17/0.95)_100%)] transition-opacity duration-700 group-hover:opacity-90" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(26_31_37/0.35)_0%,rgb(26_31_37/0.05)_35%,rgb(26_31_37/0.72)_70%,rgb(26_31_37/0.95)_100%)] transition-opacity duration-700 group-hover:opacity-90" />
         <div className="absolute inset-0 -z-10 bg-ink/0 transition-colors duration-700 group-hover:bg-ink/20" />
 
-        <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-amber transition-transform duration-700 ease-out-expo group-hover:scale-x-100" />
+        <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out-expo group-hover:scale-x-100" />
         <span className="pointer-events-none absolute inset-3 border border-bone/0 transition-colors duration-700 group-hover:border-bone/15" />
 
         <div className="flex h-full flex-col justify-between p-6 md:p-8">
           <div className="flex items-start justify-between">
             <span className="label-mono text-bone/80">
-              <span className="text-amber">{String(index + 1).padStart(2, "0")}</span>
+              <span className="text-accent-300">{String(index + 1).padStart(2, "0")}</span>
               <span className="mx-2 text-bone/30">/</span>
               {String(services.length).padStart(2, "0")}
             </span>
-            <span className="inline-flex size-11 items-center justify-center border border-bone/25 text-bone transition-all duration-500 ease-out-expo group-hover:border-amber group-hover:bg-amber group-hover:text-ink">
+            <span className="inline-flex size-11 items-center justify-center border border-bone/25 text-bone transition-all duration-500 ease-out-expo group-hover:border-accent group-hover:bg-accent group-hover:text-white">
               <ArrowUpRight size={18} className="transition-transform duration-500 ease-out-expo group-hover:rotate-45" />
             </span>
           </div>
@@ -75,7 +75,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
               {service.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="label-mono border border-bone/20 bg-ink/30 px-2.5 py-1 text-[0.65rem] text-bone/75 backdrop-blur-sm"
+                  className="label-mono border border-bone/20 bg-ink/55 px-2.5 py-1 text-[0.65rem] text-bone/80"
                 >
                   {tag}
                 </li>
@@ -103,10 +103,11 @@ export function Services() {
     <section
       id={sectionIds.services}
       aria-labelledby="hizmetler-baslik"
-      className="section-y noise relative overflow-hidden bg-graphite"
+      className="section-y relative overflow-hidden bg-white text-ink"
     >
       <div className="container-x relative">
         <SectionHeading
+          tone="light"
           id="hizmetler-baslik"
           index="02"
           eyebrow={servicesIntro.eyebrow}
@@ -121,11 +122,11 @@ export function Services() {
         </ul>
 
         <div
-          className="mt-5 flex flex-col gap-6 border border-bone/10 bg-anthracite/60 p-6 md:flex-row md:items-center md:justify-between md:p-8"
+          className="mt-5 flex flex-col gap-6 rounded-md border border-ink/10 bg-bone-100 p-6 md:flex-row md:items-center md:justify-between md:p-8"
           data-reveal
         >
-          <p className="max-w-2xl text-steel-300">
-            <span className="font-display text-xl font-semibold uppercase tracking-[0.08em] text-bone">
+          <p className="max-w-2xl text-steel-700">
+            <span className="font-display text-xl font-semibold uppercase tracking-[0.08em] text-ink">
               Parça mı lazım?
             </span>{" "}
             Onarımda kullanılan sandık motor, motor yağı, filtre seti ve ön takım parçaları{" "}
