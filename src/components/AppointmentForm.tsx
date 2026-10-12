@@ -1,9 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
 import { ArrowRight } from "@/components/icons";
-import { ctaLabels } from "@/data/navigation";
+import { ctaLabels, routes } from "@/data/navigation";
 import { services } from "@/data/services";
 import { telHref, whatsappHref } from "@/lib/contact";
 
@@ -32,11 +33,13 @@ const labelClass =
   "label-mono pointer-events-none absolute left-0 top-0 text-[0.68rem] text-steel-400 transition-colors peer-focus:text-amber";
 
 /**
- * Randevu talebini hazır WhatsApp mesajına dönüştürür. WhatsApp numarası
- * tanımlı değilse telefona, o da yoksa bilgilendirme mesajına düşer.
+ * Randevu talebini hazır WhatsApp mesajına dönüştürür ve teşekkür sayfasına
+ * geçer. WhatsApp numarası tanımlı değilse telefona, o da yoksa bilgilendirme
+ * mesajına düşer.
  */
 export function AppointmentForm() {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const router = useRouter();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,6 +57,7 @@ export function AppointmentForm() {
     if (href) {
       window.open(href, "_blank", "noopener,noreferrer");
       setStatus({ kind: "whatsapp" });
+      router.push(routes.thanks);
       return;
     }
     const phone = telHref();

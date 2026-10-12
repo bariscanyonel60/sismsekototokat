@@ -14,7 +14,7 @@ export function ServiceProcess() {
       <div className="container-x relative">
         <SectionHeading
           id="surec-baslik"
-          index="06"
+          index="07"
           eyebrow={processIntro.eyebrow}
           title={processIntro.title}
           description={processIntro.description}

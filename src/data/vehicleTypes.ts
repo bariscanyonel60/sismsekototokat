@@ -19,7 +19,7 @@ export const vehicleTypesIntro = {
   eyebrow: "Araç Grupları",
   title: "Binek Araçtan Otobüse, Tek Servis Noktası.",
   description:
-    "Şimşek Oto yalnızca otomobil servisi değil. Hafif ticari araçlardan ağır ticari araç ve otobüslere kadar geniş bir araç yelpazesine bakım ve mekanik servis veriyoruz.",
+    "Şimşek Oto yalnızca otomobil servisi değil. Hafif ticari araçlardan ağır vasıta ve otobüslere kadar her türlü araca bakım, onarım ve yedek parça hizmeti veriyoruz.",
 };
 
 export const vehicleTypes: VehicleType[] = [
@@ -29,22 +29,22 @@ export const vehicleTypes: VehicleType[] = [
     label: "Binek & Hafif Ticari",
     title: "Otomobil ve hafif ticari araç servisi",
     description:
-      "Günlük kullanılan otomobillerden iş için çalışan hafif ticari araçlara; periyodik bakımdan motor ve yürüyen aksam işlemlerine kadar.",
+      "Fiat, Renault, Nissan, Volkswagen, Seat, Škoda, Toyota ve Honda başta olmak üzere her türlü binek araç; Ford Transit ve Connect gibi hafif ticari araçlar için bakım ve onarım.",
     brandNames: brandsByGroup("passenger").map((brand) => brand.name),
-    brandsSuffix: "ve diğer markalar",
-    highlights: ["Periyodik bakım", "Motor & mekanik", "Fren & süspansiyon"],
+    brandsSuffix: "ve her türlü araç",
+    highlights: ["Mekanik & elektronik arıza tespiti", "Alt takım", "Şanzıman"],
     image: images.vehiclePassenger,
   },
   {
     id: "commercial",
     index: "02",
-    label: "Ticari & Otobüs",
-    title: "Ticari araç ve otobüs servis çözümleri",
+    label: "Ağır Vasıta & Otobüs",
+    title: "Ağır vasıta ve otobüs servis çözümleri",
     description:
-      "IVECO ve ISUZU başta olmak üzere ticari araç ve otobüsler için bakım, motor servisi ve ağır bakım. Yolda kalmanın maliyetini bilen işletmeler için.",
+      "Otokar otobüsler ile Deutz ve Cummins motorlu araçlara orijinal arıza tespit cihazıyla teşhis; IVECO araçlara uygun bakım, onarım ve yedek parça hizmeti.",
     brandNames: brandsByGroup("commercial").map((brand) => brand.name),
-    brandsSuffix: "başta olmak üzere ticari araç servis çözümleri",
-    highlights: ["Ağır bakım", "Motor servisi", "Arıza tespiti"],
+    brandsSuffix: "araçlarına orijinal arıza tespit cihazı",
+    highlights: ["Orijinal arıza tespit cihazı", "Bakım & onarım", "Yedek parça"],
     image: images.vehicleBus,
     insetImage: images.vehicleCommercialWorkshop,
     insetCaption: "Atölye / Ağır Vasıta",

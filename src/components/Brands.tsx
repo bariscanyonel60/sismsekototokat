@@ -15,7 +15,7 @@ export function Brands() {
       <div className="container-x relative">
         <SectionHeading
           id="markalar-baslik"
-          index="04"
+          index="05"
           eyebrow={brandsIntro.eyebrow}
           title={brandsIntro.title}
           description={brandsIntro.description}
@@ -44,8 +44,13 @@ export function Brands() {
                       className="text-steel-500 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-amber"
                     />
                   </span>
-                  <span className="display text-[clamp(2.1rem,4.4vw,4rem)] text-steel-500 transition-colors duration-500 group-hover:text-bone">
-                    {brand.name}
+                  <span>
+                    <span className="display block text-[clamp(2.1rem,4.4vw,4rem)] text-steel-500 transition-colors duration-500 group-hover:text-bone">
+                      {brand.name}
+                    </span>
+                    {brand.note && (
+                      <span className="label-mono mt-2 block text-[0.65rem] text-steel-400">{brand.note}</span>
+                    )}
                   </span>
                 </a>
               </li>

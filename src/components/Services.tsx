@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import { ArrowUpRight } from "@/components/icons";
+import { ArrowRight, ArrowUpRight } from "@/components/icons";
 import { SectionHeading } from "@/components/SectionHeading";
-import { sectionIds } from "@/data/navigation";
+import { ctaLabels, routes, sectionIds } from "@/data/navigation";
+import { partsIntro } from "@/data/parts";
 import { services, servicesIntro, type Service } from "@/data/services";
 import { contactHref, isExternalHref } from "@/lib/contact";
 import { delay } from "@/lib/cssVars";
@@ -34,7 +36,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   const external = isExternalHref(href);
 
   return (
-    <li className={`${config.span}`} data-reveal style={delay(index % 3)}>
+    <li id={service.slug} className={config.span} data-reveal style={delay(index % 3)}>
       <a
         href={href}
         target={external ? "_blank" : undefined}
@@ -117,6 +119,23 @@ export function Services() {
             <ServiceCard key={service.slug} service={service} index={index} />
           ))}
         </ul>
+
+        <div
+          className="mt-5 flex flex-col gap-6 border border-bone/10 bg-anthracite/60 p-6 md:flex-row md:items-center md:justify-between md:p-8"
+          data-reveal
+        >
+          <p className="max-w-2xl text-steel-300">
+            <span className="font-display text-xl font-semibold uppercase tracking-[0.08em] text-bone">
+              Parça mı lazım?
+            </span>{" "}
+            Onarımda kullanılan sandık motor, motor yağı, filtre seti ve ön takım parçaları{" "}
+            {partsIntro.stock.value} hazır stoktan.
+          </p>
+          <Link href={routes.parts} className="btn btn-primary shrink-0">
+            {ctaLabels.parts}
+            <ArrowRight size={18} />
+          </Link>
+        </div>
       </div>
     </section>
   );

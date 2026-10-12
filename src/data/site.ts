@@ -37,11 +37,11 @@ export const site = {
   wordmark: "ŞİMŞEK OTO",
   url: resolveSiteUrl(),
   locale: "tr_TR",
-  tagline: "Otomobilden ticari araca, bakım ve mekanik servis çözümleri.",
+  tagline: "Araç bakım, onarım ve yedek parça hizmeti.",
   description:
-    "Şimşek Oto; otomobil, hafif ticari araç ve otobüsler için periyodik bakım, motor servisi, ağır bakım, fren, süspansiyon ve arıza tespiti hizmetleri sunan oto servis merkezidir.",
+    "Şimşek Oto; otomobil, hafif ticari, ağır vasıta ve otobüsler için mekanik ve elektronik arıza tespiti, alt takım ve şanzıman bakım onarımı ile 450.000 hazır stok yedek parça hizmeti sunan oto servis merkezidir.",
   shortDescription:
-    "Otomobil, hafif ticari ve otobüsler için profesyonel bakım ve mekanik servis çözümleri.",
+    "Otomobil, hafif ticari, ağır vasıta ve otobüsler için bakım, onarım ve yedek parça hizmeti.",
   slogans: {
     primary: "Güvenli Sürüş, Güçlü Servis.",
     care: "Aracınız İçin Profesyonel Bakım.",
@@ -51,7 +51,7 @@ export const site = {
   },
   contact: {
     phone: null,
-    whatsapp: null,
+    whatsapp: "905530018942",
     email: null,
     address: null,
     mapUrl: null,
@@ -59,4 +59,10 @@ export const site = {
   } satisfies ContactInfo as ContactInfo,
   whatsappDefaultMessage:
     "Merhaba Şimşek Oto, aracım için servis/bakım hakkında bilgi almak istiyorum.",
+  /** Footer ve mobil menüdeki medya ajansı imzası. */
+  mediaCredit: {
+    label: "Medya",
+    name: "BCY DİJİTAL",
+    href: "https://bariscanyonel.com",
+  },
 } as const;

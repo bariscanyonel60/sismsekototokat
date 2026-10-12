@@ -41,7 +41,7 @@ export function WhyUs() {
 
         <div className="lg:col-span-6 lg:pl-6 xl:col-span-5 xl:col-start-8 xl:pl-0">
           <div className="flex items-center gap-5" data-reveal>
-            <span className="label-mono text-ink">05</span>
+            <span className="label-mono text-ink">06</span>
             <span className="h-px flex-1 bg-ink/15" />
             <span className="eyebrow text-ink">{whyUsContent.eyebrow}</span>
           </div>

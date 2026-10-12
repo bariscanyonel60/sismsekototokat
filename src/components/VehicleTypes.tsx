@@ -13,7 +13,7 @@ function BrandLine({ vehicle }: { vehicle: VehicleType }) {
       <div>
         <p className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
           {vehicle.brandNames.map((name) => (
-            <span key={name} className="display text-[clamp(3rem,6vw,5.5rem)] text-bone">
+            <span key={name} className="display text-[clamp(2.4rem,4.4vw,4.25rem)] text-bone">
               {name}
             </span>
           ))}
@@ -129,7 +129,7 @@ export function VehicleTypes() {
       <div className="container-x relative">
         <SectionHeading
           id="arac-gruplari-baslik"
-          index="03"
+          index="04"
           eyebrow={vehicleTypesIntro.eyebrow}
           title={vehicleTypesIntro.title}
           description={vehicleTypesIntro.description}

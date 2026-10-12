@@ -1,20 +1,25 @@
 import { About } from "@/components/About";
 import { AppointmentCTA } from "@/components/AppointmentCTA";
 import { Brands } from "@/components/Brands";
+import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ImageBreak } from "@/components/ImageBreak";
+import { JsonLd } from "@/components/JsonLd";
+import { PartsTeaser } from "@/components/PartsTeaser";
 import { RevealObserver } from "@/components/RevealObserver";
+import { Reviews } from "@/components/Reviews";
 import { ServiceProcess } from "@/components/ServiceProcess";
 import { Services } from "@/components/Services";
+import { StickyContact } from "@/components/StickyContact";
 import { VehicleTypes } from "@/components/VehicleTypes";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhyUs } from "@/components/WhyUs";
+import { reviews } from "@/data/reviews";
 import { buildAutoRepairSchema } from "@/lib/structuredData";
 
 export default function HomePage() {
-  const schema = buildAutoRepairSchema();
+  const hasReviews = reviews.length > 0;
 
   return (
     <>
@@ -26,20 +31,20 @@ export default function HomePage() {
         <Hero />
         <About />
         <Services />
+        <PartsTeaser />
         <VehicleTypes />
         <Brands />
         <WhyUs />
         <ServiceProcess />
         <ImageBreak />
-        <AppointmentCTA />
+        <Reviews index="08" />
+        <Faq index={hasReviews ? "09" : "08"} />
+        <AppointmentCTA index={hasReviews ? "10" : "09"} />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <StickyContact />
       <RevealObserver />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={buildAutoRepairSchema()} />
     </>
   );
 }

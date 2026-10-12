@@ -10,40 +10,54 @@ export interface Service {
 
 export const servicesIntro = {
   eyebrow: "Hizmetler",
-  title: "Aracınızın İhtiyacı Olan Her Şey",
+  title: "Bakım, Onarım ve Yedek Parça",
   description:
     "Her araç önce dinlenir, sonra kontrol edilir. Bakım ve onarım kararını tahmine değil tespite dayandırıyor; yapılacak işlemi başlamadan önce sizinle netleştiriyoruz.",
 };
 
 export const services: Service[] = [
   {
-    slug: "periyodik-bakim",
-    title: "Periyodik Bakım",
-    summary: "Yağ, filtre ve üretici bakım periyotlarına uygun genel kontroller.",
-    tags: ["Üretici periyodu", "Genel kontrol"],
+    slug: "mekanik-ariza-tespiti",
+    title: "Mekanik Arıza Tespiti",
+    summary: "Motor ve mekanik aksamdaki sorunların kaynağını parça değiştirmeden önce netleştiriyoruz.",
+    tags: ["Motor mekanik", "Teşhis"],
     image: images.servicePeriodic,
   },
   {
-    slug: "yag-filtre-bakimi",
-    title: "Yağ & Filtre Bakımı",
+    slug: "elektronik-ariza-tespiti",
+    title: "Elektronik Arıza Tespiti",
     summary:
-      "Motor yağı, yağ filtresi, hava filtresi ve gerekli filtrelerin kontrol ve değişimi.",
-    tags: ["Motor yağı", "Filtreler"],
-    image: images.serviceOil,
+      "Arıza tespit cihazıyla elektronik sistem kontrolü; Otokar, Deutz ve Cummins motorlu araçlara orijinal cihaz.",
+    tags: ["Orijinal cihaz", "Elektronik sistem"],
+    image: images.serviceDiagnostics,
   },
   {
-    slug: "motor-servisi",
-    title: "Motor Servisi",
-    summary: "Motor arızalarının kontrolü, mekanik bakım ve gerekli onarım işlemleri.",
-    tags: ["Motor mekanik", "Revizyon"],
+    slug: "motor-bakim-onarimi",
+    title: "Motor Bakım Onarımı",
+    summary: "Motor arızalarının onarımı, revizyon ve komple sıfır sandık motor değişimi.",
+    tags: ["Revizyon", "Sandık motor"],
     image: images.serviceEngine,
   },
   {
-    slug: "agir-bakim",
-    title: "Ağır Bakım",
-    summary: "Kilometre ve araç durumuna göre kapsamlı mekanik bakım işlemleri.",
-    tags: ["Kapsamlı bakım", "Kilometre bazlı"],
-    image: images.serviceHeavy,
+    slug: "alt-takim-bakim-onarimi",
+    title: "Alt Takım Bakım Onarımı",
+    summary: "Ön takım, amortisör, salıncak, rotil ve yürüyen aksam bakım ve onarımı.",
+    tags: ["Ön takım", "Yürüyen aksam"],
+    image: images.serviceInspection,
+  },
+  {
+    slug: "sanziman-bakim-onarimi",
+    title: "Şanzıman Bakım Onarımı",
+    summary: "Şanzıman kontrolü, bakımı ve onarımı; vites geçişi ve ses şikâyetlerinin tespiti.",
+    tags: ["Şanzıman", "Vites"],
+    image: images.serviceSuspension,
+  },
+  {
+    slug: "periyodik-bakim",
+    title: "Periyodik Bakım",
+    summary: "Motor yağı, filtre setleri ve üretici bakım periyotlarına uygun genel kontroller.",
+    tags: ["Motor yağı", "Filtre seti"],
+    image: images.serviceOil,
   },
   {
     slug: "fren-sistemleri",
@@ -53,24 +67,10 @@ export const services: Service[] = [
     image: images.serviceBrake,
   },
   {
-    slug: "suspansiyon-yuruyen-aksam",
-    title: "Süspansiyon & Yürüyen Aksam",
-    summary: "Amortisör, salıncak ve yürüyen aksam kontrolleri.",
-    tags: ["Amortisör", "Salıncak"],
-    image: images.serviceSuspension,
-  },
-  {
-    slug: "ariza-tespiti",
-    title: "Arıza Tespiti",
-    summary: "Araçtaki mevcut problemlerin sistematik şekilde kontrol edilmesi.",
-    tags: ["Sistematik kontrol", "Teşhis"],
-    image: images.serviceDiagnostics,
-  },
-  {
-    slug: "muayene-oncesi-kontrol",
-    title: "Muayene Öncesi Kontrol",
-    summary: "Araç muayenesi öncesinde temel mekanik ve güvenlik kontrolleri.",
-    tags: ["Güvenlik", "Mekanik kontrol"],
-    image: images.serviceInspection,
+    slug: "agir-vasita-otobus",
+    title: "Ağır Vasıta & Otobüs",
+    summary: "Otobüs, IVECO ve ağır vasıtalar için bakım, onarım ve yedek parça hizmeti.",
+    tags: ["Otokar", "IVECO"],
+    image: images.serviceHeavy,
   },
 ];

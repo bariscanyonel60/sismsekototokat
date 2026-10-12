@@ -16,19 +16,19 @@ export const aboutContent = {
   statement: {
     lead: "Otomobilden",
     accent: "ticari araca,",
-    rest: "bakım ve mekanik servis çözümleri",
+    rest: "bakım, onarım ve yedek parça",
   },
   paragraphs: [
-    "Şimşek Oto; binek otomobil, hafif ticari araç ve otobüsler için bakım ve mekanik servis hizmeti veren bir oto servis işletmesidir.",
-    "Periyodik bakım, motor servisi, ağır bakım, fren ve yürüyen aksam işlemlerini aynı çatı altında topluyor; her aracı kendi kullanım koşulları ve bakım geçmişiyle birlikte değerlendiriyoruz.",
+    "Şimşek Oto; binek otomobil, hafif ticari araç, ağır vasıta ve otobüsler için bakım, onarım ve yedek parça hizmeti veren bir oto servis işletmesidir.",
+    "Mekanik ve elektronik arıza tespiti, alt takım ve şanzıman bakım onarımını aynı çatı altında topluyor; 450.000 hazır stok yedek parçayla aracınızı gereksiz beklemeden yola çıkarıyoruz.",
   ],
 };
 
 export const capabilities: Capability[] = [
-  { label: "Binek Araç", detail: "Otomobil bakım ve onarımı" },
-  { label: "Hafif Ticari", detail: "İş araçları için servis" },
-  { label: "Otobüs", detail: "Ticari araç ve otobüs bakımı" },
-  { label: "Motor & Mekanik", detail: "Motor servisi ve revizyon" },
+  { label: "Binek Araç", detail: "Her türlü otomobile bakım ve onarım" },
+  { label: "Hafif Ticari", detail: "Ford Transit, Connect ve iş araçları" },
+  { label: "Ağır Vasıta", detail: "Otobüs, IVECO, Deutz ve Cummins" },
+  { label: "Yedek Parça", detail: "450.000 hazır stok, orijinal ve muadil" },
 ];
 
 export const whyUsContent = {
@@ -54,17 +54,17 @@ export const advantages: Advantage[] = [
   {
     title: "Otomobil & Ticari Araç Desteği",
     description:
-      "Binek araçtan hafif ticariye, IVECO ve ISUZU gibi ticari araç ve otobüslere kadar tek servis noktası.",
+      "Binek araçtan hafif ticariye, Otokar otobüslerden IVECO araçlara kadar her türlü araç için tek servis noktası.",
   },
   {
-    title: "Kapsamlı Bakım Çözümleri",
+    title: "450.000 Hazır Stok Yedek Parça",
     description:
-      "Periyodik bakımdan ağır bakıma, fren ve süspansiyondan motor servisine kadar ihtiyaç duyulan işlemler.",
+      "Komple sıfır sandık motordan motor yağı ve filtre setlerine, ön takımda orijinal ve muadil parçalara kadar hazır stok.",
   },
   {
-    title: "Arıza Tespit ve Kontrol",
+    title: "Orijinal Arıza Tespit Cihazı",
     description:
-      "Parça değiştirmeden önce sorunun kaynağını sistematik kontrollerle tespit etmeye odaklanıyoruz.",
+      "Otokar, Deutz ve Cummins motorlu araçlarda orijinal cihazla; parça değiştirmeden önce sorunun kaynağını tespit ediyoruz.",
   },
   {
     title: "Şeffaf Servis Süreci",

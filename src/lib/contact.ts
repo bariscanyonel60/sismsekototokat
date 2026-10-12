@@ -6,6 +6,7 @@ export type ContactContext =
   | { kind: "service"; service: string }
   | { kind: "brand"; brand: string }
   | { kind: "vehicleGroup"; group: string }
+  | { kind: "part"; part: string; brand?: string }
   | {
       kind: "appointment";
       name: string;
@@ -44,6 +45,10 @@ export function buildWhatsAppMessage(context: ContactContext = { kind: "general"
       return `${greeting} ${context.brand} aracım için servis/bakım hakkında bilgi almak istiyorum.`;
     case "vehicleGroup":
       return `${greeting} ${context.group} aracım için servis/bakım hakkında bilgi almak istiyorum.`;
+    case "part":
+      return context.brand
+        ? `${greeting} ${context.brand} aracım için ${context.part} stok ve fiyat bilgisi almak istiyorum.`
+        : `${greeting} ${context.part} için stok ve fiyat bilgisi almak istiyorum.`;
     case "appointment": {
       const lines = [
         `${greeting} servis randevusu oluşturmak istiyorum.`,

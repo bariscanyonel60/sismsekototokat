@@ -37,7 +37,7 @@ function Pending() {
   return <span className="text-steel-500">{PENDING}</span>;
 }
 
-export function AppointmentCTA() {
+export function AppointmentCTA({ index = "08" }: { index?: string }) {
   const { contact } = site;
   const phone = telHref();
   const whatsapp = whatsappHref();
@@ -51,7 +51,7 @@ export function AppointmentCTA() {
       <div className="tech-grid-light pointer-events-none absolute inset-0" aria-hidden />
       <div className="container-x relative">
         <div className="flex items-center gap-5" data-reveal>
-          <span className="label-mono text-ink">07</span>
+          <span className="label-mono text-ink">{index}</span>
           <span className="h-px flex-1 bg-ink/15" />
           <span className="eyebrow text-ink">{appointmentContent.eyebrow}</span>
         </div>

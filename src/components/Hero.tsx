@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight, PhoneIcon } from "@/components/icons";
 import { capabilities } from "@/data/company";
 import { images } from "@/data/images";
-import { ctaLabels, sectionIds } from "@/data/navigation";
+import { ctaLabels, routes, sectionIds } from "@/data/navigation";
 import { site } from "@/data/site";
 import { telHref } from "@/lib/contact";
 import { cssVars } from "@/lib/cssVars";
@@ -35,7 +35,7 @@ export function Hero() {
         <div className="tech-grid absolute inset-0 opacity-70" />
       </div>
 
-      <div className="container-x relative flex flex-1 flex-col justify-end pb-10 pt-[calc(var(--header-h)+48px)] md:justify-center md:pb-16">
+      <div className="container-x relative flex flex-1 flex-col justify-end pb-10 pt-[calc(var(--header-h)+var(--topbar-h)+40px)] md:justify-center md:pb-16">
         <div className="max-w-[860px]">
           <p className="eyebrow hero-fade text-bone/90" style={cssVars({ "--i": 0 })}>
             {site.wordmark} <span className="text-amber">•</span> Profesyonel Servis
@@ -60,8 +60,8 @@ export function Hero() {
             className="lede hero-fade mt-7 max-w-[34rem] text-bone/78 md:mt-8"
             style={cssVars({ "--i": 2 })}
           >
-            Otomobil, hafif ticari ve otobüsler için periyodik bakımdan motor servisine kadar kapsamlı
-            bakım ve onarım çözümleri.
+            Otomobil, hafif ticari, ağır vasıta ve otobüsler için mekanik ve elektronik arıza tespiti,
+            bakım onarım ve 450.000 hazır stok yedek parça.
           </p>
 
           <div
@@ -72,8 +72,8 @@ export function Hero() {
               {ctaLabels.primaryLong}
               <ArrowRight size={18} />
             </a>
-            <a href={`#${sectionIds.services}`} className="btn btn-outline">
-              {ctaLabels.secondary}
+            <a href={routes.parts} className="btn btn-outline">
+              {ctaLabels.parts}
             </a>
             {phone && (
               <a

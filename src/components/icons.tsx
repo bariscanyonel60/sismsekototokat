@@ -84,6 +84,51 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
+export function SearchIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m15.5 15.5 5 5" />
+    </svg>
+  );
+}
+
+export function EngineIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M2 10v6M2 13h2M4 9h3l2-2h6v2h2l2 3h3v4h-3l-2 3H8l-4-3V9Z" />
+      <path d="M10 7V4h4v3M9 13h6" />
+    </svg>
+  );
+}
+
+export function OilIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 3s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z" />
+      <path d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5" />
+    </svg>
+  );
+}
+
+export function FilterIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <rect x="5" y="3" width="14" height="18" rx="1" />
+      <path d="M9 3v18M12 3v18M15 3v18" />
+    </svg>
+  );
+}
+
+export function SuspensionIcon(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M12 2v3M12 19v3M8 5h8M8 19h8" />
+      <path d="m8 7 8 2-8 2 8 2-8 2 8 2" />
+    </svg>
+  );
+}
+
 export function WhatsAppIcon({ size = 22, ...props }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable={false} {...props}>

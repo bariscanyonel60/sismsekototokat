@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 
 import { ArrowRight, CloseIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { Logo } from "@/components/Logo";
-import { ctaLabels, mainNav, sectionIds } from "@/data/navigation";
+import { MediaCredit } from "@/components/MediaCredit";
+import { ctaLabels, type NavItem } from "@/data/navigation";
 import { site } from "@/data/site";
 import { telHref, whatsappHref } from "@/lib/contact";
 
@@ -12,9 +13,11 @@ interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
   activeHref: string;
+  items: NavItem[];
+  contactAnchor: string;
 }
 
-export function MobileMenu({ open, onClose, activeHref }: MobileMenuProps) {
+export function MobileMenu({ open, onClose, activeHref, items, contactAnchor }: MobileMenuProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const phone = telHref();
@@ -90,7 +93,7 @@ export function MobileMenu({ open, onClose, activeHref }: MobileMenuProps) {
 
         <nav aria-label="Mobil ana menü" className="flex-1 px-[var(--gutter)] py-6">
           <ul>
-            {mainNav.map((item, index) => {
+            {items.map((item, index) => {
               const active = activeHref === item.href;
               return (
                 <li
@@ -128,13 +131,13 @@ export function MobileMenu({ open, onClose, activeHref }: MobileMenuProps) {
         </nav>
 
         <div className="shrink-0 space-y-3 border-t border-bone/10 px-[var(--gutter)] py-6">
-          <a href={`#${sectionIds.contact}`} onClick={onClose} className="btn btn-primary w-full">
+          <a href={contactAnchor} onClick={onClose} className="btn btn-primary w-full">
             {ctaLabels.primaryLong}
             <ArrowRight size={18} />
           </a>
           <div className="grid grid-cols-2 gap-3">
             <a
-              href={phone ?? `#${sectionIds.contact}`}
+              href={phone ?? contactAnchor}
               onClick={onClose}
               className="btn btn-outline btn-sm"
             >
@@ -142,7 +145,7 @@ export function MobileMenu({ open, onClose, activeHref }: MobileMenuProps) {
               {phone ? ctaLabels.call : "Telefon"}
             </a>
             <a
-              href={whatsapp ?? `#${sectionIds.contact}`}
+              href={whatsapp ?? contactAnchor}
               onClick={onClose}
               target={whatsapp ? "_blank" : undefined}
               rel={whatsapp ? "noopener noreferrer" : undefined}
@@ -153,6 +156,7 @@ export function MobileMenu({ open, onClose, activeHref }: MobileMenuProps) {
             </a>
           </div>
           <p className="pt-2 text-sm text-steel-400">{site.slogans.primary}</p>
+          <MediaCredit className="w-full justify-center" />
         </div>
       </div>
     </div>

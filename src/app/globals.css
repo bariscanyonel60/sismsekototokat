@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0d0f11;
-  --color-graphite: #15181b;
-  --color-anthracite: #1e2226;
-  --color-steel-800: #2a2f35;
+  --color-ink: #1a1f25;
+  --color-graphite: #222830;
+  --color-anthracite: #2b323a;
+  --color-steel-800: #353d46;
   --color-steel-700: #3a4047;
   --color-steel-500: #6b727b;
   --color-steel-400: #8b929b;
@@ -27,7 +27,8 @@
 }
 
 :root {
-  --header-h: 76px;
+  --header-h: 92px;
+  --topbar-h: 34px;
   --gutter: clamp(20px, 4.2vw, 64px);
   --section-y: clamp(84px, 11vw, 168px);
   --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
@@ -209,7 +210,7 @@
   .btn-outline {
     color: var(--color-bone);
     border: 1px solid rgb(242 241 236 / 0.28);
-    background: rgb(13 15 17 / 0.15);
+    background: rgb(26 31 37 / 0.15);
   }
   .btn-outline:hover {
     border-color: var(--color-amber);
@@ -259,7 +260,7 @@
   }
 
   .tech-grid-light {
-    background-image: linear-gradient(to right, rgb(13 15 17 / 0.07) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgb(26 31 37 / 0.07) 1px, transparent 1px);
     background-size: calc((100% - 2 * var(--gutter)) / 6) 100%;
     background-position: var(--gutter) 0;
   }
@@ -355,6 +356,12 @@
   transform-origin: left;
   animation: line-grow 1.2s var(--ease-out-expo) both;
   animation-delay: calc(700ms + var(--i, 0) * 90ms);
+}
+
+/* ---------- Parts catalog (filtered cards mount after RevealObserver runs) ---------- */
+.part-card {
+  animation: hero-rise 0.7s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
 }
 
 /* ---------- Scroll reveal (enabled by RevealObserver) ---------- */
