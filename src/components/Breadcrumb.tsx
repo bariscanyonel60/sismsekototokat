@@ -22,7 +22,7 @@ export function Breadcrumb({ items, className = "", withSchema = true }: Breadcr
         {trail.map((item, index) => (
           <li key={item.label} className="flex items-center gap-3">
             {index === last || !item.href ? (
-              <span aria-current={index === last ? "page" : undefined} className="text-amber">
+              <span aria-current={index === last ? "page" : undefined} className="text-accent-300">
                 {item.label}
               </span>
             ) : (

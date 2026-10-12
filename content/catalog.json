@@ -1,0 +1,2333 @@
+{
+  "categories": [
+    {
+      "id": "sandik-motor",
+      "code": "MTR",
+      "title": "Komple Sıfır Sandık Motor",
+      "summary": "Binek, hafif ticari ve ağır vasıta için komple sıfır sandık motor.",
+      "imageKey": "serviceEngine",
+      "icon": "engine",
+      "serviceSlug": "motor-bakim-onarimi",
+      "subcategories": [
+        {
+          "id": "binek-motor",
+          "title": "Binek Motor"
+        },
+        {
+          "id": "hafif-ticari-motor",
+          "title": "Hafif Ticari Motor"
+        },
+        {
+          "id": "agir-vasita-motor",
+          "title": "Ağır Vasıta Motor"
+        }
+      ]
+    },
+    {
+      "id": "motor-yaglari",
+      "code": "YAG",
+      "title": "Motor Yağları",
+      "summary": "Binek araçtan ağır vasıtaya, motor tipine uygun yağlar.",
+      "imageKey": "serviceOil",
+      "icon": "oil",
+      "serviceSlug": "periyodik-bakim",
+      "subcategories": [
+        {
+          "id": "binek-motor-yaglari",
+          "title": "Binek Motor Yağları"
+        },
+        {
+          "id": "agir-vasita-motor-yaglari",
+          "title": "Ağır Vasıta Motor Yağları"
+        }
+      ]
+    },
+    {
+      "id": "filtre-setleri",
+      "code": "FLT",
+      "title": "Filtre Setleri",
+      "summary": "Yağ, hava, yakıt ve polen filtreleri; bakım için komple set.",
+      "imageKey": "servicePeriodic",
+      "icon": "filter",
+      "serviceSlug": "periyodik-bakim",
+      "subcategories": [
+        {
+          "id": "bakim-setleri",
+          "title": "Bakım Setleri"
+        },
+        {
+          "id": "yag-filtresi",
+          "title": "Yağ Filtresi"
+        },
+        {
+          "id": "hava-filtresi",
+          "title": "Hava Filtresi"
+        },
+        {
+          "id": "yakit-filtresi",
+          "title": "Yakıt Filtresi"
+        },
+        {
+          "id": "polen-filtresi",
+          "title": "Polen Filtresi"
+        }
+      ]
+    },
+    {
+      "id": "on-takim",
+      "code": "ONT",
+      "title": "Ön Takım Parçaları",
+      "summary": "Orijinal ve muadil seçenekleriyle ön takım ve yürüyen aksam.",
+      "imageKey": "serviceSuspension",
+      "icon": "suspension",
+      "serviceSlug": "alt-takim-bakim-onarimi",
+      "subcategories": [
+        {
+          "id": "amortisor",
+          "title": "Amortisör & Takoz"
+        },
+        {
+          "id": "salincak-rotil",
+          "title": "Salıncak & Rotil"
+        },
+        {
+          "id": "rot-parcalari",
+          "title": "Rot Parçaları"
+        },
+        {
+          "id": "aks-rulman",
+          "title": "Aks & Rulman"
+        },
+        {
+          "id": "on-takim-setleri",
+          "title": "Ön Takım Setleri"
+        }
+      ]
+    },
+    {
+      "id": "fren-sistemi",
+      "code": "FRN",
+      "title": "Fren Sistemi",
+      "summary": "Fren balatası, disk, kampana ve hidrolik; binekten otobüse.",
+      "imageKey": "serviceBrake",
+      "icon": "brake",
+      "serviceSlug": "fren-sistemleri",
+      "subcategories": [
+        {
+          "id": "balata-pabuc",
+          "title": "Balata & Pabuç"
+        },
+        {
+          "id": "disk-kampana",
+          "title": "Disk & Kampana"
+        },
+        {
+          "id": "fren-hidroligi",
+          "title": "Fren Hidroliği"
+        }
+      ]
+    },
+    {
+      "id": "debriyaj-sanziman",
+      "code": "DBR",
+      "title": "Debriyaj & Şanzıman",
+      "summary": "Debriyaj seti, volan, şanzıman yağı ve vites parçaları.",
+      "imageKey": "serviceDiagnostics",
+      "icon": "clutch",
+      "serviceSlug": "sanziman-bakim-onarimi",
+      "subcategories": [
+        {
+          "id": "debriyaj-setleri",
+          "title": "Debriyaj Setleri"
+        },
+        {
+          "id": "volan",
+          "title": "Volan"
+        },
+        {
+          "id": "sanziman-vites",
+          "title": "Şanzıman & Vites"
+        }
+      ]
+    },
+    {
+      "id": "triger-atesleme",
+      "code": "TRG",
+      "title": "Triger & Ateşleme",
+      "summary": "Triger seti, devirdaim, kayışlar, buji ve ateşleme parçaları.",
+      "imageKey": "breakEngine",
+      "icon": "spark",
+      "serviceSlug": "motor-bakim-onarimi",
+      "subcategories": [
+        {
+          "id": "triger-kayis",
+          "title": "Triger & Kayış"
+        },
+        {
+          "id": "devirdaim",
+          "title": "Devirdaim"
+        },
+        {
+          "id": "buji-atesleme",
+          "title": "Buji & Ateşleme"
+        }
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "slug": "binek-dizel-sandik-motor",
+      "code": "SO-MTR-01",
+      "category": "sandik-motor",
+      "subcategory": "binek-motor",
+      "title": "Binek Dizel Sandık Motor",
+      "description": "Dizel binek otomobiller için komple sıfır sandık motor; montaj ve ilk çalıştırma kontrolüyle.",
+      "segments": [
+        "binek"
+      ],
+      "qualities": [],
+      "keywords": [
+        "motor",
+        "sandık",
+        "sıfır motor",
+        "komple motor",
+        "dizel",
+        "motor değişimi"
+      ]
+    },
+    {
+      "slug": "binek-benzinli-sandik-motor",
+      "code": "SO-MTR-02",
+      "category": "sandik-motor",
+      "subcategory": "binek-motor",
+      "title": "Binek Benzinli Sandık Motor",
+      "description": "Benzinli binek otomobiller için komple sıfır sandık motor ve montajı.",
+      "segments": [
+        "binek"
+      ],
+      "qualities": [],
+      "keywords": [
+        "motor",
+        "sandık",
+        "sıfır motor",
+        "komple motor",
+        "benzinli",
+        "motor değişimi"
+      ],
+      "imageKey": "breakEngine"
+    },
+    {
+      "slug": "hafif-ticari-sandik-motor",
+      "code": "SO-MTR-03",
+      "category": "sandik-motor",
+      "subcategory": "hafif-ticari-motor",
+      "title": "Hafif Ticari Sandık Motor",
+      "description": "Ford Transit, Transit Connect ve benzeri hafif ticari araçlar için komple sıfır sandık motor.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Transit Connect"
+      ],
+      "qualities": [],
+      "keywords": [
+        "motor",
+        "sandık",
+        "sıfır motor",
+        "transit",
+        "connect",
+        "ford",
+        "hafif ticari"
+      ],
+      "imageKey": "vehicleCommercialWorkshop"
+    },
+    {
+      "slug": "agir-vasita-sandik-motor",
+      "code": "SO-MTR-04",
+      "category": "sandik-motor",
+      "subcategory": "agir-vasita-motor",
+      "title": "Ağır Vasıta & Otobüs Sandık Motor",
+      "description": "Otobüs ve ağır vasıtalar için komple sıfır sandık motor; değişim öncesi arıza tespitiyle.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "fitment": [
+        "Otokar",
+        "IVECO"
+      ],
+      "qualities": [],
+      "keywords": [
+        "motor",
+        "sandık",
+        "sıfır motor",
+        "otobüs",
+        "kamyon",
+        "otokar",
+        "iveco",
+        "deutz",
+        "cummins"
+      ],
+      "imageKey": "whyMechanic"
+    },
+    {
+      "slug": "motor-yagi-0w-20",
+      "code": "SO-YAG-01",
+      "category": "motor-yaglari",
+      "subcategory": "binek-motor-yaglari",
+      "title": "0W-20 / 0W-30 Motor Yağı",
+      "description": "Yeni nesil benzinli ve hibrit motorlar için düşük viskoziteli tam sentetik motor yağı.",
+      "segments": [
+        "binek"
+      ],
+      "fitment": [
+        "Toyota",
+        "Honda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "yağ",
+        "motor yağı",
+        "0w20",
+        "0w-20",
+        "0w30",
+        "0w-30",
+        "sentetik",
+        "hibrit",
+        "toyota",
+        "honda",
+        "benzinli"
+      ],
+      "imageKey": "vehiclePassenger"
+    },
+    {
+      "slug": "motor-yagi-5w-30",
+      "code": "SO-YAG-02",
+      "category": "motor-yaglari",
+      "subcategory": "binek-motor-yaglari",
+      "title": "5W-30 Motor Yağı",
+      "description": "Partikül filtreli (DPF) dizel ve benzinli motorlara uygun, üretici normlu tam sentetik yağ.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "yağ",
+        "motor yağı",
+        "5w30",
+        "5w-30",
+        "sentetik",
+        "dpf",
+        "dizel",
+        "benzinli"
+      ]
+    },
+    {
+      "slug": "motor-yagi-5w-40",
+      "code": "SO-YAG-03",
+      "category": "motor-yaglari",
+      "subcategory": "binek-motor-yaglari",
+      "title": "5W-40 Motor Yağı",
+      "description": "Benzinli ve dizel binek araçlar ile hafif ticariler için tam sentetik motor yağı.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "yağ",
+        "motor yağı",
+        "5w40",
+        "5w-40",
+        "sentetik",
+        "dizel",
+        "benzinli"
+      ]
+    },
+    {
+      "slug": "motor-yagi-10w-40",
+      "code": "SO-YAG-04",
+      "category": "motor-yaglari",
+      "subcategory": "binek-motor-yaglari",
+      "title": "10W-40 Motor Yağı",
+      "description": "Yüksek kilometreli binek ve hafif ticari motorlar için yarı sentetik motor yağı.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "yağ",
+        "motor yağı",
+        "10w40",
+        "10w-40",
+        "yarı sentetik"
+      ]
+    },
+    {
+      "slug": "motor-yagi-15w-40",
+      "code": "SO-YAG-05",
+      "category": "motor-yaglari",
+      "subcategory": "agir-vasita-motor-yaglari",
+      "title": "15W-40 Ağır Vasıta Motor Yağı",
+      "description": "Otobüs, kamyon ve ağır vasıta dizel motorları için yüksek performanslı motor yağı.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "fitment": [
+        "Otokar",
+        "IVECO"
+      ],
+      "qualities": [],
+      "keywords": [
+        "yağ",
+        "motor yağı",
+        "15w40",
+        "15w-40",
+        "dizel",
+        "otobüs",
+        "kamyon",
+        "iveco",
+        "deutz",
+        "cummins"
+      ],
+      "imageKey": "serviceHeavy"
+    },
+    {
+      "slug": "bakim-filtre-seti",
+      "code": "SO-FLT-01",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Komple Bakım Filtre Seti",
+      "description": "Periyodik bakım için yağ, hava, yakıt ve polen filtresinden oluşan set.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "set",
+        "bakım seti",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "agir-vasita-filtre-seti",
+      "code": "SO-FLT-02",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Ağır Vasıta Filtre Seti",
+      "description": "Otobüs ve ağır vasıtalar için yağ, hava, yakıt ve yakıt ön (separatör) filtre seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "fitment": [
+        "Otokar",
+        "IVECO"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "set",
+        "separatör",
+        "mazot filtresi",
+        "otobüs",
+        "kamyon",
+        "iveco",
+        "otokar"
+      ],
+      "imageKey": "vehicleBus"
+    },
+    {
+      "slug": "yag-filtresi",
+      "code": "SO-FLT-03",
+      "category": "filtre-setleri",
+      "subcategory": "yag-filtresi",
+      "title": "Yağ Filtresi",
+      "description": "Motor yağı değişiminde birlikte yenilenen yağ filtresi.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "yağ filtresi"
+      ]
+    },
+    {
+      "slug": "hava-filtresi",
+      "code": "SO-FLT-04",
+      "category": "filtre-setleri",
+      "subcategory": "hava-filtresi",
+      "title": "Hava Filtresi",
+      "description": "Motorun temiz hava almasını sağlayan hava filtresi.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "hava filtresi"
+      ]
+    },
+    {
+      "slug": "yakit-filtresi",
+      "code": "SO-FLT-05",
+      "category": "filtre-setleri",
+      "subcategory": "yakit-filtresi",
+      "title": "Yakıt (Mazot) Filtresi",
+      "description": "Dizel ve benzinli motorlar için yakıt filtresi.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "yakıt filtresi",
+        "mazot filtresi",
+        "dizel"
+      ]
+    },
+    {
+      "slug": "polen-filtresi",
+      "code": "SO-FLT-06",
+      "category": "filtre-setleri",
+      "subcategory": "polen-filtresi",
+      "title": "Polen (Kabin) Filtresi",
+      "description": "Kabin içine giren havayı süzen polen filtresi.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "filtre",
+        "polen filtresi",
+        "kabin filtresi",
+        "klima filtresi"
+      ]
+    },
+    {
+      "slug": "amortisor",
+      "code": "SO-ONT-01",
+      "category": "on-takim",
+      "subcategory": "amortisor",
+      "title": "Amortisör",
+      "description": "Ön amortisörler; yol tutuşu, fren mesafesi ve sürüş konforu için.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "amortisör",
+        "süspansiyon",
+        "ön takım"
+      ]
+    },
+    {
+      "slug": "amortisor-takozu",
+      "code": "SO-ONT-02",
+      "category": "on-takim",
+      "subcategory": "amortisor",
+      "title": "Amortisör Takozu & Rulmanı",
+      "description": "Amortisör üst takozu, rulmanı ve toz körüğü.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "amortisör",
+        "takoz",
+        "rulman",
+        "körük",
+        "ön takım"
+      ]
+    },
+    {
+      "slug": "salincak",
+      "code": "SO-ONT-03",
+      "category": "on-takim",
+      "subcategory": "salincak-rotil",
+      "title": "Salıncak",
+      "description": "Ön salıncak ve salıncak burçları.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "salıncak",
+        "burç",
+        "ön takım",
+        "alt takım"
+      ],
+      "imageKey": "serviceInspection"
+    },
+    {
+      "slug": "rotil",
+      "code": "SO-ONT-04",
+      "category": "on-takim",
+      "subcategory": "salincak-rotil",
+      "title": "Rotil",
+      "description": "Ön takım rotilleri; direksiyon ve süspansiyon bağlantısı.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "rotil",
+        "ön takım",
+        "alt takım"
+      ],
+      "imageKey": "serviceInspection"
+    },
+    {
+      "slug": "rot-basi-rot-mili",
+      "code": "SO-ONT-05",
+      "category": "on-takim",
+      "subcategory": "rot-parcalari",
+      "title": "Rot Başı & Rot Mili",
+      "description": "Direksiyon sistemi için rot başı ve rot milleri.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "rot",
+        "rot başı",
+        "rot mili",
+        "direksiyon",
+        "ön takım"
+      ]
+    },
+    {
+      "slug": "z-rot",
+      "code": "SO-ONT-06",
+      "category": "on-takim",
+      "subcategory": "rot-parcalari",
+      "title": "Z Rot (Viraj Demiri Askısı)",
+      "description": "Viraj demiri bağlantı çubukları ve lastikleri.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "z rot",
+        "viraj demiri",
+        "stabilizatör",
+        "ön takım"
+      ]
+    },
+    {
+      "slug": "aks-kafasi",
+      "code": "SO-ONT-07",
+      "category": "on-takim",
+      "subcategory": "aks-rulman",
+      "title": "Aks Kafası & Aks Körüğü",
+      "description": "Ön aks kafaları ve aks körükleri.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "aks",
+        "aks kafası",
+        "körük",
+        "ön takım"
+      ]
+    },
+    {
+      "slug": "porya-rulmani",
+      "code": "SO-ONT-08",
+      "category": "on-takim",
+      "subcategory": "aks-rulman",
+      "title": "Porya & Teker Rulmanı",
+      "description": "Ön teker poryaları ve rulmanları.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "porya",
+        "rulman",
+        "teker rulmanı",
+        "ön takım"
+      ],
+      "imageKey": "serviceBrake"
+    },
+    {
+      "slug": "on-fren-balatasi",
+      "code": "SO-FRN-01",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Ön Fren Balatası",
+      "description": "Binek ve hafif ticari araçlar için ön fren balatası; fren mesafesi ve güvenli duruş için.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "balata",
+        "ön balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "arka-fren-balatasi",
+      "code": "SO-FRN-02",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Arka Fren Balatası & Pabucu",
+      "description": "Diskli arka frenler için balata, kampanalı frenler için fren pabucu.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "balata",
+        "arka balata",
+        "pabuç",
+        "fren pabucu"
+      ]
+    },
+    {
+      "slug": "fren-diski",
+      "code": "SO-FRN-03",
+      "category": "fren-sistemi",
+      "subcategory": "disk-kampana",
+      "title": "Fren Diski",
+      "description": "Ön ve arka fren diskleri; balata değişiminde disk kalınlığı ölçülerek önerilir.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "disk",
+        "fren diski",
+        "ayna"
+      ]
+    },
+    {
+      "slug": "fren-kampanasi",
+      "code": "SO-FRN-04",
+      "category": "fren-sistemi",
+      "subcategory": "disk-kampana",
+      "title": "Fren Kampanası",
+      "description": "Kampanalı fren sistemleri için fren kampanası.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "kampana",
+        "tambur"
+      ]
+    },
+    {
+      "slug": "agir-vasita-fren-balatasi",
+      "code": "SO-FRN-05",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Ağır Vasıta & Otobüs Fren Balatası",
+      "description": "Otobüs, kamyon ve ağır vasıtalar için fren balatası ve fren pabucu.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "balata",
+        "otobüs",
+        "kamyon",
+        "ağır vasıta"
+      ],
+      "imageKey": "vehicleBus"
+    },
+    {
+      "slug": "fren-hidroligi",
+      "code": "SO-FRN-06",
+      "category": "fren-sistemi",
+      "subcategory": "fren-hidroligi",
+      "title": "Fren Hidroliği",
+      "description": "Hidrolik fren sistemleri için fren hidroliği; periyodik değişimde yenilenir.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "fren",
+        "hidrolik",
+        "fren yağı",
+        "dot 4"
+      ]
+    },
+    {
+      "slug": "debriyaj-seti",
+      "code": "SO-DBR-01",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Debriyaj Seti (Baskı, Disk, Rulman)",
+      "description": "Baskı, debriyaj diski ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya",
+        "rulman",
+        "kavrama"
+      ]
+    },
+    {
+      "slug": "cift-kutleli-volan",
+      "code": "SO-DBR-02",
+      "category": "debriyaj-sanziman",
+      "subcategory": "volan",
+      "title": "Çift Kütleli Volan",
+      "description": "Çift kütleli volanlı araçlar için volan; debriyaj değişiminde birlikte kontrol edilir.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "volan",
+        "çift kütleli volan",
+        "debriyaj"
+      ]
+    },
+    {
+      "slug": "agir-vasita-debriyaj-seti",
+      "code": "SO-DBR-03",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Ağır Vasıta & Otobüs Debriyaj Seti",
+      "description": "Otobüs ve ağır vasıtalar için baskı, disk ve bilyadan oluşan debriyaj seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "debriyaj",
+        "baskı",
+        "disk",
+        "otobüs",
+        "kamyon"
+      ],
+      "imageKey": "serviceHeavy"
+    },
+    {
+      "slug": "sanziman-yagi",
+      "code": "SO-DBR-04",
+      "category": "debriyaj-sanziman",
+      "subcategory": "sanziman-vites",
+      "title": "Şanzıman & Diferansiyel Yağı",
+      "description": "Manuel şanzıman ve diferansiyel için dişli yağı; araç üreticisinin normuna göre.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "şanzıman yağı",
+        "diferansiyel",
+        "dişli yağı",
+        "75w-90",
+        "80w-90"
+      ],
+      "imageKey": "serviceOil"
+    },
+    {
+      "slug": "vites-halati",
+      "code": "SO-DBR-05",
+      "category": "debriyaj-sanziman",
+      "subcategory": "sanziman-vites",
+      "title": "Vites Halatı & Debriyaj Teli",
+      "description": "Vites geçişleri ve debriyaj kumandası için halat ve teller.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "vites",
+        "halat",
+        "debriyaj teli",
+        "vites teli"
+      ]
+    },
+    {
+      "slug": "triger-seti",
+      "code": "SO-TRG-01",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Triger Seti",
+      "description": "Triger kayışı, gergi ve avara rulmanından oluşan set; üretici değişim periyodunda yenilenir.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "triger",
+        "triger kayışı",
+        "gergi",
+        "avara",
+        "triger seti"
+      ]
+    },
+    {
+      "slug": "devirdaim-pompasi",
+      "code": "SO-TRG-02",
+      "category": "triger-atesleme",
+      "subcategory": "devirdaim",
+      "title": "Devirdaim (Su) Pompası",
+      "description": "Motor soğutma sistemi için devirdaim pompası; triger değişiminde birlikte önerilir.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "devirdaim",
+        "su pompası",
+        "soğutma"
+      ]
+    },
+    {
+      "slug": "v-kayisi",
+      "code": "SO-TRG-03",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "V Kayışı & Gergi Rulmanı",
+      "description": "Alternatör, klima ve hidrolik pompa kayışları ile gergi rulmanları.",
+      "segments": [
+        "binek",
+        "hafif-ticari",
+        "agir-vasita"
+      ],
+      "qualities": [],
+      "keywords": [
+        "kayış",
+        "v kayışı",
+        "alternatör kayışı",
+        "gergi rulmanı"
+      ]
+    },
+    {
+      "slug": "buji",
+      "code": "SO-TRG-04",
+      "category": "triger-atesleme",
+      "subcategory": "buji-atesleme",
+      "title": "Buji",
+      "description": "Benzinli motorlar için buji; motor tipine uygun ısı değeriyle.",
+      "segments": [
+        "binek"
+      ],
+      "qualities": [],
+      "keywords": [
+        "buji",
+        "ateşleme",
+        "benzinli"
+      ]
+    },
+    {
+      "slug": "kizdirma-bujisi",
+      "code": "SO-TRG-05",
+      "category": "triger-atesleme",
+      "subcategory": "buji-atesleme",
+      "title": "Kızdırma Bujisi",
+      "description": "Dizel motorlarda soğuk çalıştırma için kızdırma bujisi.",
+      "segments": [
+        "binek",
+        "hafif-ticari"
+      ],
+      "qualities": [],
+      "keywords": [
+        "kızdırma",
+        "kızdırma bujisi",
+        "dizel",
+        "ilk çalıştırma"
+      ]
+    },
+    {
+      "slug": "atesleme-bobini",
+      "code": "SO-TRG-06",
+      "category": "triger-atesleme",
+      "subcategory": "buji-atesleme",
+      "title": "Ateşleme Bobini",
+      "description": "Benzinli motorlar için ateşleme bobini; tekleme ve güç kaybı arızalarında.",
+      "segments": [
+        "binek"
+      ],
+      "qualities": [],
+      "keywords": [
+        "bobin",
+        "ateşleme bobini",
+        "tekleme",
+        "benzinli"
+      ]
+    },
+    {
+      "slug": "fiat-bakim-seti",
+      "code": "SO-FIA-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Fiat Periyodik Bakım Seti",
+      "description": "Fiat için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Fiat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Fiat",
+        "Fiat",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "fiat-fren-balata-seti",
+      "code": "SO-FIA-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Fiat Fren Balata Seti",
+      "description": "Fiat için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Fiat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Fiat",
+        "Fiat",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "fiat-on-takim-parcalari",
+      "code": "SO-FIA-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Fiat Ön Takım Parçaları",
+      "description": "Fiat için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Fiat"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Fiat",
+        "Fiat",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "fiat-debriyaj-seti",
+      "code": "SO-FIA-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Fiat Debriyaj Seti",
+      "description": "Fiat için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Fiat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Fiat",
+        "Fiat",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "fiat-triger-seti",
+      "code": "SO-FIA-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Fiat Triger Seti",
+      "description": "Fiat için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Fiat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Fiat",
+        "Fiat",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "renault-bakim-seti",
+      "code": "SO-REN-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Renault Periyodik Bakım Seti",
+      "description": "Renault için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Renault"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Renault",
+        "Renault",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "renault-fren-balata-seti",
+      "code": "SO-REN-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Renault Fren Balata Seti",
+      "description": "Renault için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Renault"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Renault",
+        "Renault",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "renault-on-takim-parcalari",
+      "code": "SO-REN-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Renault Ön Takım Parçaları",
+      "description": "Renault için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Renault"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Renault",
+        "Renault",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "renault-debriyaj-seti",
+      "code": "SO-REN-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Renault Debriyaj Seti",
+      "description": "Renault için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Renault"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Renault",
+        "Renault",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "renault-triger-seti",
+      "code": "SO-REN-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Renault Triger Seti",
+      "description": "Renault için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Renault"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Renault",
+        "Renault",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "nissan-bakim-seti",
+      "code": "SO-NIS-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Nissan Periyodik Bakım Seti",
+      "description": "Nissan için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Nissan"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Nissan",
+        "Nissan",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "nissan-fren-balata-seti",
+      "code": "SO-NIS-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Nissan Fren Balata Seti",
+      "description": "Nissan için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Nissan"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Nissan",
+        "Nissan",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "nissan-on-takim-parcalari",
+      "code": "SO-NIS-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Nissan Ön Takım Parçaları",
+      "description": "Nissan için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Nissan"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Nissan",
+        "Nissan",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "nissan-debriyaj-seti",
+      "code": "SO-NIS-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Nissan Debriyaj Seti",
+      "description": "Nissan için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Nissan"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Nissan",
+        "Nissan",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "nissan-triger-seti",
+      "code": "SO-NIS-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Nissan Triger Seti",
+      "description": "Nissan için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Nissan"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Nissan",
+        "Nissan",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "volkswagen-bakim-seti",
+      "code": "SO-VWG-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Volkswagen Periyodik Bakım Seti",
+      "description": "Volkswagen için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Volkswagen"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Volkswagen",
+        "Volkswagen",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "volkswagen-fren-balata-seti",
+      "code": "SO-VWG-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Volkswagen Fren Balata Seti",
+      "description": "Volkswagen için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Volkswagen"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Volkswagen",
+        "Volkswagen",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "volkswagen-on-takim-parcalari",
+      "code": "SO-VWG-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Volkswagen Ön Takım Parçaları",
+      "description": "Volkswagen için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Volkswagen"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Volkswagen",
+        "Volkswagen",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "volkswagen-debriyaj-seti",
+      "code": "SO-VWG-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Volkswagen Debriyaj Seti",
+      "description": "Volkswagen için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Volkswagen"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Volkswagen",
+        "Volkswagen",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "volkswagen-triger-seti",
+      "code": "SO-VWG-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Volkswagen Triger Seti",
+      "description": "Volkswagen için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Volkswagen"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Volkswagen",
+        "Volkswagen",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "seat-bakim-seti",
+      "code": "SO-SEA-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Seat Periyodik Bakım Seti",
+      "description": "Seat için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Seat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Seat",
+        "Seat",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "seat-fren-balata-seti",
+      "code": "SO-SEA-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Seat Fren Balata Seti",
+      "description": "Seat için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Seat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Seat",
+        "Seat",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "seat-on-takim-parcalari",
+      "code": "SO-SEA-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Seat Ön Takım Parçaları",
+      "description": "Seat için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Seat"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Seat",
+        "Seat",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "seat-debriyaj-seti",
+      "code": "SO-SEA-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Seat Debriyaj Seti",
+      "description": "Seat için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Seat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Seat",
+        "Seat",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "seat-triger-seti",
+      "code": "SO-SEA-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Seat Triger Seti",
+      "description": "Seat için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Seat"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Seat",
+        "Seat",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "skoda-bakim-seti",
+      "code": "SO-SKO-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Škoda Periyodik Bakım Seti",
+      "description": "Škoda için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Skoda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Skoda",
+        "Škoda",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "skoda-fren-balata-seti",
+      "code": "SO-SKO-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Škoda Fren Balata Seti",
+      "description": "Škoda için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Skoda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Skoda",
+        "Škoda",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "skoda-on-takim-parcalari",
+      "code": "SO-SKO-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Škoda Ön Takım Parçaları",
+      "description": "Škoda için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Skoda"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Skoda",
+        "Škoda",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "skoda-debriyaj-seti",
+      "code": "SO-SKO-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Škoda Debriyaj Seti",
+      "description": "Škoda için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Skoda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Skoda",
+        "Škoda",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "skoda-triger-seti",
+      "code": "SO-SKO-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Škoda Triger Seti",
+      "description": "Škoda için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Skoda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Skoda",
+        "Škoda",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "toyota-bakim-seti",
+      "code": "SO-TOY-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Toyota Periyodik Bakım Seti",
+      "description": "Toyota için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Toyota"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Toyota",
+        "Toyota",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "toyota-fren-balata-seti",
+      "code": "SO-TOY-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Toyota Fren Balata Seti",
+      "description": "Toyota için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Toyota"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Toyota",
+        "Toyota",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "toyota-on-takim-parcalari",
+      "code": "SO-TOY-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Toyota Ön Takım Parçaları",
+      "description": "Toyota için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Toyota"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Toyota",
+        "Toyota",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "toyota-debriyaj-seti",
+      "code": "SO-TOY-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Toyota Debriyaj Seti",
+      "description": "Toyota için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Toyota"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Toyota",
+        "Toyota",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "toyota-triger-seti",
+      "code": "SO-TOY-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Toyota Triger Seti",
+      "description": "Toyota için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Toyota"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Toyota",
+        "Toyota",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "honda-bakim-seti",
+      "code": "SO-HON-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Honda Periyodik Bakım Seti",
+      "description": "Honda için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Honda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Honda",
+        "Honda",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "honda-fren-balata-seti",
+      "code": "SO-HON-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Honda Fren Balata Seti",
+      "description": "Honda için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Honda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Honda",
+        "Honda",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "honda-on-takim-parcalari",
+      "code": "SO-HON-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Honda Ön Takım Parçaları",
+      "description": "Honda için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Honda"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Honda",
+        "Honda",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "honda-debriyaj-seti",
+      "code": "SO-HON-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Honda Debriyaj Seti",
+      "description": "Honda için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Honda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Honda",
+        "Honda",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "honda-triger-seti",
+      "code": "SO-HON-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Honda Triger Seti",
+      "description": "Honda için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "binek"
+      ],
+      "brands": [
+        "Honda"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Honda",
+        "Honda",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "ford-bakim-seti",
+      "code": "SO-FRD-BKM",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Ford Periyodik Bakım Seti",
+      "description": "Ford Transit / Connect için yağ, hava, yakıt ve polen filtresinden oluşan bakım seti; motor tipine göre hazırlanır.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "brands": [
+        "Ford"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Connect"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Ford",
+        "Ford",
+        "Transit · Connect",
+        "bakım seti",
+        "filtre",
+        "periyodik bakım"
+      ]
+    },
+    {
+      "slug": "ford-fren-balata-seti",
+      "code": "SO-FRD-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Ford Fren Balata Seti",
+      "description": "Ford Transit / Connect için ön ve arka fren balatası; şasi numarasına göre eşleştirilir.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "brands": [
+        "Ford"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Connect"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Ford",
+        "Ford",
+        "Transit · Connect",
+        "fren",
+        "balata",
+        "fren balatası"
+      ]
+    },
+    {
+      "slug": "ford-on-takim-parcalari",
+      "code": "SO-FRD-ONT",
+      "category": "on-takim",
+      "subcategory": "on-takim-setleri",
+      "title": "Ford Ön Takım Parçaları",
+      "description": "Ford Transit / Connect için amortisör, salıncak, rotil ve rot başı; orijinal ve muadil seçenekli.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "brands": [
+        "Ford"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Connect"
+      ],
+      "qualities": [
+        "orijinal",
+        "muadil"
+      ],
+      "keywords": [
+        "Ford",
+        "Ford",
+        "Transit · Connect",
+        "ön takım",
+        "amortisör",
+        "salıncak",
+        "rotil",
+        "rot başı"
+      ]
+    },
+    {
+      "slug": "ford-debriyaj-seti",
+      "code": "SO-FRD-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Ford Debriyaj Seti",
+      "description": "Ford Transit / Connect için baskı, disk ve bilyadan oluşan komple debriyaj seti.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "brands": [
+        "Ford"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Connect"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Ford",
+        "Ford",
+        "Transit · Connect",
+        "debriyaj",
+        "baskı",
+        "disk",
+        "bilya"
+      ]
+    },
+    {
+      "slug": "ford-triger-seti",
+      "code": "SO-FRD-TRG",
+      "category": "triger-atesleme",
+      "subcategory": "triger-kayis",
+      "title": "Ford Triger Seti",
+      "description": "Ford Transit / Connect için triger kayışı, gergi ve avara rulmanı; motor koduna göre eşleştirilir.",
+      "segments": [
+        "hafif-ticari"
+      ],
+      "brands": [
+        "Ford"
+      ],
+      "fitment": [
+        "Ford Transit",
+        "Ford Connect"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Ford",
+        "Ford",
+        "Transit · Connect",
+        "triger",
+        "triger seti",
+        "kayış"
+      ]
+    },
+    {
+      "slug": "otokar-filtre-seti",
+      "code": "SO-OTK-FLT",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Otokar Filtre Seti",
+      "description": "Otokar otobüsler için yağ, hava, yakıt ve separatör filtresinden oluşan bakım seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Otokar"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Otokar",
+        "Otokar",
+        "Otobüs",
+        "filtre",
+        "set",
+        "separatör",
+        "mazot filtresi"
+      ]
+    },
+    {
+      "slug": "otokar-fren-balatasi",
+      "code": "SO-OTK-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "Otokar Fren Balatası",
+      "description": "Otokar otobüsler için fren balatası ve fren pabucu.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Otokar"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Otokar",
+        "Otokar",
+        "Otobüs",
+        "fren",
+        "balata",
+        "pabuç"
+      ]
+    },
+    {
+      "slug": "otokar-debriyaj-seti",
+      "code": "SO-OTK-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "Otokar Debriyaj Seti",
+      "description": "Otokar otobüsler için baskı, disk ve bilyadan oluşan debriyaj seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Otokar"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Otokar",
+        "Otokar",
+        "Otobüs",
+        "debriyaj",
+        "baskı",
+        "disk"
+      ]
+    },
+    {
+      "slug": "iveco-filtre-seti",
+      "code": "SO-IVE-FLT",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "IVECO Filtre Seti",
+      "description": "IVECO için yağ, hava, yakıt ve separatör filtresinden oluşan bakım seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Iveco"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Iveco",
+        "IVECO",
+        "filtre",
+        "set",
+        "separatör",
+        "mazot filtresi"
+      ]
+    },
+    {
+      "slug": "iveco-fren-balatasi",
+      "code": "SO-IVE-FRN",
+      "category": "fren-sistemi",
+      "subcategory": "balata-pabuc",
+      "title": "IVECO Fren Balatası",
+      "description": "IVECO için fren balatası ve fren pabucu.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Iveco"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Iveco",
+        "IVECO",
+        "fren",
+        "balata",
+        "pabuç"
+      ]
+    },
+    {
+      "slug": "iveco-debriyaj-seti",
+      "code": "SO-IVE-DBR",
+      "category": "debriyaj-sanziman",
+      "subcategory": "debriyaj-setleri",
+      "title": "IVECO Debriyaj Seti",
+      "description": "IVECO için baskı, disk ve bilyadan oluşan debriyaj seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Iveco"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Iveco",
+        "IVECO",
+        "debriyaj",
+        "baskı",
+        "disk"
+      ]
+    },
+    {
+      "slug": "deutz-motor-filtre-seti",
+      "code": "SO-DEU-FLT",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Deutz Motor Filtre Seti",
+      "description": "Deutz motorlar için yağ, yakıt ve hava filtresinden oluşan bakım seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Deutz"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Deutz",
+        "Deutz",
+        "Motor",
+        "filtre",
+        "motor filtre seti",
+        "mazot filtresi"
+      ]
+    },
+    {
+      "slug": "deutz-devirdaim-kayis-seti",
+      "code": "SO-DEU-DVR",
+      "category": "triger-atesleme",
+      "subcategory": "devirdaim",
+      "title": "Deutz Motor Devirdaim & Kayış Seti",
+      "description": "Deutz motorlar için devirdaim pompası, V kayışı ve gergi rulmanı.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Deutz"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Deutz",
+        "Deutz",
+        "Motor",
+        "devirdaim",
+        "kayış",
+        "gergi",
+        "soğutma"
+      ]
+    },
+    {
+      "slug": "cummins-motor-filtre-seti",
+      "code": "SO-CUM-FLT",
+      "category": "filtre-setleri",
+      "subcategory": "bakim-setleri",
+      "title": "Cummins Motor Filtre Seti",
+      "description": "Cummins motorlar için yağ, yakıt ve hava filtresinden oluşan bakım seti.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Cummins"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Cummins",
+        "Cummins",
+        "Motor",
+        "filtre",
+        "motor filtre seti",
+        "mazot filtresi"
+      ]
+    },
+    {
+      "slug": "cummins-devirdaim-kayis-seti",
+      "code": "SO-CUM-DVR",
+      "category": "triger-atesleme",
+      "subcategory": "devirdaim",
+      "title": "Cummins Motor Devirdaim & Kayış Seti",
+      "description": "Cummins motorlar için devirdaim pompası, V kayışı ve gergi rulmanı.",
+      "segments": [
+        "agir-vasita"
+      ],
+      "brands": [
+        "Cummins"
+      ],
+      "qualities": [],
+      "keywords": [
+        "Cummins",
+        "Cummins",
+        "Motor",
+        "devirdaim",
+        "kayış",
+        "gergi",
+        "soğutma"
+      ]
+    }
+  ]
+}

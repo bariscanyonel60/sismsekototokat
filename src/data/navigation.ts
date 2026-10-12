@@ -12,15 +12,17 @@ export const sectionIds = {
   brands: "markalar",
   why: "neden-biz",
   process: "servis-sureci",
-  reviews: "yorumlar",
+  gallery: "atolye",
   faq: "sss",
   contact: "iletisim",
   catalog: "parca-katalogu",
+  partList: "parca-listesi",
 } as const;
 
 export const routes = {
   home: "/",
   parts: "/yedek-parca",
+  gallery: "/galeri",
   privacy: "/gizlilik",
   kvkk: "/kvkk",
   thanks: "/tesekkurler",
@@ -74,6 +76,9 @@ export const ctaLabels = {
   appointment: "Servis Randevusu Oluştur",
   call: "Hemen Ara",
   whatsapp: "WhatsApp ile Yazın",
+  whatsappReach: "WhatsApp'tan Ulaş",
+  serviceRequest: "Servis Talebi Oluştur",
+  directions: "Yol Tarifi Al",
 } as const;
 
 /** Header üstündeki duyuru şeridi. */
@@ -85,12 +90,12 @@ export const topBar = {
 
 export const corporateLinks: NavItem[] = [
   { label: "Hakkımızda", href: `/#${sectionIds.about}` },
-  { label: "Yedek Parça", href: routes.parts },
-  { label: "Araç Grupları", href: `/#${sectionIds.vehicles}` },
-  { label: "Markalar", href: `/#${sectionIds.brands}` },
-  { label: "Servis Süreci", href: `/#${sectionIds.process}` },
   { label: "Neden Şimşek Oto?", href: `/#${sectionIds.why}` },
-  { label: "Sıkça Sorulan Sorular", href: `/#${sectionIds.faq}` },
+  { label: "Servis Süreci", href: `/#${sectionIds.process}` },
+  { label: "Araç Grupları", href: `/#${sectionIds.vehicles}` },
+  { label: "Toplu Parça Teklifi", href: `${routes.parts}#${sectionIds.partList}` },
+  { label: "Yardım & SSS", href: `/#${sectionIds.faq}` },
+  { label: "İletişim Bilgileri", href: `/#${sectionIds.contact}` },
 ];
 
 export const legalLinks: NavItem[] = [

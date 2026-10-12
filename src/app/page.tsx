@@ -9,17 +9,30 @@ import { ImageBreak } from "@/components/ImageBreak";
 import { JsonLd } from "@/components/JsonLd";
 import { PartsTeaser } from "@/components/PartsTeaser";
 import { RevealObserver } from "@/components/RevealObserver";
-import { Reviews } from "@/components/Reviews";
 import { ServiceProcess } from "@/components/ServiceProcess";
 import { Services } from "@/components/Services";
 import { StickyContact } from "@/components/StickyContact";
 import { VehicleTypes } from "@/components/VehicleTypes";
 import { WhyUs } from "@/components/WhyUs";
-import { reviews } from "@/data/reviews";
-import { buildAutoRepairSchema } from "@/lib/structuredData";
+import { hasGallery, WorkshopGallery } from "@/components/WorkshopGallery";
+import { getGallery } from "@/lib/content/store";
+import type { GalleryPhoto } from "@/lib/content/types";
+import { buildAutoRepairSchema, buildWebSiteSchema } from "@/lib/structuredData";
 
-export default function HomePage() {
-  const hasReviews = reviews.length > 0;
+/** 01–07 sabit bölümler; galeri yalnızca içerik varken numara alır. */
+function trailingIndices(photos: GalleryPhoto[]) {
+  let next = 8;
+  const take = () => String(next++).padStart(2, "0");
+  return {
+    gallery: hasGallery(photos) ? take() : "",
+    faq: take(),
+    contact: take(),
+  };
+}
+
+export default async function HomePage() {
+  const { photos } = await getGallery();
+  const index = trailingIndices(photos);
 
   return (
     <>
@@ -37,14 +50,15 @@ export default function HomePage() {
         <WhyUs />
         <ServiceProcess />
         <ImageBreak />
-        <Reviews index="08" />
-        <Faq index={hasReviews ? "09" : "08"} />
-        <AppointmentCTA index={hasReviews ? "10" : "09"} />
+        <WorkshopGallery index={index.gallery} photos={photos} />
+        <Faq index={index.faq} />
+        <AppointmentCTA index={index.contact} />
       </main>
       <Footer />
       <StickyContact />
       <RevealObserver />
       <JsonLd data={buildAutoRepairSchema()} />
+      <JsonLd data={buildWebSiteSchema()} />
     </>
   );
 }

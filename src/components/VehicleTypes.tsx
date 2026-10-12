@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { ArrowRight } from "@/components/icons";
+import { ArrowRight, BusIcon, CarIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/SectionHeading";
 import { sectionIds } from "@/data/navigation";
 import { vehicleTypes, vehicleTypesIntro, type VehicleType } from "@/data/vehicleTypes";
@@ -18,7 +18,7 @@ function BrandLine({ vehicle }: { vehicle: VehicleType }) {
             </span>
           ))}
         </p>
-        <p className="label-mono mt-2 text-amber">{vehicle.brandsSuffix}</p>
+        <p className="label-mono mt-2 text-accent-300">{vehicle.brandsSuffix}</p>
       </div>
     );
   }
@@ -28,7 +28,7 @@ function BrandLine({ vehicle }: { vehicle: VehicleType }) {
         {vehicle.brandNames.map((name) => (
           <li
             key={name}
-            className="border border-bone/25 bg-ink/35 px-3 py-1.5 font-display text-base font-semibold uppercase tracking-[0.12em] text-bone backdrop-blur-sm"
+            className="border border-bone/25 bg-ink/55 px-3 py-1.5 font-display text-base font-semibold uppercase tracking-[0.12em] text-bone"
           >
             {name}
           </li>
@@ -59,20 +59,25 @@ function VehiclePanel({ vehicle, index }: { vehicle: VehicleType; index: number 
         fill
         placeholder="blur"
         sizes={commercial ? "(min-width:1024px) 58vw, 100vw" : "(min-width:1024px) 42vw, 100vw"}
-        className={`-z-10 object-cover transition-transform duration-[1.6s] ease-out-expo group-hover:scale-[1.04] ${
+        className={`-z-10 object-cover transition-transform duration-[1.6s] ease-out-expo group-hover:scale-[1.03] ${
           commercial ? "object-[30%_60%]" : "object-[50%_40%]"
         }`}
       />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(13_15_17/0.5)_0%,rgb(13_15_17/0.1)_30%,rgb(13_15_17/0.78)_62%,rgb(13_15_17/0.97)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(26_31_37/0.5)_0%,rgb(26_31_37/0.1)_30%,rgb(26_31_37/0.78)_62%,rgb(26_31_37/0.97)_100%)]" />
 
       <div className="absolute left-6 top-6 flex items-center gap-4 md:left-10 md:top-10">
-        <span className="display text-5xl text-amber md:text-6xl">{vehicle.index}</span>
+        <span className="display text-5xl text-accent md:text-6xl">{vehicle.index}</span>
         <span className="h-px w-10 bg-bone/40" />
+        {commercial ? (
+          <BusIcon size={30} strokeWidth={1.3} className="text-bone/85" />
+        ) : (
+          <CarIcon size={30} strokeWidth={1.3} className="text-bone/85" />
+        )}
         <span className="label-mono text-bone/85">{vehicle.label}</span>
       </div>
 
       {vehicle.insetImage && (
-        <div className="chamfer-sm absolute right-6 top-6 hidden aspect-[4/3] w-[34%] max-w-[280px] overflow-hidden border border-bone/20 md:right-10 md:top-10 md:block">
+        <div className="absolute right-6 top-6 hidden aspect-[4/3] w-[34%] max-w-[280px] overflow-hidden border border-bone/20 md:right-10 md:top-10 md:block">
           <Image
             src={vehicle.insetImage.src}
             alt={vehicle.insetImage.alt}
@@ -98,7 +103,7 @@ function VehiclePanel({ vehicle, index }: { vehicle: VehicleType; index: number 
           <ul className="flex flex-wrap gap-x-5 gap-y-2" aria-label="Öne çıkan işlemler">
             {vehicle.highlights.map((item) => (
               <li key={item} className="label-mono flex items-center gap-2 text-bone/70">
-                <span className="size-1 bg-amber" aria-hidden />
+                <span className="size-1 bg-accent" aria-hidden />
                 {item}
               </li>
             ))}
@@ -107,7 +112,7 @@ function VehiclePanel({ vehicle, index }: { vehicle: VehicleType; index: number 
             href={href}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
-            className="link-arrow shrink-0 text-sm text-amber hover:text-bone"
+            className="link-arrow min-h-11 shrink-0 text-sm text-accent-300 hover:text-bone"
           >
             Servis Bilgisi Al
             <ArrowRight size={18} />
@@ -125,7 +130,6 @@ export function VehicleTypes() {
       aria-labelledby="arac-gruplari-baslik"
       className="section-y relative overflow-hidden bg-bone text-ink"
     >
-      <div className="tech-grid-light pointer-events-none absolute inset-0" aria-hidden />
       <div className="container-x relative">
         <SectionHeading
           id="arac-gruplari-baslik"

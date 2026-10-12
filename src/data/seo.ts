@@ -49,7 +49,7 @@ export const pageSeo = {
   home: {
     title: seoTitle,
     description:
-      "Şimşek Oto: Fiat, Renault, Ford Transit'ten Otokar ve IVECO'ya her türlü araca mekanik ve elektronik arıza tespiti, alt takım, şanzıman bakım onarımı ve yedek parça.",
+      "Şimşek Oto: Fiat, Renault, Ford Transit'ten Otokar ve IVECO'ya her araca mekanik ve elektronik arıza tespiti, alt takım, şanzıman onarımı ve yedek parça.",
     socialTitle: "Şimşek Oto – Bakım, Onarım ve 450.000 Hazır Stok Yedek Parça",
     socialDescription:
       "Binek, hafif ticari, ağır vasıta ve otobüsler için arıza tespiti, bakım onarım ve hazır stok yedek parça. Randevu ve parça sorgusu WhatsApp ile.",
@@ -57,13 +57,20 @@ export const pageSeo = {
     index: true,
   },
   parts: {
-    title: "Yedek Parça – 450.000 Hazır Stok",
+    title: "Oto Yedek Parça – 450.000 Hazır Stok",
     description:
-      "Komple sıfır sandık motor, motor yağları, filtre setleri ve orijinal / muadil ön takım parçaları. Binek, hafif ticari ve ağır vasıta için 450.000 hazır stok.",
+      "Oto yedek parça: sandık motor, motor yağı, filtre seti, fren, debriyaj ve ön takım. Binek, hafif ticari ve ağır vasıta için 450.000 hazır stok.",
     socialTitle: "450.000 Hazır Stok Yedek Parça | Şimşek Oto",
     socialDescription:
       "Sandık motor, motor yağı, filtre seti ve orijinal / muadil ön takım parçaları. Kataloğu filtreleyin, stok ve fiyatı tek mesajla sorun.",
     path: "/yedek-parca",
+    index: true,
+  },
+  gallery: {
+    title: "Atölye Galerisi – Servisten Gerçek Kareler",
+    description:
+      "Şimşek Oto atölyesinden gerçek fotoğraflar: motor, alt takım ve şanzıman onarımı, arıza tespiti ve ağır vasıta bakımı çalışmalarımızdan kareler.",
+    path: "/galeri",
     index: true,
   },
   privacy: {

@@ -18,25 +18,18 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <SiteShell currentPath="/404">
-      <div className="tech-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
-      <p
-        aria-hidden
-        className="display outline-text pointer-events-none absolute -right-[3vw] top-[10%] select-none text-[34vw] leading-none"
-      >
-        404
-      </p>
       <div className="container-x relative pb-24 pt-[calc(var(--header-h)+var(--topbar-h)+48px)] md:pb-32">
         <Breadcrumb items={[{ label: "Sayfa Bulunamadı" }]} withSchema={false} className="hero-fade" />
 
-        <p className="label-mono hero-fade mt-14 text-amber" style={cssVars({ "--i": 1 })}>
+        <p className="label-mono hero-fade mt-14 text-accent" style={cssVars({ "--i": 1 })}>
           Hata 404
         </p>
         <h1 className="display mt-6 text-[clamp(3rem,9vw,7rem)] text-bone">
           <span className="hero-line" style={cssVars({ "--i": 0 })}>
-            Bu yol
+            Bu yol{" "}
           </span>
           <span className="hero-line text-steel-500" style={cssVars({ "--i": 1 })}>
-            kapalı<span className="text-amber">.</span>
+            kapalı<span className="text-accent">.</span>
           </span>
         </h1>
         <p className="lede hero-fade mt-7 max-w-xl text-steel-300" style={cssVars({ "--i": 2 })}>

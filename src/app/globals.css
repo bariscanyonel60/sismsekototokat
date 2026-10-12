@@ -13,8 +13,10 @@
   --color-bone: #f2f1ec;
   --color-bone-100: #f8f7f3;
   --color-bone-300: #e3e1d9;
-  --color-amber: #ffc21a;
-  --color-amber-600: #e8a900;
+  --color-accent: #d71920;
+  --color-accent-600: #b5141a;
+  /* Koyu zeminde küçük kırmızı metin; #d71920 burada WCAG 4.5:1 kontrastı sağlamaz. */
+  --color-accent-300: #ff5a5f;
 
   --font-display: var(--font-barlow), "Arial Narrow", "Roboto Condensed", sans-serif;
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
@@ -31,7 +33,6 @@
   --topbar-h: 34px;
   --gutter: clamp(20px, 4.2vw, 64px);
   --section-y: clamp(84px, 11vw, 168px);
-  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   color-scheme: dark light;
 }
 
@@ -52,12 +53,12 @@
   }
 
   ::selection {
-    background: var(--color-amber);
-    color: var(--color-ink);
+    background: var(--color-accent);
+    color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-amber);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 
@@ -90,8 +91,8 @@
     left: 16px;
     top: -60px;
     z-index: 100;
-    background: var(--color-amber);
-    color: var(--color-ink);
+    background: var(--color-accent);
+    color: #fff;
     padding: 10px 16px;
     font-weight: 700;
     border-radius: var(--radius-xs);
@@ -145,7 +146,7 @@
     content: "";
     width: 28px;
     height: 2px;
-    background: var(--color-amber);
+    background: var(--color-accent);
     flex: none;
   }
 
@@ -198,13 +199,13 @@
   }
 
   .btn-primary {
-    background: var(--color-amber);
-    color: var(--color-ink);
-    box-shadow: 0 0 0 0 rgb(255 194 26 / 0);
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 0 0 0 rgb(215 25 32 / 0);
   }
   .btn-primary:hover {
-    background: #ffd04d;
-    box-shadow: 0 10px 34px -12px rgb(255 194 26 / 0.55);
+    background: var(--color-accent-600);
+    box-shadow: 0 10px 30px -14px rgb(215 25 32 / 0.5);
   }
 
   .btn-outline {
@@ -213,8 +214,17 @@
     background: rgb(26 31 37 / 0.15);
   }
   .btn-outline:hover {
-    border-color: var(--color-amber);
-    color: var(--color-amber);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .btn-ghost {
+    color: var(--color-ink);
+    border: 1px solid rgb(26 31 37 / 0.2);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .btn-dark {
@@ -239,66 +249,6 @@
   }
   .link-arrow:hover svg {
     transform: translateX(6px);
-  }
-
-  /* ---------- Decorative ---------- */
-  .noise::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: var(--noise);
-    opacity: 0.07;
-    mix-blend-mode: overlay;
-  }
-
-  .tech-grid {
-    background-image: linear-gradient(to right, rgb(242 241 236 / 0.06) 1px, transparent 1px);
-    background-size: calc((100% - 2 * var(--gutter)) / 6) 100%;
-    background-position: var(--gutter) 0;
-    background-repeat: repeat-x;
-  }
-
-  .tech-grid-light {
-    background-image: linear-gradient(to right, rgb(26 31 37 / 0.07) 1px, transparent 1px);
-    background-size: calc((100% - 2 * var(--gutter)) / 6) 100%;
-    background-position: var(--gutter) 0;
-  }
-
-  .corner-marks {
-    position: relative;
-  }
-  .corner-marks::before,
-  .corner-marks::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-color: var(--color-amber);
-    border-style: solid;
-    pointer-events: none;
-  }
-  .corner-marks::before {
-    top: -1px;
-    left: -1px;
-    border-width: 2px 0 0 2px;
-  }
-  .corner-marks::after {
-    bottom: -1px;
-    right: -1px;
-    border-width: 0 2px 2px 0;
-  }
-
-  .chamfer {
-    clip-path: polygon(0 0, calc(100% - 44px) 0, 100% 44px, 100% 100%, 0 100%);
-  }
-  .chamfer-sm {
-    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
-  }
-
-  .outline-text {
-    color: transparent;
-    -webkit-text-stroke: 1px rgb(242 241 236 / 0.16);
   }
 }
 
@@ -438,6 +388,26 @@
       animation-timeline: view();
       animation-range: cover;
     }
+  }
+}
+
+/* ---------- FAQ accordion (progressive: Chrome/Edge; others open instantly) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .faq {
+    interpolate-size: allow-keywords;
+  }
+  .faq::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 0.45s var(--ease-out-expo),
+      opacity 0.35s ease,
+      content-visibility 0.45s allow-discrete;
+  }
+  .faq[open]::details-content {
+    block-size: auto;
+    opacity: 1;
   }
 }
 

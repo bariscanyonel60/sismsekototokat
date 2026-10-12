@@ -29,7 +29,7 @@ export function StickyContact({ context, contactAnchor = `#${sectionIds.contact}
         <a
           href={phone ?? contactAnchor}
           aria-label={phone ? ctaLabels.call : "İletişim bilgilerine git"}
-          className={`${floatingClass} bg-amber text-ink hover:bg-[#ffd04d]`}
+          className={`${floatingClass} bg-accent text-white hover:bg-accent-600`}
         >
           <PhoneIcon size={22} />
           <span className={floatingLabelClass}>{phone ? ctaLabels.call : "İletişim"}</span>
@@ -47,32 +47,36 @@ export function StickyContact({ context, contactAnchor = `#${sectionIds.contact}
 
       <nav
         aria-label="Hızlı iletişim"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-bone/12 bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden"
+        className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 flex h-[52px] overflow-hidden rounded-sm border border-bone/12 bg-ink shadow-[0_12px_32px_-14px_rgb(0_0_0/0.7)] md:hidden"
       >
-        <a
-          href={phone ?? contactAnchor}
-          className="flex h-16 items-center justify-center gap-2 bg-amber font-display text-sm font-bold uppercase tracking-[0.1em] text-ink"
-        >
-          <PhoneIcon size={18} />
-          {phone ? "Ara" : "Telefon"}
-        </a>
-        <a
-          href={whatsapp ?? contactAnchor}
-          {...whatsappProps}
-          className="flex h-16 items-center justify-center gap-2 border-r border-bone/12 font-display text-sm font-bold uppercase tracking-[0.1em] text-bone"
-        >
-          <WhatsAppIcon size={18} className="text-[#25d366]" />
-          WhatsApp
-        </a>
+        {phone && (
+          <a
+            href={phone}
+            aria-label={ctaLabels.call}
+            className="flex w-[52px] shrink-0 items-center justify-center border-r border-bone/12 text-bone"
+          >
+            <PhoneIcon size={20} />
+          </a>
+        )}
+        {whatsapp && (
+          <a
+            href={whatsapp}
+            {...whatsappProps}
+            className="flex flex-1 items-center justify-center gap-2 font-display text-[0.8rem] font-bold uppercase tracking-[0.1em] text-bone"
+          >
+            <WhatsAppIcon size={18} className="text-[#25d366]" />
+            WhatsApp
+          </a>
+        )}
         <a
           href={contactAnchor}
-          className="flex h-16 items-center justify-center gap-2 font-display text-sm font-bold uppercase tracking-[0.1em] text-bone"
+          className="flex flex-1 items-center justify-center gap-2 bg-accent font-display text-[0.8rem] font-bold uppercase tracking-[0.1em] text-white"
         >
           {ctaLabels.primary}
-          <ArrowRight size={16} className="text-amber" />
+          <ArrowRight size={16} />
         </a>
       </nav>
-      <div aria-hidden className="h-[calc(4rem+env(safe-area-inset-bottom))] bg-ink md:hidden" />
+      <div aria-hidden className="h-[calc(4.5rem+env(safe-area-inset-bottom))] bg-ink md:hidden" />
     </>
   );
 }

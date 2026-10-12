@@ -67,7 +67,7 @@ export function Header({ currentPath = routes.home, contactAnchor = `#${sectionI
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
         solid
-          ? "border-b border-bone/10 bg-ink/80 backdrop-blur-xl backdrop-saturate-150"
+          ? "border-b border-bone/10 bg-ink/90 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -78,13 +78,13 @@ export function Header({ currentPath = routes.home, contactAnchor = `#${sectionI
         inert={solid}
       >
         <div className="overflow-hidden">
-          <div className="border-b border-bone/10 bg-amber text-ink">
+          <div className="border-b border-bone/10 bg-ink text-bone/85">
             <div className="container-x flex h-[var(--topbar-h)] items-center justify-between gap-4">
               <p className="label-mono flex min-w-0 items-center gap-3 text-[0.66rem]">
-                <span className="size-1.5 shrink-0 bg-ink" aria-hidden />
+                <span className="size-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
                 <span className="truncate">
                   {topBar.message}
-                  <span className="hidden text-ink/70 lg:inline"> · {topBar.detail}</span>
+                  <span className="hidden text-steel-400 lg:inline"> · {topBar.detail}</span>
                 </span>
               </p>
               <div className="flex shrink-0 items-center gap-5">
@@ -131,7 +131,7 @@ export function Header({ currentPath = routes.home, contactAnchor = `#${sectionI
                   >
                     {item.label}
                     <span
-                      className={`absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left bg-amber transition-transform duration-500 ease-out-expo ${
+                      className={`absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-left bg-accent transition-transform duration-500 ease-out-expo ${
                         active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                       }`}
                     />
@@ -149,7 +149,7 @@ export function Header({ currentPath = routes.home, contactAnchor = `#${sectionI
           </a>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center border border-bone/20 text-bone transition-colors hover:border-amber hover:text-amber xl:hidden"
+            className="inline-flex size-11 items-center justify-center border border-bone/20 text-bone transition-colors hover:border-accent hover:text-accent xl:hidden"
             aria-label="Menüyü aç"
             aria-expanded={menuOpen}
             aria-controls="mobil-menu"

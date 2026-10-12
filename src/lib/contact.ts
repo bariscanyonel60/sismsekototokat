@@ -6,14 +6,24 @@ export type ContactContext =
   | { kind: "service"; service: string }
   | { kind: "brand"; brand: string }
   | { kind: "vehicleGroup"; group: string }
-  | { kind: "part"; part: string; brand?: string }
+  | { kind: "part"; part: string; code?: string; brand?: string; url?: string }
+  | { kind: "compatibility"; part: string; code: string; url: string }
+  | { kind: "partList"; list: string; vehicle: string }
+  | { kind: "order"; items: OrderItem[]; vehicle: string; chassis: string; name: string; note: string }
   | {
       kind: "appointment";
       name: string;
+      phone: string;
       vehicle: string;
       service: string;
       note: string;
     };
+
+export interface OrderItem {
+  code: string;
+  title: string;
+  quantity: number;
+}
 
 const CONTACT_ANCHOR = `#${sectionIds.contact}`;
 
@@ -45,17 +55,74 @@ export function buildWhatsAppMessage(context: ContactContext = { kind: "general"
       return `${greeting} ${context.brand} aracım için servis/bakım hakkında bilgi almak istiyorum.`;
     case "vehicleGroup":
       return `${greeting} ${context.group} aracım için servis/bakım hakkında bilgi almak istiyorum.`;
-    case "part":
+    case "part": {
+      if (context.url) {
+        return [
+          `${greeting} web sitenizde bulunan`,
+          context.part,
+          context.code ? `Ürün Kodu: ${context.code}` : null,
+          "ürünü hakkında stok ve fiyat bilgisi almak istiyorum.",
+          "",
+          context.url,
+        ]
+          .filter((line) => line !== null)
+          .join("\n");
+      }
+      const product = context.code ? `${context.code} kodlu ${context.part}` : context.part;
       return context.brand
-        ? `${greeting} ${context.brand} aracım için ${context.part} stok ve fiyat bilgisi almak istiyorum.`
-        : `${greeting} ${context.part} için stok ve fiyat bilgisi almak istiyorum.`;
+        ? `${greeting} ${context.brand} aracım için ${product} stok ve fiyat bilgisi almak istiyorum.`
+        : `${greeting} ${product} için stok ve fiyat bilgisi almak istiyorum.`;
+    }
+    case "compatibility":
+      return [
+        `${greeting} aşağıdaki ürünün aracıma uyumluluğunu kontrol ettirmek istiyorum:`,
+        "",
+        `Ürün: ${context.part}`,
+        `Ürün Kodu: ${context.code}`,
+        `Ürün URL: ${context.url}`,
+        "",
+        "Şasi No: ",
+      ].join("\n");
+    case "partList": {
+      if (!context.list) {
+        return [
+          `${greeting} sitenizde bulamadığım bir parçayı sormak istiyorum.`,
+          "",
+          "Parça / OEM kodu: ",
+          `Araç: ${context.vehicle}`,
+        ].join("\n");
+      }
+      const lines = [
+        `${greeting} aşağıdaki parça listesi için fiyat teklifi almak istiyorum:`,
+        "",
+        context.list,
+        "",
+        context.vehicle ? `Araç: ${context.vehicle}` : null,
+      ].filter((line) => line !== null);
+      return lines.join("\n");
+    }
+    case "order": {
+      const lines = [
+        `${greeting} aşağıdaki parçaları sipariş etmek istiyorum:`,
+        "",
+        ...context.items.map((item, i) => `${i + 1}) ${item.title} (Ürün kodu: ${item.code}) – ${item.quantity} adet`),
+        "",
+        context.vehicle ? `Araç: ${context.vehicle}` : null,
+        context.chassis ? `Şasi No: ${context.chassis}` : null,
+        context.name ? `Ad Soyad: ${context.name}` : null,
+        context.note ? `Not: ${context.note}` : null,
+        "Stok, fiyat ve teslimat bilgisini paylaşır mısınız?",
+      ].filter((line) => line !== null);
+      return lines.join("\n");
+    }
     case "appointment": {
       const lines = [
         `${greeting} servis randevusu oluşturmak istiyorum.`,
         context.name && `Ad Soyad: ${context.name}`,
+        context.phone && `Telefon: ${context.phone}`,
         context.vehicle && `Araç: ${context.vehicle}`,
         context.service && `Hizmet: ${context.service}`,
-        context.note && `Not: ${context.note}`,
+        context.note ? `Not: ${context.note}` : null,
       ].filter(Boolean);
       return lines.join("\n");
     }

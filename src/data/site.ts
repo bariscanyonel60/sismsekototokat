@@ -1,3 +1,5 @@
+import siteContent from "../../content/site.json";
+
 export interface WorkingHours {
   /** Arayüzde görünen gün aralığı, örn. "Pazartesi – Cumartesi". */
   days: string;
@@ -49,14 +51,8 @@ export const site = {
     road: "Yola Güvenle Devam Edin.",
     craft: "İşçilikte Güven. Bakımda Titizlik.",
   },
-  contact: {
-    phone: null,
-    whatsapp: "905530018942",
-    email: null,
-    address: null,
-    mapUrl: null,
-    hours: null,
-  } satisfies ContactInfo as ContactInfo,
+  /** Panelden (`/admin/iletisim`) düzenlenir; `content/site.json`. */
+  contact: siteContent.contact as ContactInfo,
   whatsappDefaultMessage:
     "Merhaba Şimşek Oto, aracım için servis/bakım hakkında bilgi almak istiyorum.",
   /** Footer ve mobil menüdeki medya ajansı imzası. */

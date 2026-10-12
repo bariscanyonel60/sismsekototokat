@@ -17,6 +17,8 @@ export function Logo({ className = "h-[80px]", sizes = "120px", preload = false 
       alt={`${site.name} – Yedek Parça · Servis logosu`}
       sizes={sizes}
       preload={preload}
+      loading={preload ? "eager" : undefined}
+      fetchPriority={preload ? "high" : undefined}
       className={`w-auto select-none ${className}`}
     />
   );

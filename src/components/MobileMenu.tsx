@@ -74,7 +74,7 @@ export function MobileMenu({ open, onClose, activeHref, items, contactAnchor }: 
         role="dialog"
         aria-modal="true"
         aria-label="Mobil menü"
-        className={`noise absolute inset-y-0 right-0 flex w-full max-w-[460px] flex-col overflow-y-auto bg-graphite transition-transform duration-700 ease-out-expo ${
+        className={`absolute inset-y-0 right-0 flex w-full max-w-[460px] flex-col overflow-y-auto bg-graphite transition-transform duration-700 ease-out-expo ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -84,7 +84,7 @@ export function MobileMenu({ open, onClose, activeHref, items, contactAnchor }: 
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="inline-flex size-11 items-center justify-center border border-bone/20 text-bone transition-colors hover:border-amber hover:text-amber"
+            className="inline-flex size-11 items-center justify-center border border-bone/20 text-bone transition-colors hover:border-accent hover:text-accent"
             aria-label="Menüyü kapat"
           >
             <CloseIcon size={22} />
@@ -109,7 +109,7 @@ export function MobileMenu({ open, onClose, activeHref, items, contactAnchor }: 
                     aria-current={active ? "true" : undefined}
                     className="group flex items-baseline gap-5 py-4"
                   >
-                    <span className={`label-mono ${active ? "text-amber" : "text-steel-500"}`}>
+                    <span className={`label-mono ${active ? "text-accent" : "text-steel-500"}`}>
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span
@@ -121,7 +121,7 @@ export function MobileMenu({ open, onClose, activeHref, items, contactAnchor }: 
                     </span>
                     <ArrowRight
                       size={20}
-                      className="ml-auto self-center text-amber opacity-0 transition-opacity group-hover:opacity-100"
+                      className="ml-auto self-center text-accent opacity-0 transition-opacity group-hover:opacity-100"
                     />
                   </a>
                 </li>

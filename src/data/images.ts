@@ -15,7 +15,8 @@ import vehicleCommercialWorkshop from "@/assets/images/vehicle-commercial-worksh
 import vehiclePassenger from "@/assets/images/vehicle-passenger.jpg";
 import whyMechanic from "@/assets/images/why-mechanic.jpg";
 
-export type ImageLicense = "Unsplash License" | "Pexels License";
+/** "Firma fotoğrafı": işletmenin kendi çektiği / hakkına sahip olduğu görsel. */
+export type ImageLicense = "Unsplash License" | "Pexels License" | "Firma fotoğrafı";
 
 export interface SiteImage {
   src: StaticImageData;
@@ -114,3 +115,7 @@ export const images = {
     license: "Unsplash License",
   },
 } satisfies Record<string, SiteImage>;
+
+export type ImageKey = keyof typeof images;
+
+export const imageKeys = Object.keys(images) as ImageKey[];

@@ -26,6 +26,24 @@ export const faqs: FaqItem[] = [
     link: { label: "Arıza tespiti hizmeti", href: `${routes.home}#elektronik-ariza-tespiti` },
   },
   {
+    question: "Motor arızasında nasıl bir yol izliyorsunuz?",
+    answer:
+      "Önce şikâyeti ve aracın bakım geçmişini dinliyor, ardından mekanik ve elektronik arıza tespitiyle sorunun kaynağını netleştiriyoruz. Gereken işlemi — onarım, revizyon ya da komple sıfır sandık motor değişimi — sizinle konuşup onayınızı aldıktan sonra yapıyoruz.",
+    link: { label: "Motor bakım onarımı", href: `${routes.home}#motor-bakim-onarimi` },
+  },
+  {
+    question: "Periyodik bakımda neler yapılıyor?",
+    answer:
+      "Periyodik bakımda motor yağı ve filtre seti değişimiyle birlikte, aracınızın üretici bakım periyotlarına uygun genel kontroller yapılır. Bakım kapsamı aracın marka, model ve kilometresine göre belirlenir; işlem öncesinde size bilgi verilir.",
+    link: { label: "Periyodik bakım", href: `${routes.home}#periyodik-bakim` },
+  },
+  {
+    question: "Ağır vasıta ve otobüslere servis veriyor musunuz?",
+    answer:
+      "Evet. Otokar otobüsler, IVECO araçlar ve Deutz / Cummins motorlu ağır vasıtalar için bakım, onarım ve yedek parça hizmeti veriyoruz. Otokar otobüsler ile Deutz ve Cummins motorlu araçlarda orijinal arıza tespit cihazı kullanıyoruz.",
+    link: { label: "Ağır vasıta & otobüs servisi", href: `${routes.home}#agir-vasita-otobus` },
+  },
+  {
     question: "Yedek parça stoğunuzda neler var?",
     answer:
       "450.000 hazır stok yedek parçamız var. Komple sıfır sandık motor, motor yağları, filtre setleri ve ön takım parçaları bunların başında geliyor; aracınıza uygun parçayı stoktan hızlıca temin ediyoruz.",

@@ -10,7 +10,7 @@ import "./globals.css";
 
 const barlow = Barlow_Condensed({
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
   variable: "--font-barlow",
   display: "swap",
 });
@@ -37,6 +37,9 @@ export const metadata: Metadata = {
   publisher: site.name,
   category: "Otomotiv Servis",
   formatDetection: { telephone: false, address: false, email: false },
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {

@@ -92,7 +92,7 @@ const sections: LegalSection[] = [
         6698 sayılı Kişisel Verilerin Korunması Kanunu&apos;nun 11. maddesi kapsamında; kişisel verilerinizin işlenip
         işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme gibi haklara sahipsiniz.
         Ayrıntılar için{" "}
-        <Link href={routes.kvkk} className="text-amber underline-offset-4 hover:underline">
+        <Link href={routes.kvkk} className="text-accent underline-offset-4 hover:underline">
           KVKK Aydınlatma Metni
         </Link>
         &apos;ni inceleyebilirsiniz.
@@ -115,7 +115,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         Gizlilik politikamızla ilgili sorularınız ve haklarınıza ilişkin talepleriniz için{" "}
-        <Link href={homeContactHref} className="text-amber underline-offset-4 hover:underline">
+        <Link href={homeContactHref} className="text-accent underline-offset-4 hover:underline">
           iletişim bölümündeki
         </Link>{" "}
         kanallardan bize ulaşabilirsiniz.
