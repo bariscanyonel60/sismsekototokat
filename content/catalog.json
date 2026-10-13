@@ -5,7 +5,7 @@
       "code": "MTR",
       "title": "Komple Sıfır Sandık Motor",
       "summary": "Binek, hafif ticari ve ağır vasıta için komple sıfır sandık motor.",
-      "imageKey": "serviceEngine",
+      "imageKey": "partEnginePetrol",
       "icon": "engine",
       "serviceSlug": "motor-bakim-onarimi",
       "subcategories": [
@@ -28,7 +28,7 @@
       "code": "YAG",
       "title": "Motor Yağları",
       "summary": "Binek araçtan ağır vasıtaya, motor tipine uygun yağlar.",
-      "imageKey": "serviceOil",
+      "imageKey": "partOilPour",
       "icon": "oil",
       "serviceSlug": "periyodik-bakim",
       "subcategories": [
@@ -47,7 +47,7 @@
       "code": "FLT",
       "title": "Filtre Setleri",
       "summary": "Yağ, hava, yakıt ve polen filtreleri; bakım için komple set.",
-      "imageKey": "servicePeriodic",
+      "imageKey": "partOilFilter",
       "icon": "filter",
       "serviceSlug": "periyodik-bakim",
       "subcategories": [
@@ -78,7 +78,7 @@
       "code": "ONT",
       "title": "Ön Takım Parçaları",
       "summary": "Orijinal ve muadil seçenekleriyle ön takım ve yürüyen aksam.",
-      "imageKey": "serviceSuspension",
+      "imageKey": "partShockAbsorber",
       "icon": "suspension",
       "serviceSlug": "alt-takim-bakim-onarimi",
       "subcategories": [
@@ -109,7 +109,7 @@
       "code": "FRN",
       "title": "Fren Sistemi",
       "summary": "Fren balatası, disk, kampana ve hidrolik; binekten otobüse.",
-      "imageKey": "serviceBrake",
+      "imageKey": "partBrakeDisc",
       "icon": "brake",
       "serviceSlug": "fren-sistemleri",
       "subcategories": [
@@ -132,7 +132,7 @@
       "code": "DBR",
       "title": "Debriyaj & Şanzıman",
       "summary": "Debriyaj seti, volan, şanzıman yağı ve vites parçaları.",
-      "imageKey": "serviceDiagnostics",
+      "imageKey": "partClutchKit",
       "icon": "clutch",
       "serviceSlug": "sanziman-bakim-onarimi",
       "subcategories": [
@@ -155,7 +155,7 @@
       "code": "TRG",
       "title": "Triger & Ateşleme",
       "summary": "Triger seti, devirdaim, kayışlar, buji ve ateşleme parçaları.",
-      "imageKey": "breakEngine",
+      "imageKey": "partTimingEngine",
       "icon": "spark",
       "serviceSlug": "motor-bakim-onarimi",
       "subcategories": [
@@ -193,7 +193,8 @@
         "komple motor",
         "dizel",
         "motor değişimi"
-      ]
+      ],
+      "imageKey": "partEngineDiesel"
     },
     {
       "slug": "binek-benzinli-sandik-motor",
@@ -214,7 +215,7 @@
         "benzinli",
         "motor değişimi"
       ],
-      "imageKey": "breakEngine"
+      "imageKey": "partEnginePetrol"
     },
     {
       "slug": "hafif-ticari-sandik-motor",
@@ -240,7 +241,7 @@
         "ford",
         "hafif ticari"
       ],
-      "imageKey": "vehicleCommercialWorkshop"
+      "imageKey": "partEngineCommercial"
     },
     {
       "slug": "agir-vasita-sandik-motor",
@@ -268,7 +269,7 @@
         "deutz",
         "cummins"
       ],
-      "imageKey": "whyMechanic"
+      "imageKey": "partEngineHeavy"
     },
     {
       "slug": "motor-yagi-0w-20",
@@ -298,7 +299,7 @@
         "honda",
         "benzinli"
       ],
-      "imageKey": "vehiclePassenger"
+      "imageKey": "partOilPour"
     },
     {
       "slug": "motor-yagi-5w-30",
@@ -321,7 +322,8 @@
         "dpf",
         "dizel",
         "benzinli"
-      ]
+      ],
+      "imageKey": "partOilPour"
     },
     {
       "slug": "motor-yagi-5w-40",
@@ -343,7 +345,8 @@
         "sentetik",
         "dizel",
         "benzinli"
-      ]
+      ],
+      "imageKey": "partOilJug"
     },
     {
       "slug": "motor-yagi-10w-40",
@@ -363,7 +366,8 @@
         "10w40",
         "10w-40",
         "yarı sentetik"
-      ]
+      ],
+      "imageKey": "partOilJug"
     },
     {
       "slug": "motor-yagi-15w-40",
@@ -392,7 +396,7 @@
         "deutz",
         "cummins"
       ],
-      "imageKey": "serviceHeavy"
+      "imageKey": "partOilJug"
     },
     {
       "slug": "bakim-filtre-seti",
@@ -411,7 +415,8 @@
         "set",
         "bakım seti",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "agir-vasita-filtre-seti",
@@ -438,7 +443,7 @@
         "iveco",
         "otokar"
       ],
-      "imageKey": "vehicleBus"
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "yag-filtresi",
@@ -456,7 +461,8 @@
       "keywords": [
         "filtre",
         "yağ filtresi"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "hava-filtresi",
@@ -474,7 +480,8 @@
       "keywords": [
         "filtre",
         "hava filtresi"
-      ]
+      ],
+      "imageKey": "partAirFilter"
     },
     {
       "slug": "yakit-filtresi",
@@ -494,7 +501,8 @@
         "yakıt filtresi",
         "mazot filtresi",
         "dizel"
-      ]
+      ],
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "polen-filtresi",
@@ -514,7 +522,8 @@
         "polen filtresi",
         "kabin filtresi",
         "klima filtresi"
-      ]
+      ],
+      "imageKey": "partCabinFilter"
     },
     {
       "slug": "amortisor",
@@ -536,7 +545,8 @@
         "amortisör",
         "süspansiyon",
         "ön takım"
-      ]
+      ],
+      "imageKey": "partShockAbsorber"
     },
     {
       "slug": "amortisor-takozu",
@@ -559,7 +569,8 @@
         "rulman",
         "körük",
         "ön takım"
-      ]
+      ],
+      "imageKey": "partStrutMount"
     },
     {
       "slug": "salincak",
@@ -583,7 +594,7 @@
         "ön takım",
         "alt takım"
       ],
-      "imageKey": "serviceInspection"
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "rotil",
@@ -606,7 +617,7 @@
         "ön takım",
         "alt takım"
       ],
-      "imageKey": "serviceInspection"
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "rot-basi-rot-mili",
@@ -630,7 +641,8 @@
         "rot mili",
         "direksiyon",
         "ön takım"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "z-rot",
@@ -652,7 +664,8 @@
         "viraj demiri",
         "stabilizatör",
         "ön takım"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "aks-kafasi",
@@ -674,7 +687,8 @@
         "aks kafası",
         "körük",
         "ön takım"
-      ]
+      ],
+      "imageKey": "partCvBoot"
     },
     {
       "slug": "porya-rulmani",
@@ -698,7 +712,7 @@
         "teker rulmanı",
         "ön takım"
       ],
-      "imageKey": "serviceBrake"
+      "imageKey": "partWheelHub"
     },
     {
       "slug": "on-fren-balatasi",
@@ -717,7 +731,8 @@
         "balata",
         "ön balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "arka-fren-balatasi",
@@ -737,7 +752,8 @@
         "arka balata",
         "pabuç",
         "fren pabucu"
-      ]
+      ],
+      "imageKey": "partBrakeDrum"
     },
     {
       "slug": "fren-diski",
@@ -756,7 +772,8 @@
         "disk",
         "fren diski",
         "ayna"
-      ]
+      ],
+      "imageKey": "partBrakeDisc"
     },
     {
       "slug": "fren-kampanasi",
@@ -775,7 +792,8 @@
         "fren",
         "kampana",
         "tambur"
-      ]
+      ],
+      "imageKey": "partBrakeDrum"
     },
     {
       "slug": "agir-vasita-fren-balatasi",
@@ -795,7 +813,7 @@
         "kamyon",
         "ağır vasıta"
       ],
-      "imageKey": "vehicleBus"
+      "imageKey": "partBrakeShoes"
     },
     {
       "slug": "fren-hidroligi",
@@ -814,7 +832,8 @@
         "hidrolik",
         "fren yağı",
         "dot 4"
-      ]
+      ],
+      "imageKey": "serviceBrake"
     },
     {
       "slug": "debriyaj-seti",
@@ -835,7 +854,8 @@
         "bilya",
         "rulman",
         "kavrama"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "cift-kutleli-volan",
@@ -853,7 +873,8 @@
         "volan",
         "çift kütleli volan",
         "debriyaj"
-      ]
+      ],
+      "imageKey": "serviceEngine"
     },
     {
       "slug": "agir-vasita-debriyaj-seti",
@@ -873,7 +894,7 @@
         "otobüs",
         "kamyon"
       ],
-      "imageKey": "serviceHeavy"
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "sanziman-yagi",
@@ -914,7 +935,8 @@
         "halat",
         "debriyaj teli",
         "vites teli"
-      ]
+      ],
+      "imageKey": "partGearShift"
     },
     {
       "slug": "triger-seti",
@@ -934,7 +956,8 @@
         "gergi",
         "avara",
         "triger seti"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "devirdaim-pompasi",
@@ -953,7 +976,8 @@
         "devirdaim",
         "su pompası",
         "soğutma"
-      ]
+      ],
+      "imageKey": "partTimingEngine"
     },
     {
       "slug": "v-kayisi",
@@ -973,7 +997,8 @@
         "v kayışı",
         "alternatör kayışı",
         "gergi rulmanı"
-      ]
+      ],
+      "imageKey": "partAccessoryBelt"
     },
     {
       "slug": "buji",
@@ -990,7 +1015,8 @@
         "buji",
         "ateşleme",
         "benzinli"
-      ]
+      ],
+      "imageKey": "partSparkPlug"
     },
     {
       "slug": "kizdirma-bujisi",
@@ -1009,7 +1035,8 @@
         "kızdırma bujisi",
         "dizel",
         "ilk çalıştırma"
-      ]
+      ],
+      "imageKey": "breakEngine"
     },
     {
       "slug": "atesleme-bobini",
@@ -1027,7 +1054,8 @@
         "ateşleme bobini",
         "tekleme",
         "benzinli"
-      ]
+      ],
+      "imageKey": "partIgnitionCoil"
     },
     {
       "slug": "fiat-bakim-seti",
@@ -1049,7 +1077,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "fiat-fren-balata-seti",
@@ -1071,7 +1100,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "fiat-on-takim-parcalari",
@@ -1098,7 +1128,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "fiat-debriyaj-seti",
@@ -1121,7 +1152,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "fiat-triger-seti",
@@ -1143,7 +1175,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "renault-bakim-seti",
@@ -1165,7 +1198,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "renault-fren-balata-seti",
@@ -1187,7 +1221,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "renault-on-takim-parcalari",
@@ -1214,7 +1249,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "renault-debriyaj-seti",
@@ -1237,7 +1273,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "renault-triger-seti",
@@ -1259,7 +1296,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "nissan-bakim-seti",
@@ -1281,7 +1319,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "nissan-fren-balata-seti",
@@ -1303,7 +1342,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "nissan-on-takim-parcalari",
@@ -1330,7 +1370,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "nissan-debriyaj-seti",
@@ -1353,7 +1394,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "nissan-triger-seti",
@@ -1375,7 +1417,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "volkswagen-bakim-seti",
@@ -1397,7 +1440,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "volkswagen-fren-balata-seti",
@@ -1419,7 +1463,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "volkswagen-on-takim-parcalari",
@@ -1446,7 +1491,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "volkswagen-debriyaj-seti",
@@ -1469,7 +1515,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "volkswagen-triger-seti",
@@ -1491,7 +1538,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "seat-bakim-seti",
@@ -1513,7 +1561,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "seat-fren-balata-seti",
@@ -1535,7 +1584,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "seat-on-takim-parcalari",
@@ -1562,7 +1612,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "seat-debriyaj-seti",
@@ -1585,7 +1636,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "seat-triger-seti",
@@ -1607,7 +1659,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "skoda-bakim-seti",
@@ -1629,7 +1682,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "skoda-fren-balata-seti",
@@ -1651,7 +1705,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "skoda-on-takim-parcalari",
@@ -1678,7 +1733,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "skoda-debriyaj-seti",
@@ -1701,7 +1757,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "skoda-triger-seti",
@@ -1723,7 +1780,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "toyota-bakim-seti",
@@ -1745,7 +1803,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "toyota-fren-balata-seti",
@@ -1767,7 +1826,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "toyota-on-takim-parcalari",
@@ -1794,7 +1854,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "toyota-debriyaj-seti",
@@ -1817,7 +1878,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "toyota-triger-seti",
@@ -1839,7 +1901,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "honda-bakim-seti",
@@ -1861,7 +1924,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "honda-fren-balata-seti",
@@ -1883,7 +1947,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "honda-on-takim-parcalari",
@@ -1910,7 +1975,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "honda-debriyaj-seti",
@@ -1933,7 +1999,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "honda-triger-seti",
@@ -1955,7 +2022,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "ford-bakim-seti",
@@ -1982,7 +2050,8 @@
         "bakım seti",
         "filtre",
         "periyodik bakım"
-      ]
+      ],
+      "imageKey": "partOilFilter"
     },
     {
       "slug": "ford-fren-balata-seti",
@@ -2009,7 +2078,8 @@
         "fren",
         "balata",
         "fren balatası"
-      ]
+      ],
+      "imageKey": "partBrakePads"
     },
     {
       "slug": "ford-on-takim-parcalari",
@@ -2041,7 +2111,8 @@
         "salıncak",
         "rotil",
         "rot başı"
-      ]
+      ],
+      "imageKey": "partSteeringKnuckle"
     },
     {
       "slug": "ford-debriyaj-seti",
@@ -2069,7 +2140,8 @@
         "baskı",
         "disk",
         "bilya"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "ford-triger-seti",
@@ -2096,7 +2168,8 @@
         "triger",
         "triger seti",
         "kayış"
-      ]
+      ],
+      "imageKey": "partTimingBelt"
     },
     {
       "slug": "otokar-filtre-seti",
@@ -2120,7 +2193,8 @@
         "set",
         "separatör",
         "mazot filtresi"
-      ]
+      ],
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "otokar-fren-balatasi",
@@ -2143,7 +2217,8 @@
         "fren",
         "balata",
         "pabuç"
-      ]
+      ],
+      "imageKey": "partBrakeShoes"
     },
     {
       "slug": "otokar-debriyaj-seti",
@@ -2166,7 +2241,8 @@
         "debriyaj",
         "baskı",
         "disk"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "iveco-filtre-seti",
@@ -2189,7 +2265,8 @@
         "set",
         "separatör",
         "mazot filtresi"
-      ]
+      ],
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "iveco-fren-balatasi",
@@ -2211,7 +2288,8 @@
         "fren",
         "balata",
         "pabuç"
-      ]
+      ],
+      "imageKey": "partBrakeShoes"
     },
     {
       "slug": "iveco-debriyaj-seti",
@@ -2233,7 +2311,8 @@
         "debriyaj",
         "baskı",
         "disk"
-      ]
+      ],
+      "imageKey": "partClutchKit"
     },
     {
       "slug": "deutz-motor-filtre-seti",
@@ -2256,7 +2335,8 @@
         "filtre",
         "motor filtre seti",
         "mazot filtresi"
-      ]
+      ],
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "deutz-devirdaim-kayis-seti",
@@ -2280,7 +2360,8 @@
         "kayış",
         "gergi",
         "soğutma"
-      ]
+      ],
+      "imageKey": "partAccessoryBelt"
     },
     {
       "slug": "cummins-motor-filtre-seti",
@@ -2303,7 +2384,8 @@
         "filtre",
         "motor filtre seti",
         "mazot filtresi"
-      ]
+      ],
+      "imageKey": "partFuelFilter"
     },
     {
       "slug": "cummins-devirdaim-kayis-seti",
@@ -2327,7 +2409,8 @@
         "kayış",
         "gergi",
         "soğutma"
-      ]
+      ],
+      "imageKey": "partAccessoryBelt"
     }
   ]
 }

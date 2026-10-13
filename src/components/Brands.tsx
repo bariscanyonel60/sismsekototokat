@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import { ArrowUpRight, BusIcon, CarIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/SectionHeading";
+import { brandLogos } from "@/data/brandLogos";
 import { brandGroupLabels, brandsByGroup, brandsIntro, type Brand, type BrandGroup } from "@/data/brands";
 import { sectionIds } from "@/data/navigation";
 import { contactHref, isExternalHref } from "@/lib/contact";
@@ -23,7 +25,13 @@ function GroupIcon({ group }: { group: BrandGroup }) {
   }
 }
 
+function logoMask(src: string): CSSProperties {
+  const mask = `url("${src}") left center / contain no-repeat`;
+  return { mask, WebkitMask: mask };
+}
+
 function BrandTile({ brand, index }: { brand: Brand; index: number }) {
+  const logo = brandLogos[brand.plain];
   const href = contactHref({ kind: "brand", brand: brand.plain });
   const external = isExternalHref(href);
   return (
@@ -33,7 +41,7 @@ function BrandTile({ brand, index }: { brand: Brand; index: number }) {
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         aria-label={`${brand.plain} servis ve yedek parça bilgisi alın`}
-        className="group relative flex h-full min-h-[96px] flex-col justify-between gap-3 p-4 transition-colors duration-500 hover:bg-bone-100 sm:min-h-[132px] sm:p-3 md:min-h-[168px] md:p-6"
+        className="group relative flex h-full min-h-[96px] flex-col justify-start gap-3 p-4 transition-colors duration-500 hover:bg-bone-100 sm:min-h-[132px] sm:p-3 md:min-h-[168px] md:p-6"
       >
         <span className="absolute left-0 top-0 h-0.5 w-0 bg-accent transition-[width] duration-700 ease-out-expo group-hover:w-full" />
         <ArrowUpRight
@@ -41,9 +49,22 @@ function BrandTile({ brand, index }: { brand: Brand; index: number }) {
           className="self-end text-steel-400 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
         />
         <span>
-          <span className="display block break-words text-[clamp(1.2rem,6.2vw,1.6rem)] sm:text-[clamp(1.1rem,2.3vw,2.6rem)] text-steel-500 transition-colors duration-500 group-hover:text-accent">
-            {brand.name}
-          </span>
+          {logo ? (
+            <>
+              <span
+                aria-hidden="true"
+                className="block h-10 w-full max-w-[8rem] bg-steel-500 transition-colors duration-500 group-hover:bg-accent md:h-12 md:max-w-[9.5rem]"
+                style={logoMask(logo.src.src)}
+              />
+              <span lang="en" className="display mt-3 block break-words text-[1.05rem] text-ink transition-colors duration-500 group-hover:text-accent md:text-xl">
+                {brand.name}
+              </span>
+            </>
+          ) : (
+            <span lang="en" className="display block break-words text-[clamp(1.2rem,6.2vw,1.6rem)] sm:text-[clamp(1.1rem,2.3vw,2.6rem)] text-steel-500 transition-colors duration-500 group-hover:text-accent">
+              {brand.name}
+            </span>
+          )}
           {brand.note && <span className="label-mono mt-1.5 block text-[0.62rem] text-steel-500">{brand.note}</span>}
         </span>
       </a>
