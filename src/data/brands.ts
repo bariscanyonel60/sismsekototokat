@@ -23,7 +23,7 @@ export const brandsIntro = {
   description:
     "Binek araçtan hafif ticariye, ağır vasıtadan otobüse; farklı markaların mekanik ve elektronik yapısına hâkim bir servis anlayışı. Listede yer almayan markalar için de bizimle iletişime geçebilirsiniz.",
   others: "ve her türlü araç",
-  note: "Marka adları yalnızca hizmet verilen araçları belirtmek içindir; ilgili markaların yetkili servisi olduğumuz anlamına gelmez.",
+  note: "Marka adları ve logoları yalnızca hizmet verilen araçları belirtmek içindir ve sahiplerinin tescilli markalarıdır; ilgili markaların yetkili servisi olduğumuz anlamına gelmez.",
 };
 
 export const brandGroupLabels: Record<BrandGroup, string> = {
